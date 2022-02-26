@@ -1,9 +1,8 @@
 ﻿namespace FantasyFL.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
