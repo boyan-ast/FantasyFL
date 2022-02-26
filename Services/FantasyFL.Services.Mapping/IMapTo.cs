@@ -1,0 +1,7 @@
+﻿namespace FantasyFL.Services.Mapping
+{
+    // ReSharper disable once UnusedTypeParameter
+    public interface IMapTo<T>
+    {
+    }
+}
