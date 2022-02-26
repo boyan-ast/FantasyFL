@@ -24,6 +24,18 @@
         {
         }
 
+        public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Player> Players { get; set; }
+
+        public DbSet<Stadium> Stadiums { get; set; }
+
+        public DbSet<Gameweek> Gameweeks { get; set; }
+
+        public DbSet<Fixture> Fixtures { get; set; }
+
+        public DbSet<PlayerGameweek> PlayersGameweeks { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
