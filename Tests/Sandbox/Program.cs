@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
     using FantasyFL.Data;
     using FantasyFL.Data.Common;
     using FantasyFL.Data.Common.Repositories;
@@ -13,9 +14,6 @@
     using FantasyFL.Data.Seeding;
     using FantasyFL.Services.Data;
     using FantasyFL.Services.Messaging;
-
-    using CommandLine;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
