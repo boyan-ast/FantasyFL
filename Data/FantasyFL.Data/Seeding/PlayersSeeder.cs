@@ -6,20 +6,22 @@
 
     using FantasyFL.Services.Data;
 
-    internal class TeamsSeeder : ISeeder
+    internal class PlayersSeeder : ISeeder
     {
         public async Task SeedAsync(
-            ApplicationDbContext dbContext, 
+            ApplicationDbContext dbContext,
             IServiceProvider serviceProvider)
         {
-            if (dbContext.Teams.Any())
+            if (dbContext.Players.Any())
             {
                 return;
             }
 
             var seedService = (ISeedService)serviceProvider.GetService(typeof(ISeedService));
+            var footballDataService = (IFootballDataService)serviceProvider.GetService(typeof(IFootballDataService));
 
-            await seedService.ImportTeams();
+            await seedService.ImportPlayers();
+            await footballDataService.SetTeamsTopPlayers();
         }
     }
 }

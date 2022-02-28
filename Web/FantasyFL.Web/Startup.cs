@@ -8,6 +8,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Repositories;
     using FantasyFL.Data.Seeding;
+    using FantasyFL.Services;
     using FantasyFL.Services.Data;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Services.Messaging;
@@ -65,6 +66,9 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IExternalDataService, ExternalDataService>();
+            services.AddTransient<IFootballDataService, FootballDataService>();
+            services.AddTransient<ISeedService, SeedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

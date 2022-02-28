@@ -40,6 +40,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\FantasyFL.Common\FantasyFL.Common.csproj" />
+    <ProjectReference Include="..\..\Services\FantasyFL.Services.Data\FantasyFL.Services.Data.csproj" />
     <ProjectReference Include="..\FantasyFL.Data.Common\FantasyFL.Data.Common.csproj" />
     <ProjectReference Include="..\FantasyFL.Data.Models\FantasyFL.Data.Models.csproj" />
   </ItemGroup>

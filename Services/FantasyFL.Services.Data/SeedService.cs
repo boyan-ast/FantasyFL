@@ -20,7 +20,6 @@
         private readonly IRepository<Gameweek> gameweeksRepository;
         private readonly IDeletableEntityRepository<Player> playersRepository;
         private readonly IDeletableEntityRepository<Team> teamsRepository;
-        private readonly IRepository<Stadium> stadiumsRepository;
 
         public SeedService(
             IFootballDataService footballDataService,
@@ -33,7 +32,6 @@
             this.gameweeksRepository = gameweeksRepository;
             this.playersRepository = playersRepository;
             this.teamsRepository = teamsRepository;
-            this.stadiumsRepository = stadiumsRepository;
         }
 
         public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; } = new List<TeamStadiumDto>();
