@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace FantasyFL.Services.Data.InputModels.Fixtures
+﻿namespace FantasyFL.Services.Data.InputModels.Fixtures
 {
+    using Newtonsoft.Json;
+
     public class FixtureTeamsDto
     {
         [JsonProperty("home")]
