@@ -29,6 +29,7 @@
                               new SettingsSeeder(),
                               new TeamsSeeder(),
                               new PlayersSeeder(),
+                              new GameweeksSeeder(),
                           };
 
             foreach (var seeder in seeders)

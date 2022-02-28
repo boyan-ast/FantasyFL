@@ -66,9 +66,13 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IParseService, ParseService>();
             services.AddTransient<IExternalDataService, ExternalDataService>();
             services.AddTransient<IFootballDataService, FootballDataService>();
             services.AddTransient<ISeedService, SeedService>();
+            services.AddTransient<IGameweekImportService, GameweekImportService>();
+            services.AddTransient<IPlayersService, PlayersService>();
+            services.AddTransient<IGameweekService, GameweekService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
