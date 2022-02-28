@@ -17,18 +17,21 @@
     public class SeedService : ISeedService
     {
         private readonly IFootballDataService footballDataService;
+        private readonly IParseService parseService;
         private readonly IRepository<Gameweek> gameweeksRepository;
         private readonly IDeletableEntityRepository<Player> playersRepository;
         private readonly IDeletableEntityRepository<Team> teamsRepository;
 
         public SeedService(
             IFootballDataService footballDataService,
+            IParseService parseService,
             IRepository<Gameweek> gameweeksRepository,
             IDeletableEntityRepository<Player> playersRepository,
             IDeletableEntityRepository<Team> teamsRepository,
             IRepository<Stadium> stadiumsRepository)
         {
             this.footballDataService = footballDataService;
+            this.parseService = parseService;
             this.gameweeksRepository = gameweeksRepository;
             this.playersRepository = playersRepository;
             this.teamsRepository = teamsRepository;
@@ -46,7 +49,7 @@
                 {
                     Name = gameweek,
                     Number = int.Parse(gameweek.Split(" - ")[1]),
-                    EndDate = this.ParseGameweekEndDate(CustomData.GameweeksEndDates[gameweek]),
+                    EndDate = this.parseService.ParseDate(CustomData.GameweeksEndDates[gameweek]),
                 };
 
                 await this.gameweeksRepository.AddAsync(newGameweek);
@@ -119,18 +122,6 @@
             }
 
             await this.teamsRepository.SaveChangesAsync();
-        }
-
-        private DateTime ParseGameweekEndDate(string dateString)
-        {
-            DateTime.TryParseExact(
-                dateString,
-                "dd.MM.yyyy",
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None,
-                out DateTime date);
-
-            return date;
         }
     }
 }

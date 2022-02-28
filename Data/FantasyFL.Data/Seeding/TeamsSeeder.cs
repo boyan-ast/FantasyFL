@@ -9,7 +9,7 @@
     internal class TeamsSeeder : ISeeder
     {
         public async Task SeedAsync(
-            ApplicationDbContext dbContext, 
+            ApplicationDbContext dbContext,
             IServiceProvider serviceProvider)
         {
             if (dbContext.Teams.Any())
