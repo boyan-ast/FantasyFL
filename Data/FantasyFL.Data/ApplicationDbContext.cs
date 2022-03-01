@@ -24,19 +24,27 @@
         {
         }
 
-        public DbSet<Team> Teams { get; set; }
+        public DbSet<Team> Teams { get; init; }
 
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Player> Players { get; init; }
 
-        public DbSet<Stadium> Stadiums { get; set; }
+        public DbSet<Stadium> Stadiums { get; init; }
 
-        public DbSet<Gameweek> Gameweeks { get; set; }
+        public DbSet<Gameweek> Gameweeks { get; init; }
 
-        public DbSet<Fixture> Fixtures { get; set; }
+        public DbSet<Fixture> Fixtures { get; init; }
 
-        public DbSet<PlayerGameweek> PlayersGameweeks { get; set; }
+        public DbSet<PlayerGameweek> PlayersGameweeks { get; init; }
 
-        public DbSet<Setting> Settings { get; set; }
+        public DbSet<FantasyTeam> FantasyTeams { get; init; }
+
+        public DbSet<FantasyTeamPlayer> FantasyTeamsPlayers { get; init; }
+
+        public DbSet<ApplicationUserGameweek> ApplicationUsersGameweeks { get; init; }
+
+        public DbSet<FantasyLeague> FantasyLeagues { get; init; }
+
+        public DbSet<Setting> Settings { get; init; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

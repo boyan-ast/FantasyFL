@@ -85,6 +85,9 @@ namespace FantasyFL.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("FantasyLeagueId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -126,6 +129,8 @@ namespace FantasyFL.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FantasyLeagueId");
+
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
@@ -137,6 +142,121 @@ namespace FantasyFL.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUserGameweek", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("GameweekId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Points")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Transfers")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "GameweekId");
+
+                    b.HasIndex("GameweekId");
+
+                    b.ToTable("ApplicationUsersGameweeks");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyLeague", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("FantasyLeagues");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeam", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("TopPlayersCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("FantasyTeams");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeamPlayer", b =>
+                {
+                    b.Property<string>("FantasyTeamId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPlaying")
+                        .HasColumnType("bit");
+
+                    b.HasKey("FantasyTeamId", "PlayerId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("FantasyTeamsPlayers");
                 });
 
             modelBuilder.Entity("FantasyFL.Data.Models.Fixture", b =>
@@ -213,7 +333,8 @@ namespace FantasyFL.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<int>("Number")
                         .HasColumnType("int");
@@ -547,6 +668,60 @@ namespace FantasyFL.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("FantasyFL.Data.Models.FantasyLeague", null)
+                        .WithMany("ApplicationUsers")
+                        .HasForeignKey("FantasyLeagueId");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUserGameweek", b =>
+                {
+                    b.HasOne("FantasyFL.Data.Models.Gameweek", "Gameweek")
+                        .WithMany("ApplicationUsersGameweeks")
+                        .HasForeignKey("GameweekId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FantasyFL.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Gameweek");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeam", b =>
+                {
+                    b.HasOne("FantasyFL.Data.Models.ApplicationUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
+
+                    b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeamPlayer", b =>
+                {
+                    b.HasOne("FantasyFL.Data.Models.FantasyTeam", "FantasyTeam")
+                        .WithMany("FantasyTeamPlayers")
+                        .HasForeignKey("FantasyTeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FantasyFL.Data.Models.Player", "Player")
+                        .WithMany("FantasyTeamPlayers")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("FantasyTeam");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("FantasyFL.Data.Models.Fixture", b =>
                 {
                     b.HasOne("FantasyFL.Data.Models.Team", "AwayTeam")
@@ -681,8 +856,20 @@ namespace FantasyFL.Data.Migrations
                     b.Navigation("Roles");
                 });
 
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyLeague", b =>
+                {
+                    b.Navigation("ApplicationUsers");
+                });
+
+            modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeam", b =>
+                {
+                    b.Navigation("FantasyTeamPlayers");
+                });
+
             modelBuilder.Entity("FantasyFL.Data.Models.Gameweek", b =>
                 {
+                    b.Navigation("ApplicationUsersGameweeks");
+
                     b.Navigation("Fixtures");
 
                     b.Navigation("PlayerGameweeks");
@@ -690,6 +877,8 @@ namespace FantasyFL.Data.Migrations
 
             modelBuilder.Entity("FantasyFL.Data.Models.Player", b =>
                 {
+                    b.Navigation("FantasyTeamPlayers");
+
                     b.Navigation("PlayerGameweeks");
                 });
 

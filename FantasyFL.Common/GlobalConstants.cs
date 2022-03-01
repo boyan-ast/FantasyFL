@@ -6,6 +6,8 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const int DefaultIdMaxLength = 40;
+
         public const int FixtureStatusMaxLength = 5;
         public const int DefaultNameMaxLength = 40;
 

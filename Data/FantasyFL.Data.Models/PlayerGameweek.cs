@@ -6,10 +6,12 @@
 
     public class PlayerGameweek
     {
+        [ForeignKey(nameof(Player))]
         public int PlayerId { get; set; }
 
         public Player Player { get; set; }
 
+        [ForeignKey(nameof(Gameweek))]
         public int GameweekId { get; set; }
 
         public Gameweek Gameweek { get; set; }

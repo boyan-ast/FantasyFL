@@ -26,5 +26,7 @@
         public Team Team { get; set; }
 
         public ICollection<PlayerGameweek> PlayerGameweeks { get; set; } = new HashSet<PlayerGameweek>();
+
+        public ICollection<FantasyTeamPlayer> FantasyTeamPlayers { get; set; } = new HashSet<FantasyTeamPlayer>();
     }
 }

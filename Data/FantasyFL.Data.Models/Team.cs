@@ -19,6 +19,7 @@
 
         public ICollection<Player> Players { get; set; } = new HashSet<Player>();
 
+        [ForeignKey(nameof(Stadium))]
         public int StadiumId { get; set; }
 
         public Stadium Stadium { get; set; }
