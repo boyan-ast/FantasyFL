@@ -55,11 +55,9 @@
             return await this.GetResponseAsync(url);
         }
 
-        public async Task<string> GetFixturesByRoundAsync(int round, int season)
+        public async Task<string> GetFixturesByRoundAsync(string gameweekName, int season)
         {
-            string roundName = $"Regular Season - {round}";
-
-            var url = $"https://v3.football.api-sports.io/fixtures?season={season}&round={roundName}&league=172";
+            var url = $"https://v3.football.api-sports.io/fixtures?season={season}&round={gameweekName}&league={LeagueExternId}";
 
             return await this.GetResponseAsync(url);
         }

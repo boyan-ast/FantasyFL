@@ -4,7 +4,7 @@
 
     public interface IGameweekImportService
     {
-        public Task ImportFixtures(int gameweek, int season);
+        public Task ImportFixtures(string gameweekName, int season);
 
         public Task ImportLineups(int gameweekNumber);
 

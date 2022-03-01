@@ -49,7 +49,7 @@
                 {
                     Name = gameweek,
                     Number = int.Parse(gameweek.Split(" - ")[1]),
-                    EndDate = this.parseService.ParseDate(CustomData.GameweeksEndDates[gameweek]),
+                    EndDate = this.parseService.ParseDate(CustomData.GameweeksEndDates[gameweek], "dd.MM.yyyy"),
                 };
 
                 await this.gameweeksRepository.AddAsync(newGameweek);

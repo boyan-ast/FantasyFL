@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using CommandLine;
@@ -52,6 +53,44 @@
 
             var settingsService = serviceProvider.GetService<ISettingsService>();
             Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
+
+            var data = (ApplicationDbContext)serviceProvider.GetService(typeof(ApplicationDbContext));
+            var playersGameweekOne = data
+                .PlayersGameweeks
+                .Where(pg => pg.GameweekId == 19 && pg.Player.TeamId == 3)
+                .Select(pg => new
+                {
+                    Player = pg.Player.Name,
+                    PlayerTeam = pg.Player.Team.Name,
+                    pg.InStartingLineup,
+                    pg.IsSubstitute,
+                    pg.MinutesPlayed,
+                    pg.Goals,
+                    pg.YellowCards,
+                    pg.RedCards,
+                    pg.CleanSheet,
+                    pg.ConcededGoals,
+                    pg.TotalPoints,
+                    PlayerTeamWon = pg.TeamResult,
+                })
+                .OrderByDescending(p => p.TotalPoints)
+                .ToList();
+
+            foreach (var player in playersGameweekOne)
+            {
+                Console.WriteLine($"Name : {player.Player}");
+                Console.WriteLine($"Minutes played: {player.MinutesPlayed}");
+                Console.WriteLine($"Goals: {player.Goals}");
+                Console.WriteLine($"Yellow cards: {player.YellowCards}");
+                Console.WriteLine($"Red cards: {player.RedCards}");
+                Console.WriteLine($"Has clean sheet {player.CleanSheet}");
+                Console.WriteLine($"Conceded goals: {player.ConcededGoals}");
+                Console.WriteLine($"Total points for gameweek: {player.TotalPoints}");
+                Console.WriteLine(new string('*', 10));
+                Console.WriteLine($"Player team: {player.PlayerTeam} -> {player.PlayerTeamWon}");
+                Console.WriteLine(new string('*', 10));
+                Console.WriteLine(new string('*', 10));
+            }
 
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);

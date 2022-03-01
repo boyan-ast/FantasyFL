@@ -13,7 +13,7 @@
     {
         public Task<string[]> GetAllRoundsAsync(int league, int season);
 
-        public Task<IEnumerable<FixtureInfoDto>> GetAllFixturesByGameweekAsync(int gameweek, int year);
+        public Task<IEnumerable<FixtureInfoDto>> GetAllFixturesByGameweekAsync(string gameweekName, int year);
 
         public Task<IEnumerable<TeamLineupDto>> GetLineupsAsync(int fixtureId);
 

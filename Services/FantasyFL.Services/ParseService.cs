@@ -5,11 +5,11 @@
 
     public class ParseService : IParseService
     {
-        public DateTime ParseDate(string dateString)
+        public DateTime ParseDate(string dateString, string format)
         {
             DateTime.TryParseExact(
                 dateString,
-                "yyyy-MM-dd",
+                format,
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.None,
                 out DateTime date);

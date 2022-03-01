@@ -16,6 +16,6 @@
 
         public Task<string> GetLeaguesJsonAsync(string countryCode, int season);
 
-        public Task<string> GetFixturesByRoundAsync(int round, int season);
+        public Task<string> GetFixturesByRoundAsync(string gameweekName, int season);
     }
 }

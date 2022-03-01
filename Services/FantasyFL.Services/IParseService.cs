@@ -4,6 +4,6 @@
 
     public interface IParseService
     {
-        DateTime ParseDate(string dateString);
+        DateTime ParseDate(string dateString, string format);
     }
 }

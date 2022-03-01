@@ -77,15 +77,15 @@
             return roundsResponse.Rounds;
         }
 
-        public async Task<IEnumerable<FixtureInfoDto>> GetAllFixturesByGameweekAsync(int gameweek, int year = SeasonYear)
+        public async Task<IEnumerable<FixtureInfoDto>> GetAllFixturesByGameweekAsync(string gameweekName, int year = SeasonYear)
         {
-            var fixturesJson = await this.externalDataService.GetFixturesByRoundAsync(gameweek, year);
+            var fixturesJson = await this.externalDataService.GetFixturesByRoundAsync(gameweekName, year);
 
             var fixturesResponse = JsonConvert.DeserializeObject<FixturesResponseDto>(fixturesJson);
 
             if (fixturesResponse.Results == 0)
             {
-                throw new ArgumentException($"No fixtures in Gameweek {gameweek} for year {year}.");
+                throw new ArgumentException($"No fixtures in {gameweekName} for year {year}.");
             }
 
             return fixturesResponse.FixturesInfo;

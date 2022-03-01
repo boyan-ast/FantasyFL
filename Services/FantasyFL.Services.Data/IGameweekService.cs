@@ -8,5 +8,9 @@
     public interface IGameweekService
     {
         public Task<List<GameweekViewModel>> GetAllAsync();
+
+        public Task GetPlayersData(int gameweekId);
+
+        public Task FinishGameweek(int gameweekId);
     }
 }

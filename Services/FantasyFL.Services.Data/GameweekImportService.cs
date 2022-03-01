@@ -50,18 +50,18 @@
                 .ToDictionary(p => p.ExternId, p => p.Id);
         }
 
-        public async Task ImportFixtures(int gameweek, int season)
+        public async Task ImportFixtures(string gameweekName, int season)
         {
-            var fixturesInfo = await this.footballDataService.GetAllFixturesByGameweekAsync(gameweek, season);
+            var fixturesInfo = await this.footballDataService.GetAllFixturesByGameweekAsync(gameweekName, season);
 
             foreach (var fixtureDto in fixturesInfo)
             {
                 var externId = fixtureDto.Fixture.Id;
                 var fixtureGameweek = this.gameweeksRepository
                     .All()
-                    .FirstOrDefault(gw => gw.Number == gameweek);
+                    .FirstOrDefault(gw => gw.Name == gameweekName);
 
-                var fixtureDate = this.parseService.ParseDate(fixtureDto.Fixture.Date.Split("T")[0]);
+                var fixtureDate = this.parseService.ParseDate(fixtureDto.Fixture.Date.Split("T")[0], "yyyy-MM-dd");
 
                 var homeTeamId = this.teamsRepository
                     .All()
@@ -95,17 +95,12 @@
             await this.fixturesRepository.SaveChangesAsync();
         }
 
-        public async Task ImportLineups(int gameweekNumber)
+        public async Task ImportLineups(int gameweekId)
         {
             var fixturesInGameweek = await this.fixturesRepository
                 .All()
-                .Where(f => f.GameweekId == gameweekNumber)
+                .Where(f => f.GameweekId == gameweekId)
                 .ToListAsync();
-
-            var gameweekId = (await this.gameweeksRepository
-                .All()
-                .FirstOrDefaultAsync(gw => gw.Number == gameweekNumber))
-                .Id;
 
             var allPlayersInGameweekExternIds = new HashSet<int>();
 
@@ -137,9 +132,9 @@
 
                 var allPlayersInFixture =
                     this.PlayersInitialAdding(
-                        allPlayers,
-                        startedPlayers,
-                        gameweekId,
+                        (IEnumerable<int>)allPlayers,
+                        (IEnumerable<int>)startedPlayers,
+                        (int)gameweekId,
                         allPlayersInGameweekExternIds);
 
                 foreach (var player in allPlayersInFixture)
@@ -153,17 +148,12 @@
             }
         }
 
-        public async Task ImportEvents(int gameweekNumber)
+        public async Task ImportEvents(int gameweekId)
         {
             var fixturesInGameweek = await this.fixturesRepository
                 .All()
-                .Where(f => f.GameweekId == gameweekNumber)
+                .Where(f => f.GameweekId == gameweekId)
                 .ToListAsync();
-
-            var gameweekId = (await this.gameweeksRepository
-                .All()
-                .FirstOrDefaultAsync(gw => gw.Number == gameweekNumber))?
-                .Id;
 
             var playersInGameweek = await this.playersGameweeksRepository
                 .All()
