@@ -54,6 +54,7 @@
             var ownGoalsPoints = player.OwnGoals * OwnGoalPoints;
 
             var bonusPoints = CalculateBonusPoints(player);
+            player.BonusPoints = bonusPoints;
 
             var totalPoints = (minutesPlayedPoints + cleanSheetPoints + goalsPoints + savedPenaltiesPoints + bonusPoints) -
                 (concededGoalsPoints + yellowCardsPoints + redCardPoints + missedPenaltyPoints + ownGoalsPoints) + bonusPoints;

@@ -17,7 +17,7 @@
             <tr>
                 <th scope="col">@gameweek.Name</th>
                 <th scope="col">
-                    @if (!gameweek.IsImported)
+                    @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
                     {
                         <a asp-controller="Gameweeks"
                    asp-action="GetData"
@@ -26,7 +26,7 @@
                     }
                 </th>
                 <th scope="col">
-                    @if (!gameweek.IsFinished)
+                    @if (!gameweek.IsFinished && gameweek.EndDate < DateTime.UtcNow)
                     {
                         <a asp-controller="Gameweeks"
                    asp-action="Finish"

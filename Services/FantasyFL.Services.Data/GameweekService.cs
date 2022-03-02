@@ -39,6 +39,7 @@
                     Name = gw.Name,
                     IsImported = gw.IsImported,
                     IsFinished = gw.IsFinished,
+                    EndDate = gw.EndDate,
                 })
                 .ToListAsync();
 
