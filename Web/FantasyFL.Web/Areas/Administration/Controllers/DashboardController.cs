@@ -1,6 +1,6 @@
 ﻿namespace FantasyFL.Web.Areas.Administration.Controllers
 {
-    using FantasyFL.Services.Data;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Administration.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;

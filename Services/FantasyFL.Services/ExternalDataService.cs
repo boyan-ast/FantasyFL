@@ -3,6 +3,8 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
+    using FantasyFL.Services.Contracts;
+
     using static FantasyFL.Common.GlobalConstants;
 
     public class ExternalDataService : IExternalDataService

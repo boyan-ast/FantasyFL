@@ -3,6 +3,8 @@
     using System;
     using System.Globalization;
 
+    using FantasyFL.Services.Contracts;
+
     public class ParseService : IParseService
     {
         public DateTime ParseDate(string dateString, string format)

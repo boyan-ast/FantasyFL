@@ -9,7 +9,9 @@
     using FantasyFL.Data.Repositories;
     using FantasyFL.Data.Seeding;
     using FantasyFL.Services;
+    using FantasyFL.Services.Contracts;
     using FantasyFL.Services.Data;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Services.Messaging;
     using FantasyFL.Web.ViewModels;
@@ -73,6 +75,7 @@
             services.AddTransient<IGameweekImportService, GameweekImportService>();
             services.AddTransient<IPlayersService, PlayersService>();
             services.AddTransient<IGameweekService, GameweekService>();
+            services.AddTransient<IFixturesService, FixturesService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Services.Data
+﻿namespace FantasyFL.Services.Data.Contracts
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

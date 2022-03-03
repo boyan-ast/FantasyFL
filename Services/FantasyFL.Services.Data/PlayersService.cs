@@ -6,6 +6,7 @@
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
+    using FantasyFL.Services.Data.Contracts;
     using Microsoft.EntityFrameworkCore;
 
     using static FantasyFL.Common.PlayerPointsConstants;
@@ -67,17 +68,17 @@
             var points = 0;
 
             if (player.MinutesPlayed >= BonusPointsMinMinutes
-                && player.TeamResult == TeamResult.Won)
+                && player.TeamResult != TeamResult.Lost)
             {
                 points += TeamWonBonusPoints;
             }
 
-            if (player.MinutesPlayed > 0 && player.Goals > 1)
+            if (player.Goals > 1)
             {
                 points += GoalsBonusPoints;
             }
 
-            if (player.MinutesPlayed > 0 && player.SavedPenalties > 1)
+            if (player.SavedPenalties > 1)
             {
                 points += SavedPenaltiesBonusPoints;
             }

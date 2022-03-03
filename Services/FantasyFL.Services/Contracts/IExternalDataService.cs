@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Services
+﻿namespace FantasyFL.Services.Contracts
 {
     using System.Threading.Tasks;
 

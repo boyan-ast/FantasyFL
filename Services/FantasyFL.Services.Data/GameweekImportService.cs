@@ -8,10 +8,13 @@
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
+    using FantasyFL.Services.Contracts;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Data.Enums;
     using Microsoft.EntityFrameworkCore;
 
     using static FantasyFL.Common.GlobalConstants;
+
     public class GameweekImportService : IGameweekImportService
     {
         private readonly IFootballDataService footballDataService;
@@ -50,51 +53,6 @@
                 })
                 .ToDictionary(p => p.ExternId, p => p.Id);
         }
-
-        //public async Task ImportFixtures(string gameweekName, int season)
-        //{
-        //    var fixturesInfo = await this.footballDataService.GetAllFixturesByGameweekAsync(gameweekName, season);
-
-        //    foreach (var fixtureDto in fixturesInfo)
-        //    {
-        //        var externId = fixtureDto.Fixture.Id;
-        //        var fixtureGameweek = this.gameweeksRepository
-        //            .All()
-        //            .FirstOrDefault(gw => gw.Name == gameweekName);
-
-        //        var fixtureDate = this.parseService.ParseDate(fixtureDto.Fixture.Date.Split("T")[0], "yyyy-MM-dd");
-
-        //        var homeTeamId = this.teamsRepository
-        //            .All()
-        //            .FirstOrDefault(t => t.ExternId == fixtureDto.Teams.HomeTeam.Id)
-        //            .Id;
-
-        //        var awayTeamId = this.teamsRepository
-        //            .All()
-        //            .FirstOrDefault(t => t.ExternId == fixtureDto.Teams.AwayTeam.Id)
-        //            .Id;
-
-        //        var status = fixtureDto.Fixture.Status.Status;
-        //        var homeGoals = fixtureDto.Goals.HomeGoals;
-        //        var awayGoals = fixtureDto.Goals.AwayGoals;
-
-        //        var newFixture = new Fixture
-        //        {
-        //            ExternId = externId,
-        //            Gameweek = fixtureGameweek,
-        //            Date = fixtureDate,
-        //            HomeTeamId = homeTeamId,
-        //            AwayTeamId = awayTeamId,
-        //            Status = status,
-        //            HomeGoals = homeGoals,
-        //            AwayGoals = awayGoals,
-        //        };
-
-        //        await this.fixturesRepository.AddAsync(newFixture);
-        //    }
-
-        //    await this.fixturesRepository.SaveChangesAsync();
-        //}
 
         public async Task ImportLineups(int gameweekId)
         {
@@ -338,7 +296,6 @@
                 {
                     this.UpdatePlayersTeamResult(homeTeamExternId, awayTeamExternId, playersInGameweek, true);
                 }
-
 
                 await this.playersGameweeksRepository.SaveChangesAsync();
             }

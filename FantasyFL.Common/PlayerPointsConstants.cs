@@ -7,7 +7,7 @@
         public const int ConcededGoalsDefaultPoints = 2;
         public const int ConcededGoalsMidfielderPoints = 1;
 
-        public const int SavedPenaltyPoints = 6;
+        public const int SavedPenaltyPoints = 5;
 
         public const int GoalPointsGoalkeeper = 9;
         public const int GoalPointsDefender = 7;
@@ -26,7 +26,7 @@
 
         public const int YellowCardPoints = 2;
         public const int RedCardPoints = 4;
-        public const int MissedPenaltyPoints = 6;
+        public const int MissedPenaltyPoints = 4;
         public const int OwnGoalPoints = 3;
 
         public const int TeamWonBonusPoints = 1;

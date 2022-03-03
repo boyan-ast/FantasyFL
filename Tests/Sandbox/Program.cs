@@ -14,6 +14,7 @@
     using FantasyFL.Data.Repositories;
     using FantasyFL.Data.Seeding;
     using FantasyFL.Services.Data;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Messaging;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;

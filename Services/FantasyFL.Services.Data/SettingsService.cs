@@ -5,6 +5,7 @@
 
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
 
     public class SettingsService : ISettingsService

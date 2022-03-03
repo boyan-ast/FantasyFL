@@ -7,6 +7,8 @@
 
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
+    using FantasyFL.Services.Contracts;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Data.InputModels.Events;
     using FantasyFL.Services.Data.InputModels.Fixtures;
     using FantasyFL.Services.Data.InputModels.Gameweeks;

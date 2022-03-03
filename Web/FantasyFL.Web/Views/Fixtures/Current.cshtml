@@ -1,0 +1,41 @@
+﻿@using FantasyFL.Web.ViewModels.Fixtures
+@model List<FixtureViewModel>
+
+@{
+    this.ViewData["Title"] = "Results";
+}
+
+<div class="row justify-content-center">
+    <div class="col-auto table-responsive">
+        <h2 class="text-center" style="margin-top: 2rem; margin-bottom: 2rem;">Gameweek Results</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Home</th>
+                    <th class="text-center" scope="col">Details</th>
+                    <th class="text-center" scope="col">Away</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var fixture in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <img class="img-fluid" src="@fixture.HomeTeamLogo" alt="home" style="max-height: 30%; max-width: 30%;">
+                            <h5>@fixture.HomeTeam</h5>
+                        </td>
+                        <td class="text-center">
+                            <div>@fixture.Stadium</div>
+                            <h5>@fixture.HomeGoals : @fixture.AwayGoals</h5>
+                            <div>@fixture.Date</div>
+                        </td>
+                        <td class="text-center">
+                            <img src="@fixture.AwayTeamLogo" alt="away" style="max-height: 30%; max-width: 30%;">
+                            <h5>@fixture.AwayTeam</h5>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

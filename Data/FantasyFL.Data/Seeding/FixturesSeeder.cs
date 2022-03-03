@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using FantasyFL.Services.Data;
+    using FantasyFL.Services.Data.Contracts;
 
     internal class FixturesSeeder : ISeeder
     {

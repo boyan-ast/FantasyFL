@@ -5,7 +5,7 @@
 
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
-    using FantasyFL.Services.Data;
+    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Settings;
 
     using Microsoft.AspNetCore.Mvc;

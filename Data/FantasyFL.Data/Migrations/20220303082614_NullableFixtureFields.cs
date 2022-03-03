@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace FantasyFL.Data.Migrations
+﻿namespace FantasyFL.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class NullableFixtureFields : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,7 +51,7 @@ namespace FantasyFL.Data.Migrations
                 type: "nvarchar(5)",
                 maxLength: 5,
                 nullable: false,
-                defaultValue: "",
+                defaultValue: string.Empty,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(5)",
                 oldMaxLength: 5,
