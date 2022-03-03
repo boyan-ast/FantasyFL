@@ -9,5 +9,7 @@
         public Task ImportPlayers();
 
         public Task ImportGameweeks();
+
+        public Task ImportFixtures();
     }
 }

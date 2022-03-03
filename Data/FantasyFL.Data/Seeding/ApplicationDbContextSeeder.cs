@@ -30,6 +30,7 @@
                               new TeamsSeeder(),
                               new PlayersSeeder(),
                               new GameweeksSeeder(),
+                              new FixturesSeeder(),
                               new FantasyLeaguesSeeder(),
                           };
 

@@ -5,9 +5,9 @@
     public class FixtureGoalsDto
     {
         [JsonProperty("home")]
-        public int HomeGoals { get; init; }
+        public int? HomeGoals { get; init; }
 
         [JsonProperty("away")]
-        public int AwayGoals { get; init; }
+        public int? AwayGoals { get; init; }
     }
 }

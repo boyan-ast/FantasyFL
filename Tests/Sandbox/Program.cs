@@ -55,40 +55,20 @@
             Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
 
             var data = (ApplicationDbContext)serviceProvider.GetService(typeof(ApplicationDbContext));
-            var playersGameweekOne = data
-                .PlayersGameweeks
-                .Where(pg => pg.GameweekId == 19 && pg.Player.TeamId == 3)
-                .Select(pg => new
-                {
-                    Player = pg.Player.Name,
-                    PlayerTeam = pg.Player.Team.Name,
-                    pg.InStartingLineup,
-                    pg.IsSubstitute,
-                    pg.MinutesPlayed,
-                    pg.Goals,
-                    pg.YellowCards,
-                    pg.RedCards,
-                    pg.CleanSheet,
-                    pg.ConcededGoals,
-                    pg.TotalPoints,
-                    PlayerTeamWon = pg.TeamResult,
-                })
-                .OrderByDescending(p => p.TotalPoints)
-                .ToList();
 
-            foreach (var player in playersGameweekOne)
+            var fixtures = data.Fixtures
+                .Include(f => f.HomeTeam)
+                .Include(f => f.AwayTeam)
+                .OrderBy(x => x.Gameweek.Number).ToList();
+
+            foreach (var fixture in fixtures)
             {
-                Console.WriteLine($"Name : {player.Player}");
-                Console.WriteLine($"Minutes played: {player.MinutesPlayed}");
-                Console.WriteLine($"Goals: {player.Goals}");
-                Console.WriteLine($"Yellow cards: {player.YellowCards}");
-                Console.WriteLine($"Red cards: {player.RedCards}");
-                Console.WriteLine($"Has clean sheet {player.CleanSheet}");
-                Console.WriteLine($"Conceded goals: {player.ConcededGoals}");
-                Console.WriteLine($"Total points for gameweek: {player.TotalPoints}");
-                Console.WriteLine(new string('*', 10));
-                Console.WriteLine($"Player team: {player.PlayerTeam} -> {player.PlayerTeamWon}");
-                Console.WriteLine(new string('*', 10));
+                Console.WriteLine($"{fixture.Date} {fixture.Status}: {fixture.HomeTeam.Name} - {fixture.AwayTeam.Name}");
+                if (fixture.Status == "FT")
+                {
+                    Console.WriteLine($"{fixture.HomeGoals} : {fixture.AwayGoals}");
+                }
+
                 Console.WriteLine(new string('*', 10));
             }
 

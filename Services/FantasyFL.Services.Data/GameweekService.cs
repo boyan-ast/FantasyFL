@@ -57,7 +57,7 @@
                 throw new InvalidOperationException($"The matches in gameweek '{gameweek.Name}' haven't been played yet.");
             }
 
-            await this.gameweekImportService.ImportFixtures(gameweek.Name, SeasonYear);
+            // await this.gameweekImportService.ImportFixtures(gameweek.Name, SeasonYear);
             await this.gameweekImportService.ImportLineups(gameweekId);
             await this.gameweekImportService.ImportEvents(gameweekId);
             await this.playersService.CalculatePoints(gameweekId);

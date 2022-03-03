@@ -16,7 +16,7 @@
 
         public Gameweek Gameweek { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [ForeignKey(nameof(HomeTeam))]
         public int HomeTeamId { get; set; }
@@ -28,12 +28,11 @@
 
         public Team AwayTeam { get; set; }
 
-        [Required]
         [MaxLength(FixtureStatusMaxLength)]
         public string Status { get; set; }
 
-        public int HomeGoals { get; set; }
+        public int? HomeGoals { get; set; }
 
-        public int AwayGoals { get; set; }
+        public int? AwayGoals { get; set; }
     }
 }

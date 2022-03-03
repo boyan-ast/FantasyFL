@@ -21,6 +21,7 @@
         private readonly IRepository<Gameweek> gameweeksRepository;
         private readonly IDeletableEntityRepository<Player> playersRepository;
         private readonly IDeletableEntityRepository<Team> teamsRepository;
+        private readonly IRepository<Fixture> fixturesRepository;
 
         public SeedService(
             IFootballDataService footballDataService,
@@ -28,13 +29,15 @@
             IRepository<Gameweek> gameweeksRepository,
             IDeletableEntityRepository<Player> playersRepository,
             IDeletableEntityRepository<Team> teamsRepository,
-            IRepository<Stadium> stadiumsRepository)
+            IRepository<Stadium> stadiumsRepository,
+            IRepository<Fixture> fixturesRepository)
         {
             this.footballDataService = footballDataService;
             this.parseService = parseService;
             this.gameweeksRepository = gameweeksRepository;
             this.playersRepository = playersRepository;
             this.teamsRepository = teamsRepository;
+            this.fixturesRepository = fixturesRepository;
         }
 
         public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; } = new List<TeamStadiumDto>();
@@ -56,6 +59,63 @@
             }
 
             await this.gameweeksRepository.SaveChangesAsync();
+        }
+
+        public async Task ImportFixtures()
+        {
+            var gameweeks = this
+                .gameweeksRepository
+                .All()
+                .OrderBy(gw => gw.Number)
+                .Select(gw => new
+                {
+                    gw.Id,
+                    gw.Name,
+                });
+
+            foreach (var gameweek in gameweeks)
+            {
+                var fixturesInfo = await this.footballDataService
+                    .GetAllFixturesByGameweekAsync(gameweek.Name, SeasonYear);
+
+                foreach (var fixtureDto in fixturesInfo)
+                {
+                    var externId = fixtureDto.Fixture.Id;
+
+                    var fixtureDate = this.parseService
+                        .ParseDate(fixtureDto.Fixture.Date.Split("T")[0], "yyyy-MM-dd");
+
+                    var homeTeamId = this.teamsRepository
+                        .All()
+                        .FirstOrDefault(t => t.ExternId == fixtureDto.Teams.HomeTeam.Id)
+                        .Id;
+
+                    var awayTeamId = this.teamsRepository
+                        .All()
+                        .FirstOrDefault(t => t.ExternId == fixtureDto.Teams.AwayTeam.Id)
+                        .Id;
+
+                    var status = fixtureDto.Fixture.Status.Status;
+                    var homeGoals = fixtureDto.Goals.HomeGoals;
+                    var awayGoals = fixtureDto.Goals.AwayGoals;
+
+                    var newFixture = new Fixture
+                    {
+                        ExternId = externId,
+                        GameweekId = gameweek.Id,
+                        Date = fixtureDate,
+                        HomeTeamId = homeTeamId,
+                        AwayTeamId = awayTeamId,
+                        Status = status,
+                        HomeGoals = homeGoals,
+                        AwayGoals = awayGoals,
+                    };
+
+                    await this.fixturesRepository.AddAsync(newFixture);
+                }
+            }
+
+            await this.fixturesRepository.SaveChangesAsync();
         }
 
         public async Task ImportPlayers()
