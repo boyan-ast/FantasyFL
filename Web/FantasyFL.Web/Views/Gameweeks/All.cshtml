@@ -20,18 +20,21 @@
                     @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
                     {
                         <a asp-controller="Gameweeks"
-                   asp-action="GetData"
-                   asp-route-id="@gameweek.Id"
-                   class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Get Data</a>
+                           asp-action="GetData"
+                           asp-route-id="@gameweek.Id"
+                           class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Get Data</a>
                     }
                 </th>
                 <th scope="col">
-                    @if (!gameweek.IsFinished && gameweek.EndDate < DateTime.UtcNow)
+                    @if (!gameweek.IsFinished && 
+                        gameweek.IsImported &&
+                        gameweek.EndDate < DateTime.UtcNow && 
+                        gameweek.PreviousIsFinished)
                     {
                         <a asp-controller="Gameweeks"
-                   asp-action="Finish"
-                   asp-route-id="@gameweek.Id"
-                   class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Finish</a>
+                           asp-action="Finish"
+                           asp-route-id="@gameweek.Id"
+                           class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Finish</a>
                     }
                 </th>                
             </tr>

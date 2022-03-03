@@ -12,6 +12,8 @@
 
         public bool IsImported { get; init; }
 
+        public bool PreviousIsFinished { get; init; }
+
         public DateTime? EndDate { get; init; }
     }
 }

@@ -33,17 +33,24 @@
             var gameweeks = await this.gameweekRepository
                 .All()
                 .OrderBy(gw => gw.Number)
-                .Select(gw => new GameweekViewModel
-                {
-                    Id = gw.Id,
-                    Name = gw.Name,
-                    IsImported = gw.IsImported,
-                    IsFinished = gw.IsFinished,
-                    EndDate = gw.EndDate,
-                })
                 .ToListAsync();
 
-            return gameweeks;
+            var gameweeksViewModel = new List<GameweekViewModel>();
+
+            foreach (var gameweek in gameweeks)
+            {
+                gameweeksViewModel.Add(new GameweekViewModel
+                {
+                    Id = gameweek.Id,
+                    Name = gameweek.Name,
+                    IsImported = gameweek.IsImported,
+                    IsFinished = gameweek.IsFinished,
+                    EndDate = gameweek.EndDate,
+                    PreviousIsFinished = this.PreviousIsFinished(gameweek.Number),
+                });
+            }
+
+            return gameweeksViewModel;
         }
 
         public async Task GetPlayersData(int gameweekId)
@@ -81,6 +88,37 @@
             gameweek.IsFinished = true;
 
             await this.gameweekRepository.SaveChangesAsync();
+        }
+
+        public Gameweek GetCurrent()
+        {
+            var gameweek = this.gameweekRepository
+                .All()
+                .OrderByDescending(gw => gw.Number)
+                .FirstOrDefault(gw => gw.IsFinished);
+
+            // TODO: If null season not started
+            return gameweek;
+        }
+
+        public Gameweek GetNext()
+        {
+            var gameweek = this.gameweekRepository
+                .All()
+                .OrderBy(gw => gw.Number)
+                .FirstOrDefault(gw => !gw.IsFinished);
+
+            // TODO: If null season over
+            return gameweek;
+        }
+
+        private bool PreviousIsFinished(int currentNumber)
+        {
+            var previousGameweek = this.gameweekRepository
+                .All()
+                .FirstOrDefault(gw => gw.Number == currentNumber - 1);
+
+            return previousGameweek == null || previousGameweek.IsFinished;
         }
     }
 }
