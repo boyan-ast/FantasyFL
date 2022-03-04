@@ -1,0 +1,24 @@
+﻿@using FantasyFL.Web.ViewModels.Players
+@model List<PlayerListingViewModel>
+
+@{
+    ViewData["title"] = "Players";
+}
+
+<h3 class="text-center">@Model[0].Team</h3>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table class="table table-hover">
+            <tbody>
+                @foreach (var player in Model)
+                {
+                    <tr>
+                        <td class="text-center font-weight-bold">@player.Name</td>
+                        <td class="text-center">@player.Position</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
