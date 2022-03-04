@@ -1,43 +1,49 @@
-﻿@using FantasyFL.Web.ViewModels.Admin
+﻿@using FantasyFL.Web.ViewModels.Gameweeks
 @model List<GameweekViewModel>
+
+@{
+    this.ViewData["Title"] = "Admin";
+}
 
 <h1>Gameweeks</h1>
 
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Gameweek</th>
-            <th scope="col">Import</th>
-            <th scope="col">Finish</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var gameweek in Model)
-        {
+<div class="table-responsive">
+    <table class="table">
+        <thead class="thead-dark">
             <tr>
-                <th scope="col">@gameweek.Name</th>
-                <th scope="col">
-                    @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
-                    {
-                        <a asp-controller="Gameweeks"
-                           asp-action="GetData"
-                           asp-route-id="@gameweek.Id"
-                           class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Get Data</a>
-                    }
-                </th>
-                <th scope="col">
-                    @if (!gameweek.IsFinished && 
-                        gameweek.IsImported &&
-                        gameweek.EndDate < DateTime.UtcNow && 
-                        gameweek.PreviousIsFinished)
-                    {
-                        <a asp-controller="Gameweeks"
-                           asp-action="Finish"
-                           asp-route-id="@gameweek.Id"
-                           class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Finish</a>
-                    }
-                </th>                
+                <th scope="col">Gameweek</th>
+                <th scope="col">Import</th>
+                <th scope="col">Finish</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var gameweek in Model)
+            {
+                <tr>
+                    <th scope="col">@gameweek.Name</th>
+                    <th scope="col">
+                        @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
+                        {
+                            <a asp-controller="Gameweeks"
+                       asp-action="GetData"
+                       asp-route-id="@gameweek.Id"
+                       class="btn btn-primary btn-pill" role="button" aria-pressed="true">Get Data</a>
+                        }
+                    </th>
+                    <th scope="col">
+                        @if (!gameweek.IsFinished &&
+                       gameweek.IsImported &&
+                       gameweek.EndDate < DateTime.UtcNow &&
+                       gameweek.PreviousIsFinished)
+                        {
+                            <a asp-controller="Gameweeks"
+                       asp-action="Finish"
+                       asp-route-id="@gameweek.Id"
+                       class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Finish</a>
+                        }
+                    </th>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>>

@@ -1,0 +1,30 @@
+﻿@using FantasyFL.Web.ViewModels.Teams
+@model List<TeamListingViewModel>
+
+@{
+    ViewData["title"] = "Teams";
+}
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table class="table table-responsive">
+            <tbody>
+                @foreach (var team in Model)
+                {
+                    <tr>
+                        <td class="align-middle" scope="row">
+                            <img src="@team.Logo" alt="logo" class="text-center" style="max-height: 80%; max-width: 80%;">
+                        </td>
+                        <td class="align-middle font-weight-bold"><h4>@team.Name</h4></td>
+                        <td class="align-middle text-center">
+                            <a asp-controller="Players"
+                           asp-action="Squad"
+                           asp-route-id="@team.Id"
+                           class="btn btn-outline-dark" role="button" aria-pressed="true"><h6 class="text-center">Players</h6></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

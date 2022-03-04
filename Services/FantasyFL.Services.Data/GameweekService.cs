@@ -8,7 +8,7 @@
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
-    using FantasyFL.Web.ViewModels.Admin;
+    using FantasyFL.Web.ViewModels.Gameweeks;
     using Microsoft.EntityFrameworkCore;
 
     using static FantasyFL.Common.GlobalConstants;
@@ -17,12 +17,12 @@
     {
         private readonly IRepository<Gameweek> gameweekRepository;
         private readonly IGameweekImportService gameweekImportService;
-        private readonly IPlayersService playersService;
+        private readonly IPlayersPointsService playersService;
 
         public GameweekService(
             IRepository<Gameweek> gameweekRepository,
             IGameweekImportService gameweekImportService,
-            IPlayersService playersService)
+            IPlayersPointsService playersService)
         {
             this.gameweekRepository = gameweekRepository;
             this.gameweekImportService = gameweekImportService;
