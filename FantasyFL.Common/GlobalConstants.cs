@@ -5,6 +5,9 @@
         public const string SystemName = "FantasyFL";
 
         public const string AdministratorRoleName = "Administrator";
+        public const string AdministratorUserName = "Admin";
+        public const string AdministratorPassword = "admin123";
+        public const string AdministratorEmail = "boyan.m.ast@gmail.com";
 
         public const int DefaultIdMaxLength = 40;
 

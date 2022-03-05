@@ -6,7 +6,7 @@
 
     using FantasyFL.Services.Data.Contracts;
 
-    public class GameweeksSeeder : ISeeder
+    internal class GameweeksSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

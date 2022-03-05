@@ -6,7 +6,7 @@
 
     using FantasyFL.Data.Models;
 
-    public class FantasyLeaguesSeeder : ISeeder
+    internal class FantasyLeaguesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
