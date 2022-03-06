@@ -4,15 +4,16 @@
 
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class FantasyTeamsController : Controller
+    public class FantasyTeamController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFantasyTeamsService fantasyTeamService;
 
-        public FantasyTeamsController(
+        public FantasyTeamController(
             UserManager<ApplicationUser> userManager,
             IFantasyTeamsService fantasyTeamService)
         {
@@ -20,6 +21,7 @@
             this.fantasyTeamService = fantasyTeamService;
         }
 
+        [Authorize]
         public async Task<IActionResult> PickPlayers()
         {
             var userId = this.userManager.GetUserId(this.User);

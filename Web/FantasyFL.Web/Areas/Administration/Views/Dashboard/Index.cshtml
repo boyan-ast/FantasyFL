@@ -1,7 +1,67 @@
-﻿@model FantasyFL.Web.ViewModels.Administration.Dashboard.IndexViewModel
+﻿@model List<FantasyFL.Web.ViewModels.Gameweeks.GameweekViewModel>
+
 @{
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<h1>@this.ViewData["Title"]</h1>
-Settings: @this.Model.SettingsCount
+
+<h2 class="text-center mt-3 mb-4">All Gameweeks</h2>
+
+<div class="row justify-content-center table-responsive col-auto">
+    <table class="table m-3">
+        <thead class="thead-dark">
+            <tr>
+                <th class="text-center" scope="col">Gameweek</th>
+                <th class="text-center" scope="col">Import</th>
+                <th class="text-center" scope="col">Finish</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var gameweek in Model)
+            {
+                <tr>
+                    <td class="text-center" scope="col">@gameweek.Name</td>
+                    <td class="text-center" scope="col">
+                        @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
+                        {
+                            <a asp-area="Administration"
+                            asp-controller="Dashboard"
+                           asp-action="GetData"
+                           asp-route-id="@gameweek.Id"
+                           class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Get Data</a>
+                        }
+                    </td>
+                    <td class="text-center" scope="col">
+                        @if (!gameweek.IsFinished &&
+                       gameweek.IsImported &&
+                       gameweek.EndDate < DateTime.UtcNow &&
+                       gameweek.PreviousIsFinished)
+                        {
+                            <a asp-area="Administration"
+                            asp-controller="Dashboard"
+                           asp-action="Finish"
+                           asp-route-id="@gameweek.Id"
+                           class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Finish</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>>
+
+@section Scripts{
+<script>
+    $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+    $(window).on('load', function(){
+      setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+    });
+    function removeLoader(){
+        $( "#loadingDiv" ).fadeOut(500, function() {
+          // fadeOut complete. Remove the loading div
+          $( "#loadingDiv" ).remove(); //makes page more lightweight
+      });
+    }
+</script>
+}
+

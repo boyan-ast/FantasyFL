@@ -1,23 +1,38 @@
 ﻿namespace FantasyFL.Web.Areas.Administration.Controllers
 {
-    using FantasyFL.Services.Data.Contracts;
-    using FantasyFL.Web.ViewModels.Administration.Dashboard;
+    using System.Threading.Tasks;
 
+    using FantasyFL.Services.Data.Contracts;
     using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {
-        private readonly ISettingsService settingsService;
+        private readonly IGameweekService gameweeksService;
 
-        public DashboardController(ISettingsService settingsService)
+        public DashboardController(IGameweekService gameweeksService)
         {
-            this.settingsService = settingsService;
+            this.gameweeksService = gameweeksService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var viewModel = new IndexViewModel { SettingsCount = this.settingsService.GetCount(), };
-            return this.View(viewModel);
+            var gameweeks = await this.gameweeksService.GetAllAsync();
+
+            return this.View(gameweeks);
+        }
+
+        public async Task<IActionResult> GetData(int id)
+        {
+            await this.gameweeksService.GetPlayersData(id);
+
+            return this.Redirect("/Administration/Dashboard");
+        }
+
+        public async Task<IActionResult> Finish(int id)
+        {
+            await this.gameweeksService.FinishGameweek(id);
+
+            return this.Redirect("/Administration/Dashboard");
         }
     }
 }

@@ -31,7 +31,7 @@
 
                 if (isUserTeamEmpty)
                 {
-                    return this.Redirect("/FantasyTeams/PickPlayers");
+                    return this.Redirect("/FantasyTeam/PickPlayers");
                 }
                 else
                 {
