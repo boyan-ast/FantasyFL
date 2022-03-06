@@ -1,5 +1,6 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Data.Contracts;
@@ -17,6 +18,11 @@
         public async Task<IActionResult> Current()
         {
             var fixtures = await this.fixturesService.GetAllInCurrentGameweek();
+
+            if (!fixtures.Any())
+            {
+                return this.Redirect("/Fixtures/Next");
+            }
 
             return this.View(fixtures);
         }

@@ -29,6 +29,11 @@
         {
             var currentGameweek = this.gameweekService.GetCurrent();
 
+            if (currentGameweek == null)
+            {
+                return new List<FixtureViewModel>();
+            }
+
             var fixtures = await this.GetFixturesInGameweek(currentGameweek.Id);
 
             return fixtures;
