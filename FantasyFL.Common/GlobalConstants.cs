@@ -9,9 +9,15 @@
         public const string AdministratorPassword = "admin123";
         public const string AdministratorEmail = "boyan.m.ast@gmail.com";
 
+        public const string DefaultFantasyLeagueName = "Bulgaria";
+
+        public const int UsernameMaxLength = 15;
+
         public const int DefaultIdMaxLength = 40;
 
         public const int FixtureStatusMaxLength = 5;
+
+        public const int DefaultNameMinLength = 4;
         public const int DefaultNameMaxLength = 40;
 
         public const int LeagueExternId = 172;
