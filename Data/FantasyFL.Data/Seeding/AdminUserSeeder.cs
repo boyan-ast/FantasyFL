@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,10 @@
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
             var roleManager = serviceProvider.GetService<RoleManager<ApplicationRole>>();
 
+            var fantasyLeaguesRepository = (IDeletableEntityRepository<FantasyLeague>)serviceProvider
+                .GetService(typeof(IDeletableEntityRepository<FantasyLeague>));
+            var defaultFentasyLeague = fantasyLeaguesRepository.All().FirstOrDefault(fl => fl.Name == "Bulgaria");
+
             var userExists = await userManager.Users.AnyAsync(u => u.UserName == AdministratorUserName);
 
             if (!userExists)
@@ -27,8 +32,13 @@
                     UserName = AdministratorUserName,
                     Email = AdministratorEmail,
                     EmailConfirmed = true,
-                    //TODO: Add FantasyTeam and FantasyLeague
+                    FantasyTeam = new FantasyTeam
+                    {
+                        Name = "AdminTeam",
+                    },
                 };
+
+                admin.FantasyLeagues.Add(defaultFentasyLeague);
 
                 var result = await userManager.CreateAsync(admin, AdministratorPassword);
 

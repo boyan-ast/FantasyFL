@@ -9,12 +9,17 @@
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/lazy.css">
-    <link rel="stylesheet" href="~/css/loading.css">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
             <div class="container">
+                <div>
+                    <a class=".navbar-brand" href="index.html">
+                        <img src="~/images/lorde.png" alt="site-logo" style="width: 50px; height: 50px;">
+                    </a>
+                </div>
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-1" aria-controls="navbarNavDropdown-1"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +47,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#a" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                Matches
+                                Fixtures
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" asp-controller="Fixtures" asp-action="Current">Results</a>

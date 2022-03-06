@@ -5,32 +5,32 @@
     this.ViewData["Title"] = "Admin";
 }
 
-<h1>Gameweeks</h1>
+<h2 class="text-center mt-3 mb-4">All Gameweeks</h2>
 
-<div class="table-responsive">
+<div class="row justify-content-center table-responsive col-auto">
     <table class="table">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">Gameweek</th>
-                <th scope="col">Import</th>
-                <th scope="col">Finish</th>
+                <th class="text-center" scope="col">Gameweek</th>
+                <th class="text-center" scope="col">Import</th>
+                <th class="text-center" scope="col">Finish</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var gameweek in Model)
             {
                 <tr>
-                    <th scope="col">@gameweek.Name</th>
-                    <th scope="col">
+                    <td class="text-center" scope="col">@gameweek.Name</td>
+                    <td class="text-center" scope="col">
                         @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
                         {
                             <a asp-controller="Gameweeks"
                        asp-action="GetData"
                        asp-route-id="@gameweek.Id"
-                       class="btn btn-primary btn-pill" role="button" aria-pressed="true">Get Data</a>
+                       class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Get Data</a>
                         }
-                    </th>
-                    <th scope="col">
+                    </td>
+                    <td class="text-center" scope="col">
                         @if (!gameweek.IsFinished &&
                        gameweek.IsImported &&
                        gameweek.EndDate < DateTime.UtcNow &&
@@ -39,11 +39,26 @@
                             <a asp-controller="Gameweeks"
                        asp-action="Finish"
                        asp-route-id="@gameweek.Id"
-                       class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Finish</a>
+                       class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Finish</a>
                         }
-                    </th>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>>
+
+@section Scripts{
+<script>
+    $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+    $(window).on('load', function(){
+      setTimeout(removeLoader, 2000); //wait for page load PLUS two seconds.
+    });
+    function removeLoader(){
+        $( "#loadingDiv" ).fadeOut(500, function() {
+          // fadeOut complete. Remove the loading div
+          $( "#loadingDiv" ).remove(); //makes page more lightweight
+      });
+    }
+</script>
+}

@@ -3,6 +3,8 @@ namespace FantasyFL.Data.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using FantasyFL.Data.Common.Models;
 
@@ -17,6 +19,12 @@ namespace FantasyFL.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        public FantasyTeam FantasyTeam { get; set; }
+
+        public ICollection<FantasyLeague> FantasyLeagues { get; set; } = new HashSet<FantasyLeague>();
+
+        public int TotalPoints { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

@@ -32,6 +32,7 @@
                               new GameweeksSeeder(),
                               new FixturesSeeder(),
                               new FantasyLeaguesSeeder(),
+                              new AdminUserSeeder(),
                           };
 
             foreach (var seeder in seeders)

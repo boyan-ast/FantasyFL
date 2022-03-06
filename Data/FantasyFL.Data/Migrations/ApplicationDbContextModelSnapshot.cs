@@ -19,6 +19,21 @@ namespace FantasyFL.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ApplicationUserFantasyLeague", b =>
+                {
+                    b.Property<string>("ApplicationUsersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("FantasyLeaguesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ApplicationUsersId", "FantasyLeaguesId");
+
+                    b.HasIndex("FantasyLeaguesId");
+
+                    b.ToTable("ApplicationUserFantasyLeague");
+                });
+
             modelBuilder.Entity("FantasyFL.Data.Models.ApplicationRole", b =>
                 {
                     b.Property<string>("Id")
@@ -85,9 +100,6 @@ namespace FantasyFL.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("FantasyLeagueId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -120,6 +132,9 @@ namespace FantasyFL.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TotalPoints")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -128,8 +143,6 @@ namespace FantasyFL.Data.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FantasyLeagueId");
 
                     b.HasIndex("IsDeleted");
 
@@ -219,16 +232,15 @@ namespace FantasyFL.Data.Migrations
                         .HasColumnType("nvarchar(40)");
 
                     b.Property<string>("OwnerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("TopPlayersCount")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("OwnerId")
+                        .IsUnique();
 
                     b.ToTable("FantasyTeams");
                 });
@@ -667,11 +679,19 @@ namespace FantasyFL.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("ApplicationUserFantasyLeague", b =>
                 {
+                    b.HasOne("FantasyFL.Data.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("ApplicationUsersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("FantasyFL.Data.Models.FantasyLeague", null)
-                        .WithMany("ApplicationUsers")
-                        .HasForeignKey("FantasyLeagueId");
+                        .WithMany()
+                        .HasForeignKey("FantasyLeaguesId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUserGameweek", b =>
@@ -696,8 +716,10 @@ namespace FantasyFL.Data.Migrations
             modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeam", b =>
                 {
                     b.HasOne("FantasyFL.Data.Models.ApplicationUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .WithOne("FantasyTeam")
+                        .HasForeignKey("FantasyFL.Data.Models.FantasyTeam", "OwnerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Owner");
                 });
@@ -850,14 +872,11 @@ namespace FantasyFL.Data.Migrations
                 {
                     b.Navigation("Claims");
 
+                    b.Navigation("FantasyTeam");
+
                     b.Navigation("Logins");
 
                     b.Navigation("Roles");
-                });
-
-            modelBuilder.Entity("FantasyFL.Data.Models.FantasyLeague", b =>
-                {
-                    b.Navigation("ApplicationUsers");
                 });
 
             modelBuilder.Entity("FantasyFL.Data.Models.FantasyTeam", b =>

@@ -16,6 +16,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
+        [Required]
         [ForeignKey(nameof(Owner))]
         public string OwnerId { get; set; }
 
@@ -26,7 +27,5 @@
         public string Name { get; set; }
 
         public ICollection<FantasyTeamPlayer> FantasyTeamPlayers { get; set; } = new HashSet<FantasyTeamPlayer>();
-
-        public int TopPlayersCount { get; set; } = 0;
     }
 }
