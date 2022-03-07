@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Web.ViewModels.Gameweeks
+﻿namespace FantasyFL.Web.ViewModels.Administration.Dashboard
 {
     using System;
 

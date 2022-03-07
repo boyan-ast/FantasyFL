@@ -31,7 +31,7 @@
 
                 if (isUserTeamEmpty)
                 {
-                    return this.Redirect("/FantasyTeam/PickPlayers");
+                    return this.Redirect("/FantasyTeam/PickGoalkeepers");
                 }
                 else
                 {

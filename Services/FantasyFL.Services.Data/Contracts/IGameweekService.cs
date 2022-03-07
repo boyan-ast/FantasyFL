@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
-    using FantasyFL.Web.ViewModels.Gameweeks;
+    using FantasyFL.Web.ViewModels.Administration.Dashboard;
 
     public interface IGameweekService
     {

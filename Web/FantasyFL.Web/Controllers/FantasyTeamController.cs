@@ -3,7 +3,9 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
+    using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
+    using FantasyFL.Web.ViewModels.FantasyTeam;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -12,23 +14,51 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IFantasyTeamsService fantasyTeamService;
+        private readonly IPlayersService playersService;
 
         public FantasyTeamController(
             UserManager<ApplicationUser> userManager,
-            IFantasyTeamsService fantasyTeamService)
+            IFantasyTeamsService fantasyTeamService,
+            IPlayersService playersService)
         {
             this.userManager = userManager;
             this.fantasyTeamService = fantasyTeamService;
+            this.playersService = playersService;
         }
 
         [Authorize]
-        public async Task<IActionResult> PickPlayers()
+        public async Task<IActionResult> PickGoalkeepers()
         {
             var userId = this.userManager.GetUserId(this.User);
 
-            var userTeam = await this.fantasyTeamService.GetUserTeam(userId);
+            var allPlayers = await this.playersService
+                .GetAllPlayers();
 
-            return this.View(model: userTeam.Name);
+            var pickGoalKeepersFormModel = new PickPlayersFormModel
+            {
+                OwnerId = userId,
+                Players = allPlayers,
+            };
+
+            return this.View(pickGoalKeepersFormModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PickDefenders(PickPlayersFormModel model)
+        {
+            // TODO: Validate model
+            var allPlayers = await this.playersService
+                .GetAllPlayers();
+
+            var pickDefendersFormModel = new PickPlayersFormModel
+            {
+                OwnerId = model.OwnerId,
+                Players = allPlayers,
+                Goalkeepers = model.Goalkeepers,
+            };
+
+            return this.View(pickDefendersFormModel);
         }
     }
 }
