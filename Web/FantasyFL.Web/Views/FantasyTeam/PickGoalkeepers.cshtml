@@ -8,13 +8,14 @@
 
 <div class="row">
     <div class="overflow-auto col-md-6" style="height: 600px;">
-        <table class="table table-hover">
+        <table id="playersTable" class="table table-hover">
             <tbody>
                 @foreach (var player in Model.Players.Where(p => p.Position == Position.Goalkeeper.ToString()))
                 {
-                    <tr>
-                        <td class="text-center font-weight-bold">@player.Name</td>
+                    <tr class="clickable">
+                        <td class="text-center font-weight-bold playerName">@player.Name</td>
                         <td class="text-center">@player.Team</td>
+                        <td class="text-center playerId" hidden>@player.Id</td>
                     </tr>
                 }
             </tbody>
@@ -22,14 +23,14 @@
     </div>
 
     <div class="col-md-6">
-        <form asp-controller="FantasyTeam" asp-action="PickDefenders" class="pl-5" method="post">
+        <form asp-controller="FantasyTeam" asp-action="PickDefenders" id="pickPlayersForm" class="pl-5" method="post">
             <h4>Pick Your Goalkeepers</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
 
             @for (int i = 0; i < 2; i++)
             {
-                <div class="form-group">
+                <div class="form-group goalkeepers">
                     <label asp-for="Goalkeepers[i].Name"></label>
                     <input asp-for="Goalkeepers[i].Name" class="form-control" />
                     <span asp-validation-for="Goalkeepers[i].Name" class="text-danger"></span>
@@ -47,3 +48,36 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+<script>
+    function clickHandler(e){
+        let trElement = e.currentTarget;
+
+        let playerId = trElement.querySelector("td.playerId").textContent;
+        let playerName = trElement.querySelector("td.playerName").textContent;
+
+        console.log(playerId);
+            console.log(playerName);
+        let inputElements = document.querySelectorAll('#pickPlayersForm .goalkeepers input');
+
+        for (let i = 0; i < inputElements.length; i++) {
+            console.log(inputElements[i].value);
+
+            if (!inputElements[i].value) {
+                inputElements[i].value = playerName;
+                break;
+            }
+
+            if (i == inputElements.length - 1) {
+                 alert("Your list is full. Remove player first.");
+            }
+        }
+    }
+
+    document.querySelectorAll('#playersTable tr')
+        .forEach(e => e.addEventListener("click", clickHandler));
+</script>
+
+}
+
