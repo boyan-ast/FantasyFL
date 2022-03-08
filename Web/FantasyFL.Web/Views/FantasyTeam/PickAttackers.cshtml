@@ -24,11 +24,11 @@
 
     <div class="col-md-6">
         <form asp-controller="FantasyTeam" asp-action="SubmitTeam" id="pickPlayersForm" class="pl-5" method="post">
-            <h4>Pick Your Defenders</h4>
+            <h4>Pick Your Attackers</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            @for (int i = 0; i < Model.Goalkeepers.Count; i++)
+            @for (int i = 0; i < 2; i++)
             {
                 <div class="form-group" hidden >
                     <label asp-for="Goalkeepers[i].Name"></label>
@@ -43,7 +43,7 @@
                 </div>
             }
 
-            @for (int i = 0; i < Model.Defenders.Count; i++)
+            @for (int i = 0; i < 5; i++)
             {
                 <div class="form-group" hidden >
                     <label asp-for="Defenders[i].Name"></label>
@@ -58,7 +58,7 @@
                 </div>
             }
 
-            @for (int i = 0; i < Model.Midfielders.Count; i++)
+            @for (int i = 0; i < 5; i++)
             {
                 <div class="form-group" hidden >
                     <label asp-for="Midfielders[i].Name"></label>

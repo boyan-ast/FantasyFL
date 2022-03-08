@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
 
     public class FantasyTeamController : Controller
     {
@@ -34,12 +35,20 @@
             var allPlayers = await this.playersService
                 .GetAllPlayers();
 
-            var pickGoalKeepersFormModel = new PickPlayersFormModel
+            var pickGoalkeepersModel = new PickPlayersFormModel
             {
                 Players = allPlayers,
             };
 
-            return this.View(pickGoalKeepersFormModel);
+            if (this.TempData["players"] != null)
+            {
+                this.TempData["players"] = JsonConvert.DeserializeObject<PickPlayersFormModel>(this.TempData["players"].ToString());
+                pickGoalkeepersModel = this.TempData["players"] as PickPlayersFormModel;
+                pickGoalkeepersModel.Players = allPlayers;
+                this.TempData.Remove("players");
+            }
+
+            return this.View(pickGoalkeepersModel);
         }
 
         [Authorize]
@@ -103,7 +112,10 @@
             // TODO: Validate model
             // TODO: Edit if needed
 
-            return this.Redirect("/");
+            // The tempdate is in case of invalid players list
+            this.TempData["players"] = JsonConvert.SerializeObject(model);
+
+            return this.RedirectToAction("PickGoalkeepers");
         }
     }
 }
