@@ -36,7 +36,6 @@
 
             var pickGoalKeepersFormModel = new PickPlayersFormModel
             {
-                OwnerId = userId,
                 Players = allPlayers,
             };
 
@@ -53,12 +52,58 @@
 
             var pickDefendersFormModel = new PickPlayersFormModel
             {
-                OwnerId = model.OwnerId,
                 Players = allPlayers,
                 Goalkeepers = model.Goalkeepers,
             };
 
             return this.View(pickDefendersFormModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PickMidfielders(PickPlayersFormModel model)
+        {
+            // TODO: Validate model
+            var allPlayers = await this.playersService
+                .GetAllPlayers();
+
+            var pickMidfieldersModel = new PickPlayersFormModel
+            {
+                Players = allPlayers,
+                Goalkeepers = model.Goalkeepers,
+                Defenders = model.Defenders,
+            };
+
+            return this.View(pickMidfieldersModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> PickAttackers(PickPlayersFormModel model)
+        {
+            // TODO: Validate model
+            var allPlayers = await this.playersService
+                .GetAllPlayers();
+
+            var pickAttackersModel = new PickPlayersFormModel
+            {
+                Players = allPlayers,
+                Goalkeepers = model.Goalkeepers,
+                Defenders = model.Defenders,
+                Midfielders = model.Midfielders,
+            };
+
+            return this.View(pickAttackersModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> SubmitTeam(PickPlayersFormModel model)
+        {
+            // TODO: Validate model
+            // TODO: Edit if needed
+
+            return this.Redirect("/");
         }
     }
 }

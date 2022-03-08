@@ -3,14 +3,14 @@
 @model PickPlayersFormModel
 
 @{
-    ViewData["Title"] = "Pick Defenders";
+    ViewData["Title"] = "Pick Attackers";
 }
 
 <div class="row">
     <div class="overflow-auto col-md-6" style="height: 600px;">
         <table id="playersTable" class="table table-hover">
             <tbody>
-                @foreach (var player in Model.Players.Where(p => p.Position == Position.Defender.ToString()))
+                @foreach (var player in Model.Players.Where(p => p.Position == Position.Attacker.ToString()))
                 {
                     <tr class="clickable">
                         <td class="text-center font-weight-bold playerName">@player.Name</td>
@@ -23,38 +23,68 @@
     </div>
 
     <div class="col-md-6">
-        <form asp-controller="FantasyTeam" asp-action="PickMidfielders" id="pickPlayersForm" class="pl-5" method="post">
+        <form asp-controller="FantasyTeam" asp-action="SubmitTeam" id="pickPlayersForm" class="pl-5" method="post">
             <h4>Pick Your Defenders</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
 
             @for (int i = 0; i < Model.Goalkeepers.Count; i++)
             {
-                <div class="form-group" hidden>
+                <div class="form-group" hidden >
                     <label asp-for="Goalkeepers[i].Name"></label>
                     <input asp-for="Goalkeepers[i].Name" class="form-control" />
                     <span asp-validation-for="Goalkeepers[i].Name" class="text-danger"></span>
                 </div>
 
-                <div class="form-group" hidden>
+                <div class="form-group" hidden >
                     <label asp-for="Goalkeepers[i].Id"></label>
                     <input asp-for="Goalkeepers[i].Id" class="form-control" />
                     <span asp-validation-for="Goalkeepers[i].Id" class="text-danger"></span>
                 </div>
             }
 
-            @for (int i = 0; i < 5; i++)
+            @for (int i = 0; i < Model.Defenders.Count; i++)
             {
-                <div class="form-group playerName">
+                <div class="form-group" hidden >
                     <label asp-for="Defenders[i].Name"></label>
                     <input asp-for="Defenders[i].Name" class="form-control" />
-                    <span asp-validation-for="Defenders[@i].Name" class="text-danger"></span>
+                    <span asp-validation-for="Defenders[i].Name" class="text-danger"></span>
                 </div>
 
-                <div class="form-group playerId">
+                <div class="form-group" hidden >
                     <label asp-for="Defenders[i].Id"></label>
                     <input asp-for="Defenders[i].Id" class="form-control" />
                     <span asp-validation-for="Defenders[i].Id" class="text-danger"></span>
+                </div>
+            }
+
+            @for (int i = 0; i < Model.Midfielders.Count; i++)
+            {
+                <div class="form-group" hidden >
+                    <label asp-for="Midfielders[i].Name"></label>
+                    <input asp-for="Midfielders[i].Name" class="form-control" />
+                    <span asp-validation-for="Midfielders[i].Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" hidden >
+                    <label asp-for="Midfielders[i].Id"></label>
+                    <input asp-for="Midfielders[i].Id" class="form-control" />
+                    <span asp-validation-for="Midfielders[i].Id" class="text-danger"></span>
+                </div>
+            }
+
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="form-group playerName">
+                    <label asp-for="Attackers[i].Name"></label>
+                    <input asp-for="Attackers[i].Name" class="form-control" />
+                    <span asp-validation-for="Attackers[i].Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group playerId">
+                    <label asp-for="Attackers[i].Id"></label>
+                    <input asp-for="Attackers[i].Id" class="form-control" />
+                    <span asp-validation-for="Attackers[i].Id" class="text-danger"></span>
                 </div>
             }
 
@@ -66,5 +96,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/pickPlayers.js"></script>
+<script src="~/js/pickPlayers.js"></script>
 }
