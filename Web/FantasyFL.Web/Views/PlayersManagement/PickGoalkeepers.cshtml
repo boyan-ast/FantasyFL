@@ -33,7 +33,7 @@
                         <label asp-for="Goalkeepers[i].Name">Goalkeeper @(i + 1): </label>
                         <input asp-for="Goalkeepers[i].Name" class="form-control ml-2" readonly />
                         <div class="input-group-append">
-                            <button class="btn btn-danger ml-2" type="button">X</button>
+                            <button class="btn btn-danger ml-2 remove-player" type="button">X</button>
                         </div>
                     </div>
 
@@ -90,6 +90,10 @@
     </div>
 </div>
 
+<textarea id="error-message" hidden>@ViewData["alertMessage"]</textarea>
+
 @section Scripts {
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="~/js/pickPlayers.js"></script>
+<script src="~/js/alerts.js"></script>
 }

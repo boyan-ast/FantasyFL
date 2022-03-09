@@ -42,10 +42,13 @@
 
             if (this.TempData["players"] != null)
             {
+                this.ViewData["alertMessage"] = this.TempData["alert"].ToString();
                 this.TempData["players"] = JsonConvert.DeserializeObject<PickPlayersFormModel>(this.TempData["players"].ToString());
                 pickGoalkeepersModel = this.TempData["players"] as PickPlayersFormModel;
                 pickGoalkeepersModel.Players = allPlayers;
+
                 this.TempData.Remove("players");
+                this.TempData.Remove("alert");
             }
 
             return this.View(pickGoalkeepersModel);
@@ -115,9 +118,13 @@
             {
                 if (playersCount > MaxCountPlayersFromSameTeam)
                 {
+                    string errorMessage = $"More than {MaxCountPlayersFromSameTeam} players from {team} selected!";
+
                     this.ModelState.AddModelError(
                         string.Empty,
-                        $"You have more than {MaxCountPlayersFromSameTeam} players from team {team} selected");
+                        errorMessage);
+
+                    this.TempData["alert"] += errorMessage + '\n';
                 }
             }
 

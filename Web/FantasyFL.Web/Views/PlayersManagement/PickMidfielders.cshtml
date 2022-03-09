@@ -23,8 +23,8 @@
     </div>
 
     <div class="col-md-6">
-        <form asp-controller="PlayersManagement" asp-action="PickAttackers" id="pickPlayersForm" class="pl-5" method="post">
-            <h4>Pick Your Midfielders</h4>
+        <form asp-controller="PlayersManagement" asp-action="PickAttackers" id="pickPlayersForm" class="form-inline pl-5" method="post">
+            <h4 class="mb-3">Midfielders</h4>
             <hr />
 
             @for (int i = 0; i < 2; i++)
@@ -42,29 +42,34 @@
 
             @for (int i = 0; i < 5; i++)
             {
-                <div class="form-group" hidden >
+                <div class="form-group" hidden>
                     <label asp-for="Defenders[i].Name"></label>
                     <input asp-for="Defenders[i].Name" class="form-control" />
                 </div>
 
-                <div class="form-group" hidden >
+                <div class="form-group" hidden>
                     <label asp-for="Defenders[i].Id"></label>
                     <input asp-for="Defenders[i].Id" class="form-control" />
                 </div>
             }
 
-            @for (int i = 0; i < 5; i++)
-            {
-                <div class="form-group playerName" >
-                    <label asp-for="Midfielders[i].Name">Midfielder @(i + 1)</label>
-                    <input asp-for="Midfielders[i].Name" class="form-control" readonly />
-                </div>
+            <div class="row">
+                @for (int i = 0; i < 5; i++)
+                {
+                    <div class="form-group mb-4 playerName">
+                        <label asp-for="Midfielders[i].Name">Midfielder @(i + 1): </label>
+                        <input asp-for="Midfielders[i].Name" class="form-control ml-2" readonly />
+                        <div class="input-group-append">
+                            <button class="btn btn-danger ml-2 remove-player" type="button">X</button>
+                        </div>
+                    </div>
 
-                <div class="form-group playerId" hidden>
-                    <label asp-for="Midfielders[i].Id"></label>
-                    <input asp-for="Midfielders[i].Id" class="form-control" />
-                </div>
-            }
+                    <div class="form-group playerId" hidden>
+                        <label asp-for="Midfielders[i].Id"></label>
+                        <input asp-for="Midfielders[i].Id" class="form-control" />
+                    </div>
+                }
+            </div>
 
             @for (int i = 0; i < 3; i++)
             {
@@ -79,13 +84,14 @@
                 </div>
             }
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Select</button>
+            <div class="form-group row">
+                <button type="submit" class="btn btn-success">Select Midfielders</button>
             </div>
         </form>
     </div>
 </div>
 
 @section Scripts {
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="~/js/pickPlayers.js"></script>
 }
