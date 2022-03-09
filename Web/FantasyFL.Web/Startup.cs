@@ -79,7 +79,7 @@
             services.AddTransient<IPlayersService, PlayersService>();
             services.AddTransient<ITeamsService, TeamsService>();
             services.AddTransient<ILeaguesService, LeaguesService>();
-            services.AddTransient<IFantasyTeamsService, FantasyTeamsService>();
+            services.AddTransient<IPlayersManagementService, PlayersManagementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

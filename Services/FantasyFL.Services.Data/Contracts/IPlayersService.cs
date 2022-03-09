@@ -12,5 +12,7 @@
         Task<List<PlayerListingViewModel>> GetAllByPosition(Position position);
 
         Task<List<PlayerListingViewModel>> GetAllPlayers();
+
+        Task<string> GetPlayerTeamName(int playerId);
     }
 }

@@ -12,14 +12,14 @@
     public class HomeController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IFantasyTeamsService fantasyTeamsService;
+        private readonly IPlayersManagementService playersManagementService;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
-            IFantasyTeamsService fantasyTeamsService)
+            IPlayersManagementService playersManagementService)
         {
             this.userManager = userManager;
-            this.fantasyTeamsService = fantasyTeamsService;
+            this.playersManagementService = playersManagementService;
         }
 
         public async Task<IActionResult> Index()
@@ -27,11 +27,11 @@
             if (this.User.Identity.IsAuthenticated)
             {
                 var userId = this.userManager.GetUserId(this.User);
-                var isUserTeamEmpty = await this.fantasyTeamsService.UserTeamIsEmpty(userId);
+                var isUserTeamEmpty = await this.playersManagementService.UserTeamIsEmpty(userId);
 
                 if (isUserTeamEmpty)
                 {
-                    return this.Redirect("/FantasyTeam/PickGoalkeepers");
+                    return this.Redirect("/PlayersManagement/PickGoalkeepers");
                 }
                 else
                 {

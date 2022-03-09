@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Web.ViewModels.FantasyTeam
+﻿namespace FantasyFL.Web.ViewModels.PlayersManagement
 {
     using System.ComponentModel.DataAnnotations;
 

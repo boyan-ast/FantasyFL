@@ -1,37 +1,37 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
-    using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
-    using FantasyFL.Web.ViewModels.FantasyTeam;
+    using FantasyFL.Web.ViewModels.PlayersManagement;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
 
-    public class FantasyTeamController : Controller
+    using static FantasyFL.Common.GlobalConstants;
+
+    public class PlayersManagementController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IFantasyTeamsService fantasyTeamService;
+        private readonly IPlayersManagementService playersManagementService;
         private readonly IPlayersService playersService;
 
-        public FantasyTeamController(
+        public PlayersManagementController(
             UserManager<ApplicationUser> userManager,
-            IFantasyTeamsService fantasyTeamService,
+            IPlayersManagementService playersManagementService,
             IPlayersService playersService)
         {
             this.userManager = userManager;
-            this.fantasyTeamService = fantasyTeamService;
+            this.playersManagementService = playersManagementService;
             this.playersService = playersService;
         }
 
         [Authorize]
         public async Task<IActionResult> PickGoalkeepers()
         {
-            var userId = this.userManager.GetUserId(this.User);
-
             var allPlayers = await this.playersService
                 .GetAllPlayers();
 
@@ -109,13 +109,85 @@
         [HttpPost]
         public async Task<IActionResult> SubmitTeam(PickPlayersFormModel model)
         {
-            // TODO: Validate model
-            // TODO: Edit if needed
+            var playersTeams = await this.GetPlayersTeamsCount(model);
 
-            // The tempdate is in case of invalid players list
-            this.TempData["players"] = JsonConvert.SerializeObject(model);
+            foreach (var (team, playersCount) in playersTeams)
+            {
+                if (playersCount > MaxCountPlayersFromSameTeam)
+                {
+                    this.ModelState.AddModelError(
+                        string.Empty,
+                        $"You have more than {MaxCountPlayersFromSameTeam} players from team {team} selected");
+                }
+            }
 
-            return this.RedirectToAction("PickGoalkeepers");
+            if (!this.ModelState.IsValid)
+            {
+                this.TempData["players"] = JsonConvert.SerializeObject(model);
+
+                return this.RedirectToAction("PickGoalkeepers");
+            }
+
+            var userId = this.userManager.GetUserId(this.User);
+
+            await this.playersManagementService.AddPlayersToTeam(model, userId);
+
+            return this.Redirect("/Players/Squad/1");
+        }
+
+        private async Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model)
+        {
+            var teamsPlayers = new Dictionary<string, int>();
+
+            foreach (var player in model.Goalkeepers)
+            {
+                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
+
+                if (!teamsPlayers.ContainsKey(playerTeam))
+                {
+                    teamsPlayers[playerTeam] = 0;
+                }
+
+                teamsPlayers[playerTeam]++;
+            }
+
+            foreach (var player in model.Defenders)
+            {
+                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
+
+                if (!teamsPlayers.ContainsKey(playerTeam))
+                {
+                    teamsPlayers[playerTeam] = 0;
+                }
+
+                teamsPlayers[playerTeam]++;
+            }
+
+            foreach (var player in model.Midfielders)
+            {
+                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
+
+                if (!teamsPlayers.ContainsKey(playerTeam))
+                {
+                    teamsPlayers[playerTeam] = 0;
+                }
+
+                teamsPlayers[playerTeam]++;
+            }
+
+            foreach (var player in model.Attackers)
+            {
+                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
+
+                if (!teamsPlayers.ContainsKey(playerTeam))
+                {
+                    teamsPlayers[playerTeam] = 0;
+                }
+
+                teamsPlayers[playerTeam]++;
+            }
+
+            return teamsPlayers;
         }
     }
 }

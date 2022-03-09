@@ -77,5 +77,16 @@
 
             return players;
         }
+
+        public async Task<string> GetPlayerTeamName(int playerId)
+        {
+            var teamName = await this.playersRepository
+                .All()
+                .Where(p => p.Id == playerId)
+                .Select(p => p.Team.Name)
+                .FirstOrDefaultAsync();
+
+            return teamName;
+        }
     }
 }

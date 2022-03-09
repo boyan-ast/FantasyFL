@@ -1,16 +1,16 @@
-﻿@using FantasyFL.Web.ViewModels.FantasyTeam
+﻿@using FantasyFL.Web.ViewModels.PlayersManagement
 @using FantasyFL.Data.Models.Enums
 @model PickPlayersFormModel
 
 @{
-    ViewData["Title"] = "Pick Attackers";
+    ViewData["Title"] = "Pick Midfielders";
 }
 
 <div class="row">
     <div class="overflow-auto col-md-6" style="height: 600px;">
         <table id="playersTable" class="table table-hover">
             <tbody>
-                @foreach (var player in Model.Players.Where(p => p.Position == Position.Attacker.ToString()))
+                @foreach (var player in Model.Players.Where(p => p.Position == Position.Midfielder.ToString()))
                 {
                     <tr class="clickable">
                         <td class="text-center font-weight-bold playerName">@player.Name</td>
@@ -23,23 +23,20 @@
     </div>
 
     <div class="col-md-6">
-        <form asp-controller="FantasyTeam" asp-action="SubmitTeam" id="pickPlayersForm" class="pl-5" method="post">
-            <h4>Pick Your Attackers</h4>
+        <form asp-controller="PlayersManagement" asp-action="PickAttackers" id="pickPlayersForm" class="pl-5" method="post">
+            <h4>Pick Your Midfielders</h4>
             <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
 
             @for (int i = 0; i < 2; i++)
             {
-                <div class="form-group" hidden >
+                <div class="form-group" hidden>
                     <label asp-for="Goalkeepers[i].Name"></label>
                     <input asp-for="Goalkeepers[i].Name" class="form-control" />
-                    <span asp-validation-for="Goalkeepers[i].Name" class="text-danger"></span>
                 </div>
 
-                <div class="form-group" hidden >
+                <div class="form-group" hidden>
                     <label asp-for="Goalkeepers[i].Id"></label>
                     <input asp-for="Goalkeepers[i].Id" class="form-control" />
-                    <span asp-validation-for="Goalkeepers[i].Id" class="text-danger"></span>
                 </div>
             }
 
@@ -48,43 +45,37 @@
                 <div class="form-group" hidden >
                     <label asp-for="Defenders[i].Name"></label>
                     <input asp-for="Defenders[i].Name" class="form-control" />
-                    <span asp-validation-for="Defenders[i].Name" class="text-danger"></span>
                 </div>
 
                 <div class="form-group" hidden >
                     <label asp-for="Defenders[i].Id"></label>
                     <input asp-for="Defenders[i].Id" class="form-control" />
-                    <span asp-validation-for="Defenders[i].Id" class="text-danger"></span>
                 </div>
             }
 
             @for (int i = 0; i < 5; i++)
             {
-                <div class="form-group" hidden >
-                    <label asp-for="Midfielders[i].Name"></label>
-                    <input asp-for="Midfielders[i].Name" class="form-control" />
-                    <span asp-validation-for="Midfielders[i].Name" class="text-danger"></span>
+                <div class="form-group playerName" >
+                    <label asp-for="Midfielders[i].Name">Midfielder @(i + 1)</label>
+                    <input asp-for="Midfielders[i].Name" class="form-control" readonly />
                 </div>
 
-                <div class="form-group" hidden >
+                <div class="form-group playerId" hidden>
                     <label asp-for="Midfielders[i].Id"></label>
                     <input asp-for="Midfielders[i].Id" class="form-control" />
-                    <span asp-validation-for="Midfielders[i].Id" class="text-danger"></span>
                 </div>
             }
 
             @for (int i = 0; i < 3; i++)
             {
-                <div class="form-group playerName">
+                <div class="form-group" hidden>
                     <label asp-for="Attackers[i].Name"></label>
                     <input asp-for="Attackers[i].Name" class="form-control" />
-                    <span asp-validation-for="Attackers[i].Name" class="text-danger"></span>
                 </div>
 
-                <div class="form-group playerId">
+                <div class="form-group" hidden>
                     <label asp-for="Attackers[i].Id"></label>
                     <input asp-for="Attackers[i].Id" class="form-control" />
-                    <span asp-validation-for="Attackers[i].Id" class="text-danger"></span>
                 </div>
             }
 
