@@ -43,7 +43,8 @@
             if (this.TempData["players"] != null)
             {
                 this.ViewData["alertMessage"] = this.TempData["alert"].ToString();
-                this.TempData["players"] = JsonConvert.DeserializeObject<PickPlayersFormModel>(this.TempData["players"].ToString());
+                this.TempData["players"] = JsonConvert
+                    .DeserializeObject<PickPlayersFormModel>(this.TempData["players"].ToString());
                 pickGoalkeepersModel = this.TempData["players"] as PickPlayersFormModel;
                 pickGoalkeepersModel.Players = allPlayers;
 
@@ -139,7 +140,7 @@
 
             await this.playersManagementService.AddPlayersToTeam(model, userId);
 
-            return this.Redirect("/Players/Squad/1");
+            return this.Redirect("/Fantasy/MyTeam");
         }
 
         private async Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model)

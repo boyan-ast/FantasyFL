@@ -8,14 +8,14 @@
 
     public interface IGameweekService
     {
-        public Task<List<GameweekViewModel>> GetAllAsync();
+        Task<List<GameweekViewModel>> GetAllAsync();
 
-        public Task GetPlayersData(int gameweekId);
+        Task GetPlayersData(int gameweekId);
 
-        public Task FinishGameweek(int gameweekId);
+        Task FinishGameweek(int gameweekId);
+                
+        Gameweek GetCurrent();
 
-        public Gameweek GetCurrent();
-
-        public Gameweek GetNext();
+        Gameweek GetNext();
     }
 }

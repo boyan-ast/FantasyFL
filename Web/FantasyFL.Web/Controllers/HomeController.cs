@@ -35,7 +35,7 @@
                 }
                 else
                 {
-                    return this.Redirect("/");
+                    return this.Redirect("/Fantasy/MyTeam");
                 }
             }
 

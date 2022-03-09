@@ -43,4 +43,7 @@ function removePlayerHandler(e) {
 
     playerNameInputElement.value = '';
     playerIdInputElement.value = '';
+
+    console.log(playerNameInputElement.value);
+    console.log(playerIdInputElement.value);
 }

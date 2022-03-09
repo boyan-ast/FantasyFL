@@ -1,0 +1,34 @@
+﻿@using FantasyFL.Web.ViewModels.Fantasy
+@model List<FantasyPlayerViewModel>
+
+@{
+    ViewData["title"] = "My Fantasy Team";
+}
+
+<h3 class="text-center">@Model[0].FantasyTeam</h3>
+
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Gameweek Points</th>
+                    <th scope="col">Is Playing?</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model[i].Name</td>
+                        <td>@Model[i].GameweekPoints</td>
+                        <td>@Model[i].IsPlaying</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
