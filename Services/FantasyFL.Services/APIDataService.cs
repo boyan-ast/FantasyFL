@@ -7,7 +7,7 @@
 
     using static FantasyFL.Common.GlobalConstants;
 
-    public class ExternalDataService : IExternalDataService
+    public class APIDataService : IExternalDataService
     {
         public async Task<string> GetSquadAsync(int teamId)
         {

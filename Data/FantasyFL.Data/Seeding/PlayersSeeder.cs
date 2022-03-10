@@ -18,10 +18,8 @@
             }
 
             var seedService = (ISeedService)serviceProvider.GetService(typeof(ISeedService));
-            var footballDataService = (IFootballDataService)serviceProvider.GetService(typeof(IFootballDataService));
 
             await seedService.ImportPlayers();
-            await footballDataService.SetTeamsTopPlayers();
         }
     }
 }

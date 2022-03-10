@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Web.ViewModels.Players;
 
@@ -14,5 +15,8 @@
         Task<List<PlayerListingViewModel>> GetAllPlayers();
 
         Task<string> GetPlayerTeamName(int playerId);
+
+        // TODO: Find why when remove player first gets id = 0
+        Task<int> GetPlayerIdByName(string playerName);
     }
 }

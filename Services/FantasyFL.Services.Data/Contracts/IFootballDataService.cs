@@ -24,7 +24,5 @@
         public Task<IEnumerable<TeamStadiumDto>> GetTeamsAndStadiumsJsonAsync(int leagueId, int season);
 
         public Task<TeamPlayersInfoDto> GetTeamSquadJsonAsync(int teamId);
-
-        public Task SetTeamsTopPlayers();
     }
 }

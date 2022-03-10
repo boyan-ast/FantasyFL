@@ -122,41 +122,5 @@
         {
             return this.roundsFixtures[roundName];
         }
-
-        public async Task SetTeamsTopPlayers()
-        {
-            var topPlayersNumbers = new Dictionary<string, int>
-            {
-                { "Ludogorets", 11 },
-                { "Botev Plovdiv", 8 },
-                { "Levski Sofia", 7 },
-                { "Cherno More Varna", 72 },
-                { "CSKA Sofia", 2 },
-                { "Slavia Sofia", 10 },
-                { "Beroe", 30 },
-                { "Lokomotiv Plovdiv", 14 },
-                { "Botev Vratsa", 18 },
-                { "Tsarsko Selo", 3 },
-                { "Lokomotiv Sofia", 58 },
-                { "CSKA 1948", 18 },
-                { "Pirin Blagoevgrad", 29 },
-                { "Arda Kardzhali", 17 },
-            };
-
-            var teams = this.teamsRepository.All().ToList();
-            var players = this.playersRepository.All().ToList();
-
-            foreach (var team in teams)
-            {
-                var player = this.playersRepository
-                    .All()
-                    .Where(p => p.TeamId == team.Id)
-                    .FirstOrDefault(p => p.Number == topPlayersNumbers[team.Name]);
-
-                team.TopPlayer = player;
-            }
-
-            await this.teamsRepository.SaveChangesAsync();
-        }
     }
 }
