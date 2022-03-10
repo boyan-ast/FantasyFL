@@ -88,5 +88,14 @@
 
             return teamName;
         }
+
+        public async Task<int> GetPlayerIdByName(string playerName)
+        {
+            var player = await this.playersRepository
+                .All()
+                .FirstOrDefaultAsync(p => p.Name == playerName);
+
+            return player.Id;
+        }
     }
 }

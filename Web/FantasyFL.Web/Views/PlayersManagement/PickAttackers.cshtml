@@ -55,7 +55,7 @@
 
             @for (int i = 0; i < 5; i++)
             {
-                <div class="form-group" hidden>
+                <div class="form-group .midfielders" hidden>
                     <label asp-for="Midfielders[i].Name"></label>
                     <input asp-for="Midfielders[i].Name" class="form-control" />
                 </div>
@@ -86,7 +86,7 @@
 
 
             <div class="form-group row">
-                <button type="submit" class="btn btn-success">Select Attackers</button>
+                <button onclick="test()" type="submit" class="btn btn-success">Select Attackers</button>
             </div>
         </form>
     </div>
@@ -95,4 +95,11 @@
 @section Scripts {
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="~/js/pickPlayers.js"></script>
+
+<script>
+    function test(e){
+            document.querySelectorAll('.midfielders')
+        .forEach(e => console.log(e));  
+    }
+</script>
 }

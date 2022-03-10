@@ -18,15 +18,18 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IPlayersManagementService playersManagementService;
         private readonly IPlayersService playersService;
+        private readonly IGameweekService gameweekService;
 
         public PlayersManagementController(
             UserManager<ApplicationUser> userManager,
             IPlayersManagementService playersManagementService,
-            IPlayersService playersService)
+            IPlayersService playersService,
+            IGameweekService gameweekService)
         {
             this.userManager = userManager;
             this.playersManagementService = playersManagementService;
             this.playersService = playersService;
+            this.gameweekService = gameweekService;
         }
 
         [Authorize]
@@ -113,7 +116,7 @@
         [HttpPost]
         public async Task<IActionResult> SubmitTeam(PickPlayersFormModel model)
         {
-            var playersTeams = await this.GetPlayersTeamsCount(model);
+            var playersTeams = await this.GetPlayersTeamsCount(model);         
 
             foreach (var (team, playersCount) in playersTeams)
             {
@@ -140,6 +143,13 @@
 
             await this.playersManagementService.AddPlayersToTeam(model, userId);
 
+            var currentGameweek = this.gameweekService.GetCurrent();
+
+            if (currentGameweek == null)
+            {
+                return this.Redirect("/Fixtures/Next");
+            }
+
             return this.Redirect("/Fantasy/MyTeam");
         }
 
@@ -149,6 +159,11 @@
 
             foreach (var player in model.Goalkeepers)
             {
+                if (player.Id == 0)
+                {
+                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
+                }
+
                 var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
 
                 if (!teamsPlayers.ContainsKey(playerTeam))
@@ -161,6 +176,11 @@
 
             foreach (var player in model.Defenders)
             {
+                if (player.Id == 0)
+                {
+                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
+                }
+
                 var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
 
                 if (!teamsPlayers.ContainsKey(playerTeam))
@@ -173,6 +193,11 @@
 
             foreach (var player in model.Midfielders)
             {
+                if (player.Id == 0)
+                {
+                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
+                }
+
                 var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
 
                 if (!teamsPlayers.ContainsKey(playerTeam))
@@ -185,6 +210,11 @@
 
             foreach (var player in model.Attackers)
             {
+                if (player.Id == 0)
+                {
+                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
+                }
+
                 var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
 
                 if (!teamsPlayers.ContainsKey(playerTeam))
