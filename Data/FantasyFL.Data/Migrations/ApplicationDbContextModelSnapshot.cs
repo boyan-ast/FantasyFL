@@ -561,16 +561,11 @@ namespace FantasyFL.Data.Migrations
                     b.Property<int>("StadiumId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TopPlayerId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("StadiumId");
-
-                    b.HasIndex("TopPlayerId");
 
                     b.ToTable("Teams");
                 });
@@ -808,13 +803,7 @@ namespace FantasyFL.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("FantasyFL.Data.Models.Player", "TopPlayer")
-                        .WithMany()
-                        .HasForeignKey("TopPlayerId");
-
                     b.Navigation("Stadium");
-
-                    b.Navigation("TopPlayer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

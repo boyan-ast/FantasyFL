@@ -15,7 +15,7 @@ function clickHandler(e) {
 
     for (let i = 0; i < inputPlayersNameElements.length; i++) {
 
-        if (!inputPlayersNameElements[i].value) {
+        if (inputPlayersNameElements[i].value == '') {
             inputPlayersNameElements[i].value = playerName;
 
             inputPlayersIdElements[i].value = playerId;

@@ -69,7 +69,7 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IParseService, ParseService>();
-            services.AddTransient<IExternalDataService, ExternalDataService>();
+            services.AddTransient<IExternalDataService, JsonDataService>();
             services.AddTransient<IFootballDataService, FootballDataService>();
             services.AddTransient<ISeedService, SeedService>();
             services.AddTransient<IGameweekImportService, GameweekImportService>();
