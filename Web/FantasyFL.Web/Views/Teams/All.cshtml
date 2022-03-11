@@ -17,10 +17,13 @@
                         <h4 class="card-title mt-2">@team.Name</h4>
                     </div>
                     <div class="card-footer text-center">
-                        <a asp-controller="Players"
-                       asp-action="Squad"
-                       asp-route-id="@team.Id"
-                       class="btn btn-outline-dark">Players</a>
+                        <a asp-area=""
+                           asp-controller="Teams"
+                           asp-action="Players"
+                           asp-route-id="@team.Id"
+                           class="btn btn-outline-dark btn-lg">
+                            Players
+                        </a>
                     </div>
                 </div>
             </div>

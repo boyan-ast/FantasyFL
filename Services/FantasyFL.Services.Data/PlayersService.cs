@@ -8,7 +8,8 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
-    using FantasyFL.Web.ViewModels.Players;
+    using FantasyFL.Web.ViewModels.PlayersManagement;
+    using FantasyFL.Web.ViewModels.Teams;
     using Microsoft.EntityFrameworkCore;
 
     public class PlayersService : IPlayersService
@@ -96,6 +97,50 @@
                 .FirstOrDefaultAsync(p => p.Name == playerName);
 
             return player.Id;
+        }
+
+        public async Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model)
+        {
+            var teamsPlayers = new Dictionary<string, int>();
+
+            foreach (var player in model.Goalkeepers)
+            {
+                await this.AddPlayerToTeamsPlayers(player, teamsPlayers);
+            }
+
+            foreach (var player in model.Defenders)
+            {
+                await this.AddPlayerToTeamsPlayers(player, teamsPlayers);
+            }
+
+            foreach (var player in model.Midfielders)
+            {
+                await this.AddPlayerToTeamsPlayers(player, teamsPlayers);
+            }
+
+            foreach (var player in model.Attackers)
+            {
+                await this.AddPlayerToTeamsPlayers(player, teamsPlayers);
+            }
+
+            return teamsPlayers;
+        }
+
+        private async Task AddPlayerToTeamsPlayers(PlayerInputModel player, Dictionary<string, int> teamsPlayers)
+        {
+            if (player.Id == 0)
+            {
+                player.Id = await this.GetPlayerIdByName(player.Name);
+            }
+
+            var playerTeam = await this.GetPlayerTeamName(player.Id);
+
+            if (!teamsPlayers.ContainsKey(playerTeam))
+            {
+                teamsPlayers[playerTeam] = 0;
+            }
+
+            teamsPlayers[playerTeam]++;
         }
     }
 }

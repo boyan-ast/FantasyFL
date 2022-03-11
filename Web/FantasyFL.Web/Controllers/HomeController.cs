@@ -22,29 +22,16 @@
             this.playersManagementService = playersManagementService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            if (this.User.Identity.IsAuthenticated)
+            if (!this.User.Identity.IsAuthenticated)
             {
-                var userId = this.userManager.GetUserId(this.User);
-                var isUserTeamEmpty = await this.playersManagementService.UserTeamIsEmpty(userId);
-
-                if (isUserTeamEmpty)
-                {
-                    return this.Redirect("/PlayersManagement/PickGoalkeepers");
-                }
-                else
-                {
-                    return this.Redirect("/Fantasy/MyTeam");
-                }
+                return this.Redirect("/Identity/Account/Login");
             }
 
-            return this.View();
-        }
+            var userId = this.userManager.GetUserId(this.User);
 
-        public IActionResult Privacy()
-        {
-            return this.View();
+            return this.Redirect("/Fantasy/PickTeam");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

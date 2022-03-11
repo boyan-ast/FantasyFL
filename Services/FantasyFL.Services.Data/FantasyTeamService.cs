@@ -6,6 +6,7 @@
 
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
+    using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Fantasy;
     using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@
             this.playersGameweeksRepository = playersGameweeksRepository;
         }
 
-        public async Task<List<FantasyPlayerViewModel>> GetUserFantasyPlayers(string userId)
+        public async Task<List<PlayerPointsViewModel>> GetUserFantasyPlayersPoints(string userId)
         {
             var currentGameweek = this.gameweekService.GetCurrent();
 
@@ -43,7 +44,7 @@
                 .Where(p => p.FantasyTeamId == userFantasyTeam.Id)
                 .ToListAsync();
 
-            var players = new List<FantasyPlayerViewModel>();
+            var players = new List<PlayerPointsViewModel>();
 
             foreach (var userPlayer in userPlayers)
             {
@@ -55,7 +56,7 @@
 
                 if (playerGameweek != null)
                 {
-                    var player = new FantasyPlayerViewModel
+                    var player = new PlayerPointsViewModel
                     {
                         Id = playerGameweek.PlayerId,
                         Name = playerGameweek.Player.Name,
@@ -78,6 +79,33 @@
                 .FirstOrDefaultAsync(t => t.OwnerId == userId);
 
             return fantasyTeam;
+        }
+
+        public async Task<bool> UserTeamIsEmpty(string userId)
+        {
+            var team = await this.fantasyTeamsRepository
+                .All()
+                .Where(t => t.OwnerId == userId)
+                .FirstOrDefaultAsync(t => t.FantasyTeamPlayers.Any());
+
+            return team == null;
+        }
+
+        public async Task<List<PlayerSelectViewModel>> GetUserPlayersByPosition(string userId, Position position)
+        {
+            var userFantasyTeam = await this.GetUserFantasyTeam(userId);
+
+            var players = await this.fantasyTeamsPlayersRepository
+                .All()
+                .Where(p => p.FantasyTeamId == userFantasyTeam.Id && p.Player.Position == position)
+                .Select(p => new PlayerSelectViewModel
+                {
+                    PlayerId = p.PlayerId,
+                    Name = p.Player.Name,
+                })
+                .ToListAsync();
+
+            return players;
         }
     }
 }

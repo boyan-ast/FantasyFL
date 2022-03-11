@@ -116,7 +116,7 @@
         [HttpPost]
         public async Task<IActionResult> SubmitTeam(PickPlayersFormModel model)
         {
-            var playersTeams = await this.GetPlayersTeamsCount(model);         
+            var playersTeams = await this.playersService.GetPlayersTeamsCount(model);
 
             foreach (var (team, playersCount) in playersTeams)
             {
@@ -151,81 +151,6 @@
             }
 
             return this.Redirect("/Fantasy/MyTeam");
-        }
-
-        private async Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model)
-        {
-            var teamsPlayers = new Dictionary<string, int>();
-
-            foreach (var player in model.Goalkeepers)
-            {
-                if (player.Id == 0)
-                {
-                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
-                }
-
-                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
-
-                if (!teamsPlayers.ContainsKey(playerTeam))
-                {
-                    teamsPlayers[playerTeam] = 0;
-                }
-
-                teamsPlayers[playerTeam]++;
-            }
-
-            foreach (var player in model.Defenders)
-            {
-                if (player.Id == 0)
-                {
-                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
-                }
-
-                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
-
-                if (!teamsPlayers.ContainsKey(playerTeam))
-                {
-                    teamsPlayers[playerTeam] = 0;
-                }
-
-                teamsPlayers[playerTeam]++;
-            }
-
-            foreach (var player in model.Midfielders)
-            {
-                if (player.Id == 0)
-                {
-                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
-                }
-
-                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
-
-                if (!teamsPlayers.ContainsKey(playerTeam))
-                {
-                    teamsPlayers[playerTeam] = 0;
-                }
-
-                teamsPlayers[playerTeam]++;
-            }
-
-            foreach (var player in model.Attackers)
-            {
-                if (player.Id == 0)
-                {
-                    player.Id = await this.playersService.GetPlayerIdByName(player.Name);
-                }
-
-                var playerTeam = await this.playersService.GetPlayerTeamName(player.Id);
-
-                if (!teamsPlayers.ContainsKey(playerTeam))
-                {
-                    teamsPlayers[playerTeam] = 0;
-                }
-
-                teamsPlayers[playerTeam]++;
-            }
-
-            return teamsPlayers;
         }
     }
 }

@@ -63,13 +63,6 @@
             return players;
         }
 
-        public async Task<bool> UserTeamIsEmpty(string userId)
-        {
-            var isEmpty = !(await this.GetFantasyTeamPlayers(userId)).Any();
-
-            return isEmpty;
-        }
-
         private void AddPlayersLinesToTeam(List<PlayerInputModel> players, FantasyTeam fantasyTeam)
         {
             foreach (var player in players)

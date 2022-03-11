@@ -1,6 +1,6 @@
 ﻿namespace FantasyFL.Web.ViewModels.Fantasy
 {
-    public class FantasyPlayerViewModel
+    public class PlayerPointsViewModel
     {
         public int Id { get; init; }
 

@@ -1,0 +1,59 @@
+﻿@using FantasyFL.Web.ViewModels.Fantasy
+@model TeamSelectViewModel
+
+<div asp-validation-summary="All"></div>
+<form asp-controller="Fantasy" asp-action="PickTeam" method="post">
+    <div class="form-group align-items-center">
+        <div class="col-sm-5 my-2">
+                <label>Goalkeeper: </label>
+                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Goalkeepers,
+                        nameof(PlayerSelectViewModel.PlayerId),
+                        nameof(PlayerSelectViewModel.Name)))"
+                        class="form-control">
+                    <option>Select Goalkeeper</option>
+                </select>
+            @for (int i = 0; i < 4; i++)
+            {
+                <label>Defender @(i + 1): </label>
+                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Defenders,
+                        nameof(PlayerSelectViewModel.PlayerId),
+                        nameof(PlayerSelectViewModel.Name)))"
+                    class="form-control">
+                    <option>Select Defender</option>
+                </select>
+            }
+            @for (int i = 0; i < 4; i++)
+            {
+                <label>Midfielder @(i + 1): </label>
+                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Midfielders,
+                        nameof(PlayerSelectViewModel.PlayerId),
+                        nameof(PlayerSelectViewModel.Name)))"
+                    class="form-control">
+                    <option>Select Midfielder</option>
+                </select>
+            }
+            @for (int i = 0; i < 2; i++)
+            {
+                <label>Attacker @(i + 1): </label>
+                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Attackers,
+                        nameof(PlayerSelectViewModel.PlayerId),
+                        nameof(PlayerSelectViewModel.Name)))"
+                    class="form-control">
+                    <option>Select Attacker</option>
+                </select>
+            }
+            <input class="btn btn-success mt-3" type="submit" />
+        </div>
+    </div>
+</form>
+
+<textarea id="error-message" hidden>@ViewData["alertMessage"]</textarea>
+
+@section Scripts{
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/js/alerts.js"></script>
+<script>
+    document.querySelectorAll('select')
+        .forEach(e => e.removeAttribute('multiple'));
+</script>
+}

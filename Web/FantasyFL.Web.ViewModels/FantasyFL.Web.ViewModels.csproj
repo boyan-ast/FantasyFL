@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Services\FantasyFL.Services.Mapping\FantasyFL.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Players\" />
+  </ItemGroup>
+
 </Project>

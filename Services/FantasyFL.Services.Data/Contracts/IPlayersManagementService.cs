@@ -12,8 +12,6 @@
 
         Task<FantasyTeam> GetUserTeam(string userId);
 
-        Task<bool> UserTeamIsEmpty(string userId);
-
         Task<List<Player>> GetFantasyTeamPlayers(string userId);
 
         // TODO: Remove public from interfaces

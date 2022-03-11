@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using FantasyFL.Web.ViewModels.Players;
+    using FantasyFL.Web.ViewModels.Teams;
 
     public class PickPlayersFormModel
     {

@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Web.ViewModels.Players
+﻿namespace FantasyFL.Web.ViewModels.Teams
 {
     public class PlayerListingViewModel
     {
