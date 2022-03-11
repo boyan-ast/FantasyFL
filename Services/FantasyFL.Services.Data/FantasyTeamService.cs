@@ -107,5 +107,35 @@
 
             return players;
         }
+
+        public async Task ClearUserPlayers(string teamId)
+        {
+            var players = await this.fantasyTeamsPlayersRepository
+                .All()
+                .Where(p => p.FantasyTeamId == teamId)
+                .ToListAsync();
+
+            foreach (var player in players)
+            {
+                player.IsPlaying = false;
+            }
+
+            await this.fantasyTeamsRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdatePlayingPlayers(string teamId, HashSet<int> playersIds)
+        {
+            var players = await this.fantasyTeamsPlayersRepository
+                .All()
+                .Where(p => p.FantasyTeamId == teamId && playersIds.Contains(p.PlayerId))
+                .ToListAsync();
+
+            foreach (var player in players)
+            {
+                player.IsPlaying = true;
+            }
+
+            await this.fantasyTeamsRepository.SaveChangesAsync();
+        }
     }
 }

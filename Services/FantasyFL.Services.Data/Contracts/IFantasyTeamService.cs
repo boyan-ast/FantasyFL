@@ -16,5 +16,9 @@
         Task<List<PlayerSelectViewModel>> GetUserPlayersByPosition(string userId, Position position);
 
         Task<bool> UserTeamIsEmpty(string userId);
+
+        Task ClearUserPlayers(string teamId);
+
+        Task UpdatePlayingPlayers(string teamId, HashSet<int> playersIds);
     }
 }

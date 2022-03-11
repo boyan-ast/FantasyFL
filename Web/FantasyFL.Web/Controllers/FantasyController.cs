@@ -67,19 +67,21 @@
         [HttpPost]
         public async Task<IActionResult> PickTeam(TeamSelectViewModel team)
         {
-            var teamIdsHashset = new HashSet<int>(team.SelectedPlayers);
+            var playingPlayersIds = new HashSet<int>(team.SelectedPlayers);
 
-            if (teamIdsHashset.Count < 11)
+            if (playingPlayersIds.Count < 11)
             {
                 this.TempData["errors"] = "You have to select 11 different players.";
                 return this.RedirectToAction(nameof(this.PickTeam));
             }
 
             var userId = this.userManager.GetUserId(this.User);
+            var userTeam = await this.fantasyTeamService.GetUserFantasyTeam(userId);
 
-            var selectedPlayers = team.SelectedPlayers;
+            await this.fantasyTeamService.ClearUserPlayers(userTeam.Id);
+            await this.fantasyTeamService.UpdatePlayingPlayers(userTeam.Id, playingPlayersIds);
 
-            return this.Json(this.ModelState.ErrorCount);
+            return this.Redirect("/Fixtures/Next");
         }
     }
 }
