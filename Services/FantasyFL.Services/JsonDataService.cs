@@ -67,7 +67,9 @@
         private static async Task<string> GetResult(string fileName)
         {
             var runDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            var filePath = Path.Combine(runDir, "wwwroot", "APIFootballData", fileName);
+
+            var filePath = runDir + @$"\APIFootballData\{fileName}";
+
 
             if (!File.Exists(filePath))
             {

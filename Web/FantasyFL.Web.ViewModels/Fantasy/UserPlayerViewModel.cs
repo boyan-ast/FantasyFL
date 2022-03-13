@@ -1,15 +1,13 @@
 ﻿namespace FantasyFL.Web.ViewModels.Fantasy
 {
-    public class PlayerPointsViewModel
+    public class UserPlayerViewModel
     {
-        public int Id { get; init; }
-
         public string Name { get; init; }
+
+        public string Position { get; init; }
 
         public int GameweekPoints { get; init; }
 
         public bool IsPlaying { get; init; }
-
-        public string FantasyTeam { get; init; }
     }
 }

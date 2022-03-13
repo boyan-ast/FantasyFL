@@ -36,29 +36,13 @@
                 return this.Redirect("/PlayersManagement/PickGoalkeepers");
             }
 
-            var goalkeepers = await this.fantasyTeamService
-                .GetUserPlayersByPosition(userId, Position.Goalkeeper);
-            var defenders = await this.fantasyTeamService
-                .GetUserPlayersByPosition(userId, Position.Defender);
-            var midfielders = await this.fantasyTeamService
-                .GetUserPlayersByPosition(userId, Position.Midfielder);
-            var attackers = await this.fantasyTeamService
-                .GetUserPlayersByPosition(userId, Position.Attacker);
-
-            var team = new TeamSelectViewModel
-            {
-                Goalkeepers = goalkeepers,
-                Defenders = defenders,
-                Midfielders = midfielders,
-                Attackers = attackers,
-                SelectedPlayers = new List<int>(),
-            };
-
             if (this.TempData.ContainsKey("errors"))
             {
                 this.ViewData["alertMessage"] = this.TempData["errors"].ToString();
                 this.TempData.Remove("errors");
             }
+
+            var team = await this.fantasyTeamService.GetUserTeamSelectModel(userId);
 
             return this.View(team);
         }
@@ -82,6 +66,15 @@
             await this.fantasyTeamService.UpdatePlayingPlayers(userTeam.Id, playingPlayersIds);
 
             return this.Redirect("/Fixtures/Next");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> MyTeam()
+        {
+            var userId = this.userManager.GetUserId(this.User);
+            var userGameweekTeam = await this.fantasyTeamService.GetUserGameweekTeam(userId);
+
+            return this.View(userGameweekTeam);
         }
     }
 }

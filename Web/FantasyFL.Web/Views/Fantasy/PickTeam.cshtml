@@ -1,6 +1,10 @@
 ﻿@using FantasyFL.Web.ViewModels.Fantasy
 @model TeamSelectViewModel
 
+@{
+    ViewData["title"] = "Pick Team";
+}
+
 <div asp-validation-summary="All"></div>
 <form asp-controller="Fantasy" asp-action="PickTeam" method="post">
     <div class="form-group align-items-center">

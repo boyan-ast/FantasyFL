@@ -1,0 +1,108 @@
+﻿@model FantasyFL.Web.ViewModels.Fantasy.UserTeamViewModel
+
+@{
+    ViewData["title"] = "My Team";
+}
+
+<h3 class="text-center">@Model.Name</h3>
+
+<!-- Club Section Begin -->
+@*<section class="club-section spad">
+    <div class="container">*@
+        <div class="container club-tab-list">
+            <div class="row">
+                <div class="col-lg-8 m-auto text-center">
+                    <ul class="nav nav-tabs " role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">Goalkeeper</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Defenders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Midfielders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Forwards</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-5" role="tab">Substitutes</a>
+                        </li>
+                    </ul><!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="club-tab-content">
+                                @foreach (var player in @Model.Players.Where(p => p.Position == "Goalkeeper" && p.IsPlaying))
+                                {
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="~/images/goalkeeper.jpg" alt="@player.Name">
+                                            <h5>@player.Name</h5>
+                                        </div>
+                                        <div class="ci-name">@player.GameweekPoints points</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="club-tab-content">
+                                @foreach (var player in @Model.Players.Where(p => p.Position == "Defender" && p.IsPlaying))
+                                {
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="~/images/player.jpg" alt="@player.Name">
+                                            <h5>@player.Name</h5>
+                                        </div>
+                                        <div class="ci-name">@player.GameweekPoints points</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="club-tab-content">
+                                @foreach (var player in @Model.Players.Where(p => p.Position == "Midfielder" && p.IsPlaying))
+                                {
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="~/images/player.jpg" alt="@player.Name">
+                                            <h5>@player.Name</h5>
+                                        </div>
+                                        <div class="ci-name">@player.GameweekPoints points</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-4" role="tabpanel">
+                            <div class="club-tab-content">
+                                @foreach (var player in @Model.Players.Where(p => p.Position == "Attacker" && p.IsPlaying))
+                                {
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="~/images/player.jpg" alt="@player.Name">
+                                            <h5>@player.Name</h5>
+                                        </div>
+                                        <div class="ci-name">@player.GameweekPoints points</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-5" role="tabpanel">
+                            <div class="club-tab-content">
+                                @foreach (var player in @Model.Players.Where(p => !p.IsPlaying))
+                                {
+                                    <div class="ct-item">
+                                        <div class="ci-text">
+                                            <img src="~/images/player.jpg" alt="@player.Name">
+                                            <h5>@player.Name</h5>
+                                        </div>
+                                        <div class="ci-name">@player.Position</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+@*    </div>
+</section>*@

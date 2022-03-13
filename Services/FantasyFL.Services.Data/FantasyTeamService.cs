@@ -33,43 +33,45 @@
             this.playersGameweeksRepository = playersGameweeksRepository;
         }
 
-        public async Task<List<PlayerPointsViewModel>> GetUserFantasyPlayersPoints(string userId)
+        public async Task<UserTeamViewModel> GetUserGameweekTeam(string userId)
         {
             var currentGameweek = this.gameweekService.GetCurrent();
 
             var userFantasyTeam = await this.GetUserFantasyTeam(userId);
 
             var userPlayers = await this.fantasyTeamsPlayersRepository
-                .All()
+                .AllAsNoTracking()
+                .Include(p => p.Player)
                 .Where(p => p.FantasyTeamId == userFantasyTeam.Id)
                 .ToListAsync();
 
-            var players = new List<PlayerPointsViewModel>();
+            var players = new List<UserPlayerViewModel>();
 
             foreach (var userPlayer in userPlayers)
             {
                 var playerGameweek = await this.playersGameweeksRepository
-                    .All()
-                    .Include(p => p.Player)
+                    .AllAsNoTracking()
                     .FirstOrDefaultAsync(p => p.PlayerId == userPlayer.PlayerId
                         && p.GameweekId == currentGameweek.Id);
 
-                if (playerGameweek != null)
+                var player = new UserPlayerViewModel
                 {
-                    var player = new PlayerPointsViewModel
-                    {
-                        Id = playerGameweek.PlayerId,
-                        Name = playerGameweek.Player.Name,
-                        GameweekPoints = playerGameweek.TotalPoints,
-                        IsPlaying = userPlayer.IsPlaying,
-                        FantasyTeam = userFantasyTeam.Name,
-                    };
+                    Name = userPlayer.Player.Name,
+                    Position = userPlayer.Player.Position.ToString(),
+                    GameweekPoints = playerGameweek != null ? playerGameweek.TotalPoints : 0,
+                    IsPlaying = userPlayer.IsPlaying,
+                };
 
-                    players.Add(player);
-                }
+                players.Add(player);
             }
 
-            return players;
+            var userTeam = new UserTeamViewModel
+            {
+                Name = userFantasyTeam.Name,
+                Players = players,
+            };
+
+            return userTeam;
         }
 
         public async Task<FantasyTeam> GetUserFantasyTeam(string userId)
@@ -89,6 +91,24 @@
                 .FirstOrDefaultAsync(t => t.FantasyTeamPlayers.Any());
 
             return team == null;
+        }
+
+        public async Task<TeamSelectViewModel> GetUserTeamSelectModel(string userId)
+        {
+            var goalkeepers = await this.GetUserPlayersByPosition(userId, Position.Goalkeeper);
+            var defenders = await this.GetUserPlayersByPosition(userId, Position.Defender);
+            var midfielders = await this.GetUserPlayersByPosition(userId, Position.Midfielder);
+            var attackers = await this.GetUserPlayersByPosition(userId, Position.Attacker);
+
+            var team = new TeamSelectViewModel
+            {
+                Goalkeepers = goalkeepers,
+                Defenders = defenders,
+                Midfielders = midfielders,
+                Attackers = attackers,
+            };
+
+            return team;
         }
 
         public async Task<List<PlayerSelectViewModel>> GetUserPlayersByPosition(string userId, Position position)

@@ -9,7 +9,7 @@
 
     public interface IFantasyTeamService
     {
-        Task<List<PlayerPointsViewModel>> GetUserFantasyPlayersPoints(string userId);
+        Task<UserTeamViewModel> GetUserGameweekTeam(string userId);
 
         Task<FantasyTeam> GetUserFantasyTeam(string userId);
 
@@ -20,5 +20,7 @@
         Task ClearUserPlayers(string teamId);
 
         Task UpdatePlayingPlayers(string teamId, HashSet<int> playersIds);
+
+        Task<TeamSelectViewModel> GetUserTeamSelectModel(string userId);
     }
 }
