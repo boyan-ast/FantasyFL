@@ -29,5 +29,7 @@
         public ICollection<PlayerGameweek> PlayerGameweeks { get; set; } = new HashSet<PlayerGameweek>();
 
         public ICollection<ApplicationUserGameweek> ApplicationUsersGameweeks { get; set; } = new HashSet<ApplicationUserGameweek>();
+
+        public ICollection<ApplicationUser> UsersStartedInGameweek { get; set; } = new HashSet<ApplicationUser>();
     }
 }

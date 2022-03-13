@@ -13,13 +13,13 @@
 
     using static FantasyFL.Common.GlobalConstants;
 
-    public class GameweekService : IGameweekService
+    public class GameweeksService : IGameweeksService
     {
         private readonly IRepository<Gameweek> gameweekRepository;
         private readonly IGameweekImportService gameweekImportService;
         private readonly IPlayersPointsService playersService;
 
-        public GameweekService(
+        public GameweeksService(
             IRepository<Gameweek> gameweekRepository,
             IGameweekImportService gameweekImportService,
             IPlayersPointsService playersService)
@@ -93,7 +93,7 @@
         public Gameweek GetCurrent()
         {
             var gameweek = this.gameweekRepository
-                .All()
+                .AllAsNoTracking()
                 .OrderByDescending(gw => gw.Number)
                 .FirstOrDefault(gw => gw.IsFinished);
 

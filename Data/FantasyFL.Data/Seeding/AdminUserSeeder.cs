@@ -22,8 +22,11 @@
 
             var leaguesService = (ILeaguesService)serviceProvider
                 .GetService(typeof(ILeaguesService));
+            var gameweeksService = (IGameweeksService)serviceProvider
+                .GetService(typeof(IGameweeksService));
 
             var defaultFantasyLeague = await leaguesService.GetLeagueByName(DefaultFantasyLeagueName);
+            var startGameweek = gameweeksService.GetNext();
 
             var userExists = await userManager.Users.AnyAsync(u => u.UserName == AdministratorUserName);
 
@@ -38,6 +41,7 @@
                     {
                         Name = "AdminTeam",
                     },
+                    StartGameweek = startGameweek,
                 };
 
                 admin.FantasyLeagues.Add(defaultFantasyLeague);

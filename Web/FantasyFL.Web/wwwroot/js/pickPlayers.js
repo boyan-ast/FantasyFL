@@ -39,11 +39,10 @@ function removePlayerHandler(e) {
     let playerNameDivElement = buttonElement.parentElement.parentElement;
 
     let playerNameInputElement = playerNameDivElement.querySelector('div.playerName input.form-control');
-    let playerIdInputElement = playerNameDivElement.parentElement.querySelector('div.playerId input.form-control');
+    let playerIdInputElement = playerNameDivElement.nextElementSibling.querySelector('input.form-control');
+
+    console.log(playerIdInputElement);
 
     playerNameInputElement.value = '';
     playerIdInputElement.value = '';
-
-    console.log(playerNameInputElement.value);
-    console.log(playerIdInputElement.value);
 }

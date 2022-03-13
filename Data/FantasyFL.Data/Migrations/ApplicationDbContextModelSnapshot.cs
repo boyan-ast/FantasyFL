@@ -132,6 +132,9 @@ namespace FantasyFL.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("StartGameweekId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TotalPoints")
                         .HasColumnType("int");
 
@@ -153,6 +156,8 @@ namespace FantasyFL.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("StartGameweekId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -689,6 +694,17 @@ namespace FantasyFL.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("FantasyFL.Data.Models.Gameweek", "StartGameweek")
+                        .WithMany("UsersStartedInGameweek")
+                        .HasForeignKey("StartGameweekId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("StartGameweek");
+                });
+
             modelBuilder.Entity("FantasyFL.Data.Models.ApplicationUserGameweek", b =>
                 {
                     b.HasOne("FantasyFL.Data.Models.Gameweek", "Gameweek")
@@ -880,6 +896,8 @@ namespace FantasyFL.Data.Migrations
                     b.Navigation("Fixtures");
 
                     b.Navigation("PlayerGameweeks");
+
+                    b.Navigation("UsersStartedInGameweek");
                 });
 
             modelBuilder.Entity("FantasyFL.Data.Models.Player", b =>

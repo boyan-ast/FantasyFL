@@ -5,6 +5,16 @@
 }
 
 <h3 class="text-center">@Model.Name</h3>
+<h5 class="text-center font-weight-light">
+    @if(Model.Gameweek != 0)
+    {
+        <text>Gameweek @Model.Gameweek</text>
+    }
+    else
+    {
+        <text>Season not started yet.</text>
+    }
+</h5>
 
 <!-- Club Section Begin -->
 @*<section class="club-section spad">
@@ -50,7 +60,7 @@
                                 {
                                     <div class="ct-item">
                                         <div class="ci-text">
-                                            <img src="~/images/player.jpg" alt="@player.Name">
+                                            <img class="specer-img" src="~/images/player.jpg" alt="@player.Name">
                                             <h5>@player.Name</h5>
                                         </div>
                                         <div class="ci-name">@player.GameweekPoints points</div>

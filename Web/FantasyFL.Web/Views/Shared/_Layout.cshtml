@@ -5,18 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="~/css/custom.css">
-    <link rel="stylesheet" href="~/css/lazy.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/lazy.css">
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/specer-style.css">
+    <link rel="stylesheet" href="~/css/custom.css">
 </head>
 <body>
-    <!-- Page Preloder -->
-@*    <div id="preloder">
-        <div class="loader"></div>
-    </div>*@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -27,14 +22,17 @@
                     <ul class="navbar-nav ml-auto">
                         @if (this.User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item dropdown">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="MyTeam">My Team</a>
+                            </li>
+                            <li class="nav-item dropdown pr-5">
                                 <a class="nav-link dropdown-toggle" href="#a" id="fantasyDropdownMenuLink" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                    Fantasy Team
+                                    Fantasy
                                 </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-area="" asp-controller="Fantasy" asp-action="MyTeam">MyTeam</a>
+                                <div class="dropdown-menu" aria-slabelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" asp-area="" asp-controller="Fantasy" asp-action="PickTeam">Pick Players</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Fantasy" asp-action="GameweekResult">Gameweek Points</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="Fantasy" asp-action="Transfers">Transfers</a>
                                 </div>
                             </li>
@@ -66,19 +64,17 @@
         </main>
     </div>
 
-    <footer class="border-top footer-section text-muted">
+    <footer class="border-top footer text-muted">
         <div class="container">
             &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>  
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/lib/popper/popper.min.js"></script>
-@*    <script src="~/lib/specer-master/jquery.magnific-popup.min.js" asp-append-version="true"></script>
-    <script src="~/lib/specer-master/main.js" asp-append-version="true"></script>*@
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="~/js/lazy.js"></script>
     @await this.RenderSectionAsync("Scripts", required: false)

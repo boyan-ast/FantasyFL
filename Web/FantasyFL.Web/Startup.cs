@@ -74,7 +74,7 @@
             services.AddTransient<ISeedService, SeedService>();
             services.AddTransient<IGameweekImportService, GameweekImportService>();
             services.AddTransient<IPlayersPointsService, PlayersPointsService>();
-            services.AddTransient<IGameweekService, GameweekService>();
+            services.AddTransient<IGameweeksService, GameweeksService>();
             services.AddTransient<IFixturesService, FixturesService>();
             services.AddTransient<IPlayersService, PlayersService>();
             services.AddTransient<ITeamsService, TeamsService>();

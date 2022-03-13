@@ -6,7 +6,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Web.ViewModels.Administration.Dashboard;
 
-    public interface IGameweekService
+    public interface IGameweeksService
     {
         Task<List<GameweekViewModel>> GetAllAsync();
 

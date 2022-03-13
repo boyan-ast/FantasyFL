@@ -1,3 +1,40 @@
 .clickable {
     cursor: pointer;
 }
+
+
+.club-tab-list .nav .nav-item .nav-link.active {
+    color: #151618;
+}
+
+.club-tab-list .tab-content .club-tab-content .ct-item {
+    overflow: hidden;
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.club-tab-list .tab-content .club-tab-content .ct-item .ci-text {
+    float: left;
+}
+
+.club-tab-list .tab-content .club-tab-content .ct-item .ci-text img {
+    height: 70px;
+    width: 70px;
+    float: left;
+    margin-right: 20px;
+}
+
+.club-tab-list .tab-content .club-tab-content .ct-item .ci-text h5 {
+    color: #151618;
+    font-weight: 500;
+    overflow: hidden;
+    padding-top: 24px;
+}
+
+.club-tab-list .tab-content .club-tab-content .ct-item .ci-name {
+    float: right;
+    color: #636363;
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 22px;
+}

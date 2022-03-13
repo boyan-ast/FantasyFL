@@ -14,11 +14,11 @@
 
     public class FixturesService : IFixturesService
     {
-        private readonly IGameweekService gameweekService;
+        private readonly IGameweeksService gameweekService;
         private readonly IRepository<Fixture> fixturesRepository;
 
         public FixturesService(
-            IGameweekService gameweekService,
+            IGameweeksService gameweekService,
             IRepository<Fixture> fixturesRepository)
         {
             this.gameweekService = gameweekService;

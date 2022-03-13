@@ -13,14 +13,14 @@
 
     public class FantasyTeamService : IFantasyTeamService
     {
-        private readonly IGameweekService gameweekService;
+        private readonly IGameweeksService gameweekService;
         private readonly IDeletableEntityRepository<Player> playersRepository;
         private readonly IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository;
         private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
         private readonly IRepository<PlayerGameweek> playersGameweeksRepository;
 
         public FantasyTeamService(
-            IGameweekService gameweekService,
+            IGameweeksService gameweekService,
             IDeletableEntityRepository<Player> playersRepository,
             IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository,
             IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository,
@@ -45,33 +45,56 @@
                 .Where(p => p.FantasyTeamId == userFantasyTeam.Id)
                 .ToListAsync();
 
-            var players = new List<UserPlayerViewModel>();
-
-            foreach (var userPlayer in userPlayers)
+            if (currentGameweek == null)
             {
-                var playerGameweek = await this.playersGameweeksRepository
-                    .AllAsNoTracking()
-                    .FirstOrDefaultAsync(p => p.PlayerId == userPlayer.PlayerId
-                        && p.GameweekId == currentGameweek.Id);
-
-                var player = new UserPlayerViewModel
+                var userTeam = new UserTeamViewModel
                 {
-                    Name = userPlayer.Player.Name,
-                    Position = userPlayer.Player.Position.ToString(),
-                    GameweekPoints = playerGameweek != null ? playerGameweek.TotalPoints : 0,
-                    IsPlaying = userPlayer.IsPlaying,
+                    Name = userFantasyTeam.Name,
+                    Gameweek = 0,
+                    Players = userPlayers
+                        .Select(p => new UserPlayerViewModel
+                        {
+                            Name = p.Player.Name,
+                            Position = p.Player.Position.ToString(),
+                            GameweekPoints = 0,
+                            IsPlaying = false,
+                        })
+                        .ToList(),
                 };
 
-                players.Add(player);
+                return userTeam;
             }
-
-            var userTeam = new UserTeamViewModel
+            else
             {
-                Name = userFantasyTeam.Name,
-                Players = players,
-            };
+                var players = new List<UserPlayerViewModel>();
 
-            return userTeam;
+                foreach (var userPlayer in userPlayers)
+                {
+                    var playerGameweek = await this.playersGameweeksRepository
+                        .AllAsNoTracking()
+                        .FirstOrDefaultAsync(p => p.PlayerId == userPlayer.PlayerId
+                            && p.GameweekId == currentGameweek.Id);
+
+                    var player = new UserPlayerViewModel
+                    {
+                        Name = userPlayer.Player.Name,
+                        Position = userPlayer.Player.Position.ToString(),
+                        GameweekPoints = playerGameweek != null ? playerGameweek.TotalPoints : 0,
+                        IsPlaying = userPlayer.IsPlaying,
+                    };
+
+                    players.Add(player);
+                }
+
+                var userTeam = new UserTeamViewModel
+                {
+                    Name = userFantasyTeam.Name,
+                    Gameweek = currentGameweek.Number,
+                    Players = players,
+                };
+
+                return userTeam;
+            }
         }
 
         public async Task<FantasyTeam> GetUserFantasyTeam(string userId)

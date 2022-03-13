@@ -18,13 +18,13 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IPlayersManagementService playersManagementService;
         private readonly IPlayersService playersService;
-        private readonly IGameweekService gameweekService;
+        private readonly IGameweeksService gameweekService;
 
         public PlayersManagementController(
             UserManager<ApplicationUser> userManager,
             IPlayersManagementService playersManagementService,
             IPlayersService playersService,
-            IGameweekService gameweekService)
+            IGameweeksService gameweekService)
         {
             this.userManager = userManager;
             this.playersManagementService = playersManagementService;
@@ -43,7 +43,7 @@
                 Players = allPlayers,
             };
 
-            if (this.TempData["players"] != null)
+            if (this.TempData.ContainsKey("players"))
             {
                 this.ViewData["alertMessage"] = this.TempData["alert"].ToString();
                 this.TempData["players"] = JsonConvert
@@ -51,8 +51,7 @@
                 pickGoalkeepersModel = this.TempData["players"] as PickPlayersFormModel;
                 pickGoalkeepersModel.Players = allPlayers;
 
-                this.TempData.Remove("players");
-                this.TempData.Remove("alert");
+                this.TempData.Clear();
             }
 
             return this.View(pickGoalkeepersModel);

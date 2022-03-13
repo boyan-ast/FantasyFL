@@ -69,7 +69,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> MyTeam()
+        public async Task<IActionResult> GameweekResult()
         {
             var userId = this.userManager.GetUserId(this.User);
             var userGameweekTeam = await this.fantasyTeamService.GetUserGameweekTeam(userId);

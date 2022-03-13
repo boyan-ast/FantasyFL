@@ -7,9 +7,9 @@
 
     public class DashboardController : AdministrationController
     {
-        private readonly IGameweekService gameweeksService;
+        private readonly IGameweeksService gameweeksService;
 
-        public DashboardController(IGameweekService gameweeksService)
+        public DashboardController(IGameweeksService gameweeksService)
         {
             this.gameweeksService = gameweeksService;
         }

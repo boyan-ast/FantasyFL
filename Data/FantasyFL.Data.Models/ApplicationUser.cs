@@ -22,6 +22,10 @@ namespace FantasyFL.Data.Models
 
         public FantasyTeam FantasyTeam { get; set; }
 
+        public int StartGameweekId { get; set; }
+
+        public Gameweek StartGameweek { get; set; }
+
         public ICollection<FantasyLeague> FantasyLeagues { get; set; } = new HashSet<FantasyLeague>();
 
         public int TotalPoints { get; set; }

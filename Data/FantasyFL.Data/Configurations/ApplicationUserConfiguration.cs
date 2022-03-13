@@ -28,6 +28,12 @@
                 .HasForeignKey(e => e.UserId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
+
+            appUser
+                .HasOne(a => a.StartGameweek)
+                .WithMany(g => g.UsersStartedInGameweek)
+                .HasForeignKey(a => a.StartGameweekId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
