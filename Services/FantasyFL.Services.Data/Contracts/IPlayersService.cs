@@ -9,11 +9,11 @@
 
     public interface IPlayersService
     {
-        Task<List<PlayerListingViewModel>> GetAllByTeam(int id);
+        Task<List<TeamPlayerViewModel>> GetAllByTeam(int id);
 
-        Task<List<PlayerListingViewModel>> GetAllByPosition(Position position);
+        Task<List<TeamPlayerViewModel>> GetAllByPosition(Position position);
 
-        Task<List<PlayerListingViewModel>> GetAllPlayers();
+        Task<List<TeamPlayerViewModel>> GetAllPlayers();
 
         Task<string> GetPlayerTeamName(int playerId);
 

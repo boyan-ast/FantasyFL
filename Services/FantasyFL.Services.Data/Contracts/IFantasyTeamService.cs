@@ -9,7 +9,7 @@
 
     public interface IFantasyTeamService
     {
-        Task<UserTeamViewModel> GetUserGameweekTeam(string userId);
+        Task<TeamPointsViewModel> GetUserGameweekTeam(string userId);
 
         Task<FantasyTeam> GetUserFantasyTeam(string userId);
 

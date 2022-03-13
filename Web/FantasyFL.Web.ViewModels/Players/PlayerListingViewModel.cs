@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Web.ViewModels.Teams
+﻿namespace FantasyFL.Web.ViewModels.Players
 {
     public class PlayerListingViewModel
     {
@@ -8,6 +8,6 @@
 
         public string Position { get; init; }
 
-        public string Team { get; init; }
+        public string Team { get; set; }
     }
 }

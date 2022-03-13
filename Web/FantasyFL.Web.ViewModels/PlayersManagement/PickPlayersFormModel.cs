@@ -14,6 +14,6 @@
 
         public List<PlayerInputModel> Attackers { get; set; }
 
-        public List<PlayerListingViewModel> Players { get; set; }
+        public List<TeamPlayerViewModel> Players { get; set; }
     }
 }

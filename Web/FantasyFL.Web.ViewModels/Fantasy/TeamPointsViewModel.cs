@@ -2,12 +2,12 @@
 {
     using System.Collections.Generic;
 
-    public class UserTeamViewModel
+    public class TeamPointsViewModel
     {
         public string Name { get; init; }
 
         public int Gameweek { get; init; }
 
-        public IEnumerable<UserPlayerViewModel> Players { get; init; }
+        public IEnumerable<PlayerPointsViewModel> Players { get; init; }
     }
 }

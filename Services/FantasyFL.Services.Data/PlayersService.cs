@@ -25,13 +25,13 @@
             this.teamsRepository = teamsRepository;
         }
 
-        public async Task<List<PlayerListingViewModel>> GetAllByTeam(int id)
+        public async Task<List<TeamPlayerViewModel>> GetAllByTeam(int id)
         {
             var players = await this.playersRepository
                 .All()
                 .Where(p => p.TeamId == id)
                 .OrderBy(p => p.Position)
-                .Select(p => new PlayerListingViewModel
+                .Select(p => new TeamPlayerViewModel
                 {
                     Id = p.Id,
                     Name = p.Name,
@@ -43,13 +43,13 @@
             return players;
         }
 
-        public async Task<List<PlayerListingViewModel>> GetAllPlayers()
+        public async Task<List<TeamPlayerViewModel>> GetAllPlayers()
         {
             var players = await this.playersRepository
                 .All()
                 .OrderBy(p => p.TeamId)
                 .ThenBy(p => p.Position)
-                .Select(p => new PlayerListingViewModel
+                .Select(p => new TeamPlayerViewModel
                 {
                     Id = p.Id,
                     Name = p.Name,
@@ -61,13 +61,13 @@
             return players;
         }
 
-        public async Task<List<PlayerListingViewModel>> GetAllByPosition(Position position)
+        public async Task<List<TeamPlayerViewModel>> GetAllByPosition(Position position)
         {
             var players = await this.playersRepository
                 .All()
                 .Where(p => p.Position == position)
                 .OrderBy(p => p.TeamId)
-                .Select(p => new PlayerListingViewModel
+                .Select(p => new TeamPlayerViewModel
                 {
                     Id = p.Id,
                     Name = p.Name,

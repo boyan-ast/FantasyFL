@@ -33,7 +33,7 @@
             this.playersGameweeksRepository = playersGameweeksRepository;
         }
 
-        public async Task<UserTeamViewModel> GetUserGameweekTeam(string userId)
+        public async Task<TeamPointsViewModel> GetUserGameweekTeam(string userId)
         {
             var currentGameweek = this.gameweekService.GetCurrent();
 
@@ -47,12 +47,12 @@
 
             if (currentGameweek == null)
             {
-                var userTeam = new UserTeamViewModel
+                var userTeam = new TeamPointsViewModel
                 {
                     Name = userFantasyTeam.Name,
                     Gameweek = 0,
                     Players = userPlayers
-                        .Select(p => new UserPlayerViewModel
+                        .Select(p => new PlayerPointsViewModel
                         {
                             Name = p.Player.Name,
                             Position = p.Player.Position.ToString(),
@@ -66,7 +66,7 @@
             }
             else
             {
-                var players = new List<UserPlayerViewModel>();
+                var players = new List<PlayerPointsViewModel>();
 
                 foreach (var userPlayer in userPlayers)
                 {
@@ -75,7 +75,7 @@
                         .FirstOrDefaultAsync(p => p.PlayerId == userPlayer.PlayerId
                             && p.GameweekId == currentGameweek.Id);
 
-                    var player = new UserPlayerViewModel
+                    var player = new PlayerPointsViewModel
                     {
                         Name = userPlayer.Player.Name,
                         Position = userPlayer.Player.Position.ToString(),
@@ -86,7 +86,7 @@
                     players.Add(player);
                 }
 
-                var userTeam = new UserTeamViewModel
+                var userTeam = new TeamPointsViewModel
                 {
                     Name = userFantasyTeam.Name,
                     Gameweek = currentGameweek.Number,
