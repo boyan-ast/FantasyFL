@@ -69,6 +69,7 @@
             return gameweeksViewModel;
         }
 
+        // TODO: Add Async to the names of the methods
         public async Task GetPlayersData(int gameweekId)
         {
             var gameweek = await this.gameweekRepository
@@ -104,7 +105,7 @@
 
             var usersPlayingInGameweek = await this.usersRepository
                 .AllAsNoTracking()
-                .Where(u => u.StartGameweek.Number >= gameweek.Number)
+                .Where(u => u.StartGameweek.Number <= gameweek.Number)
                 .ToListAsync();
 
             foreach (var user in usersPlayingInGameweek)
@@ -133,9 +134,12 @@
 
             var userGameweek = await this.usersGameweeksRepository
                 .All()
-                .FirstOrDefaultAsync(u => u.GameweekId == gameweekId);
+                .FirstOrDefaultAsync(u => u.UserId == userId && u.GameweekId == gameweekId);
 
-            userGameweek.Points = points;
+            if (userGameweek != null)
+            {
+                userGameweek.Points = points;
+            }
 
             await this.usersGameweeksRepository.SaveChangesAsync();
         }

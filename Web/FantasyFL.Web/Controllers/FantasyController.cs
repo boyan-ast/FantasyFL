@@ -64,7 +64,7 @@
             await this.fantasyTeamService.ClearUserPlayers(userTeam.Id);
             await this.fantasyTeamService.UpdatePlayingPlayers(userTeam.Id, playingPlayersIds);
 
-            return this.Redirect("/Fixtures/Next");
+            return this.Redirect("/User/Team");
         }
 
         [Authorize]

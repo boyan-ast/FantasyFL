@@ -12,14 +12,11 @@
     public class HomeController : BaseController
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IPlayersManagementService playersManagementService;
 
         public HomeController(
-            UserManager<ApplicationUser> userManager,
-            IPlayersManagementService playersManagementService)
+            UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
-            this.playersManagementService = playersManagementService;
         }
 
         public IActionResult Index()
@@ -31,7 +28,7 @@
 
             var userId = this.userManager.GetUserId(this.User);
 
-            return this.Redirect("/Fantasy/PickTeam");
+            return this.Redirect("/User/Team");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
