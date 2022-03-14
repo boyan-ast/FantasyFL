@@ -11,7 +11,7 @@
     using FantasyFL.Web.ViewModels.Fantasy;
     using Microsoft.EntityFrameworkCore;
 
-    public class FantasyTeamService : IFantasyTeamService
+    public class FantasyTeamsService : IFantasyTeamsService
     {
         private readonly IGameweeksService gameweekService;
         private readonly IDeletableEntityRepository<Player> playersRepository;
@@ -19,7 +19,7 @@
         private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
         private readonly IRepository<PlayerGameweek> playersGameweeksRepository;
 
-        public FantasyTeamService(
+        public FantasyTeamsService(
             IGameweeksService gameweekService,
             IDeletableEntityRepository<Player> playersRepository,
             IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository,

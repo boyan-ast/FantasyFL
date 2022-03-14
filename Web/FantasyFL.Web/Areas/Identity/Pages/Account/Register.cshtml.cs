@@ -30,6 +30,7 @@
         private readonly IEmailSender emailSender;
         private readonly ILeaguesService leaguesService;
         private readonly IGameweeksService gameweeksService;
+        private readonly IUsersService usersService;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -37,7 +38,8 @@
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
             ILeaguesService leaguesService,
-            IGameweeksService gameweeksService)
+            IGameweeksService gameweeksService,
+            IUsersService usersService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -45,6 +47,7 @@
             this.emailSender = emailSender;
             this.leaguesService = leaguesService;
             this.gameweeksService = gameweeksService;
+            this.usersService = usersService;
         }
 
         [BindProperty]
@@ -117,6 +120,8 @@
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
+
+                    await this.usersService.AddUserGameweeks(user.Id, user.StartGameweek.Number);
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

@@ -149,7 +149,7 @@
                 return this.Redirect("/Fixtures/Next");
             }
 
-            return this.Redirect("/Fantasy/MyTeam");
+            return this.Redirect("/User/Team");
         }
     }
 }

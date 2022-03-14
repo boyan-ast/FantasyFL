@@ -2,12 +2,12 @@
 @model List<FixtureViewModel>
 
 @{
-    this.ViewData["Title"] = "Results";
+    this.ViewData["Title"] = "Fixtures";
 }
 
 <div class="row justify-content-center">
     <div class="col-auto table-responsive">
-        <h2 class="text-center mt-3 mb-4">Gameweek Results</h2>
+        <h2 class="text-center mt-3 mb-4">Fixtures</h2>
         <table class="table">
             <thead>
                 <tr>
@@ -26,7 +26,6 @@
                         </td>
                         <td class="text-center">
                             <div>@fixture.Stadium</div>
-                            <h3>@fixture.HomeGoals : @fixture.AwayGoals</h3>
                             <div>@fixture.Date</div>
                         </td>
                         <td class="text-center">

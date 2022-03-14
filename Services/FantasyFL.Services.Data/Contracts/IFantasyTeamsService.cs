@@ -7,7 +7,7 @@
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Web.ViewModels.Fantasy;
 
-    public interface IFantasyTeamService
+    public interface IFantasyTeamsService
     {
         Task<TeamPointsViewModel> GetUserGameweekTeam(string userId);
 

@@ -6,16 +6,16 @@
     using FantasyFL.Services.Data.Contracts;
     using Microsoft.AspNetCore.Mvc;
 
-    public class FixturesController : Controller
+    public class FirstLeagueController : Controller
     {
         private readonly IFixturesService fixturesService;
 
-        public FixturesController(IFixturesService fixturesService)
+        public FirstLeagueController(IFixturesService fixturesService)
         {
             this.fixturesService = fixturesService;
         }
 
-        public async Task<IActionResult> Current()
+        public async Task<IActionResult> Results()
         {
             var fixtures = await this.fixturesService.GetAllInCurrentGameweek();
 
@@ -27,7 +27,7 @@
             return this.View(fixtures);
         }
 
-        public async Task<IActionResult> Next()
+        public async Task<IActionResult> Fixtures()
         {
             var fixtures = await this.fixturesService.GetAllInNextGameweek();
 

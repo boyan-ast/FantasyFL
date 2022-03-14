@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using FantasyFL.Web.ViewModels.Teams;
+    using FantasyFL.Web.ViewModels.FirstLeague;
 
     public interface ITeamsService
     {

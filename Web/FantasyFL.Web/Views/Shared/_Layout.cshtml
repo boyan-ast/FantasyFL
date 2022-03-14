@@ -23,7 +23,7 @@
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Users" asp-action="MyTeam">My Team</a>
+                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Team">My Team</a>
                             </li>
                             <li class="nav-item dropdown pr-5">
                                 <a class="nav-link dropdown-toggle" href="#a" id="fantasyDropdownMenuLink" data-toggle="dropdown"
@@ -37,17 +37,15 @@
                                 </div>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Teams" asp-action="All">Teams</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#a" id="navbarDropdownMenuLink" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                Fixtures
+                                First League
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="Fixtures" asp-action="Current">Results</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Fixtures" asp-action="Next">Upcoming</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="FirstLeague" asp-action="Results">Results</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="FirstLeague" asp-action="Fixtures">Fixtures</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Teams" asp-action="All">Teams</a>
                             </div>
                         </li>
                     </ul>

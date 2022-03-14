@@ -15,16 +15,31 @@
 
     public class GameweeksService : IGameweeksService
     {
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IRepository<Gameweek> gameweekRepository;
+        private readonly IRepository<PlayerGameweek> playersGameweeksRepository;
+        private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
+        private readonly IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository;
+        private readonly IRepository<ApplicationUserGameweek> usersGameweeksRepository;
         private readonly IGameweekImportService gameweekImportService;
         private readonly IPlayersPointsService playersService;
 
         public GameweeksService(
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
             IRepository<Gameweek> gameweekRepository,
+            IRepository<PlayerGameweek> playersGameweeksRepository,
+            IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository,
+            IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository,
+            IRepository<ApplicationUserGameweek> usersGameweeksRepository,
             IGameweekImportService gameweekImportService,
             IPlayersPointsService playersService)
         {
+            this.usersRepository = usersRepository;
             this.gameweekRepository = gameweekRepository;
+            this.playersGameweeksRepository = playersGameweeksRepository;
+            this.fantasyTeamsRepository = fantasyTeamsRepository;
+            this.fantasyTeamsPlayersRepository = fantasyTeamsPlayersRepository;
+            this.usersGameweeksRepository = usersGameweeksRepository;
             this.gameweekImportService = gameweekImportService;
             this.playersService = playersService;
         }
@@ -87,7 +102,42 @@
 
             gameweek.IsFinished = true;
 
+            var usersPlayingInGameweek = await this.usersRepository
+                .AllAsNoTracking()
+                .Where(u => u.StartGameweek.Number >= gameweek.Number)
+                .ToListAsync();
+
+            foreach (var user in usersPlayingInGameweek)
+            {
+                await this.CalculateUserGameweekPoints(user.Id, gameweekId);
+            }
+
             await this.gameweekRepository.SaveChangesAsync();
+        }
+
+        public async Task CalculateUserGameweekPoints(string userId, int gameweekId)
+        {
+            var userFantasyTeam = await this.fantasyTeamsRepository
+                .All()
+                .FirstOrDefaultAsync(t => t.OwnerId == userId);
+
+            var userPlayingPlayersIds = this.fantasyTeamsPlayersRepository
+                .AllAsNoTracking()
+                .Where(p => p.FantasyTeamId == userFantasyTeam.Id && p.IsPlaying)
+                .Select(p => p.PlayerId);
+
+            var points = await this.playersGameweeksRepository
+                .AllAsNoTracking()
+                .Where(p => p.GameweekId == gameweekId && userPlayingPlayersIds.Contains(p.PlayerId))
+                .SumAsync(p => p.TotalPoints);
+
+            var userGameweek = await this.usersGameweeksRepository
+                .All()
+                .FirstOrDefaultAsync(u => u.GameweekId == gameweekId);
+
+            userGameweek.Points = points;
+
+            await this.usersGameweeksRepository.SaveChangesAsync();
         }
 
         public Gameweek GetCurrent()

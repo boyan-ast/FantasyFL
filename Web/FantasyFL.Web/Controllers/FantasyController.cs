@@ -1,10 +1,9 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+
     using FantasyFL.Data.Models;
-    using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Fantasy;
     using Microsoft.AspNetCore.Authorization;
@@ -13,11 +12,11 @@
 
     public class FantasyController : Controller
     {
-        private readonly IFantasyTeamService fantasyTeamService;
+        private readonly IFantasyTeamsService fantasyTeamService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public FantasyController(
-            IFantasyTeamService fantasyTeamService,
+            IFantasyTeamsService fantasyTeamService,
             UserManager<ApplicationUser> userManager)
         {
             this.fantasyTeamService = fantasyTeamService;

@@ -13,7 +13,9 @@
         Task GetPlayersData(int gameweekId);
 
         Task FinishGameweek(int gameweekId);
-                
+
+        Task CalculateUserGameweekPoints(string userId, int gameweekId);
+
         Gameweek GetCurrent();
 
         Gameweek GetNext();

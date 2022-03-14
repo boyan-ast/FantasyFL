@@ -128,11 +128,6 @@
 
         private async Task AddPlayerToTeamsPlayers(PlayerInputModel player, Dictionary<string, int> teamsPlayers)
         {
-            //if (player.Id == 0)
-            //{
-            //    player.Id = await this.GetPlayerIdByName(player.Name);
-            //}
-
             var playerTeam = await this.GetPlayerTeamName(player.Id);
 
             if (!teamsPlayers.ContainsKey(playerTeam))

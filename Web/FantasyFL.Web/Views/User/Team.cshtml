@@ -1,0 +1,28 @@
+﻿@model FantasyFL.Web.ViewModels.Users.UserTeamViewModel
+
+@{
+    ViewData["title"] = "My Team";
+}
+
+<h4>@Model.Name</h4>
+<h3>@Model.TotalPoints</h3>
+
+<table class="table table-sm table-dark">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Position</th>
+            <th scope="col">Club</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var player in Model.FantasyTeamPlayers.OrderBy(p => p.Position))
+        {
+            <tr>
+                <td>@player.Name</td>
+                <td>@player.Position.ToString()</td>
+                <td>@player.Team</td>
+            </tr>
+        }        
+    </tbody>
+</table>
