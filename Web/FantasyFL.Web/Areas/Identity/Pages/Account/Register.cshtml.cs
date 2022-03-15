@@ -26,6 +26,7 @@
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
         private readonly ILogger<RegisterModel> logger;
         private readonly IEmailSender emailSender;
         private readonly ILeaguesService leaguesService;
@@ -34,6 +35,7 @@
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
+            RoleManager<ApplicationRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
@@ -42,6 +44,7 @@
             IUsersService usersService)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
             this.signInManager = signInManager;
             this.logger = logger;
             this.emailSender = emailSender;
@@ -122,6 +125,13 @@
                     this.logger.LogInformation("User created a new account with password.");
 
                     await this.usersService.AddUserGameweeks(user.Id, user.StartGameweek.Number);
+
+                    var roleExists = await this.roleManager.RoleExistsAsync(UserRoleName);
+
+                    if (roleExists)
+                    {
+                        await this.userManager.AddToRoleAsync(user, UserRoleName);
+                    }
 
                     var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

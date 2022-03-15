@@ -104,44 +104,47 @@
             gameweek.IsFinished = true;
 
             var usersPlayingInGameweek = await this.usersRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(u => u.StartGameweek.Number <= gameweek.Number)
                 .ToListAsync();
 
             foreach (var user in usersPlayingInGameweek)
             {
-                await this.CalculateUserGameweekPoints(user.Id, gameweekId);
+                var userGameweek = await this.usersGameweeksRepository
+                    .All()
+                    .FirstOrDefaultAsync(u => u.UserId == user.Id && u.GameweekId == gameweekId);
+
+                if (userGameweek != null)
+                {
+                    var points = await this.CalculateUserGameweekPoints(user.Id, gameweekId);
+                    userGameweek.Points = points;
+                    user.TotalPoints += points;
+                }
             }
 
+            await this.usersGameweeksRepository.SaveChangesAsync();
+            await this.usersRepository.SaveChangesAsync();
             await this.gameweekRepository.SaveChangesAsync();
         }
 
-        public async Task CalculateUserGameweekPoints(string userId, int gameweekId)
+        public async Task<int> CalculateUserGameweekPoints(string userId, int gameweekId)
         {
             var userFantasyTeam = await this.fantasyTeamsRepository
                 .All()
                 .FirstOrDefaultAsync(t => t.OwnerId == userId);
 
-            var userPlayingPlayersIds = this.fantasyTeamsPlayersRepository
+            var userPlayingPlayersIds = await this.fantasyTeamsPlayersRepository
                 .AllAsNoTracking()
                 .Where(p => p.FantasyTeamId == userFantasyTeam.Id && p.IsPlaying)
-                .Select(p => p.PlayerId);
+                .Select(p => p.PlayerId)
+                .ToListAsync();
 
             var points = await this.playersGameweeksRepository
                 .AllAsNoTracking()
                 .Where(p => p.GameweekId == gameweekId && userPlayingPlayersIds.Contains(p.PlayerId))
                 .SumAsync(p => p.TotalPoints);
 
-            var userGameweek = await this.usersGameweeksRepository
-                .All()
-                .FirstOrDefaultAsync(u => u.UserId == userId && u.GameweekId == gameweekId);
-
-            if (userGameweek != null)
-            {
-                userGameweek.Points = points;
-            }
-
-            await this.usersGameweeksRepository.SaveChangesAsync();
+            return points;
         }
 
         public Gameweek GetCurrent()

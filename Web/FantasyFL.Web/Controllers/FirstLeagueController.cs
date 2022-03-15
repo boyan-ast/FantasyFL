@@ -21,7 +21,7 @@
 
             if (!fixtures.Any())
             {
-                return this.Redirect("/Fixtures/Next");
+                return this.Redirect("/FirstLeague/Fitures");
             }
 
             return this.View(fixtures);

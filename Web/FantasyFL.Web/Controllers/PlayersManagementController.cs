@@ -144,11 +144,6 @@
 
             var currentGameweek = this.gameweekService.GetCurrent();
 
-            if (currentGameweek == null)
-            {
-                return this.Redirect("/Fixtures/Next");
-            }
-
             return this.Redirect("/User/Team");
         }
     }

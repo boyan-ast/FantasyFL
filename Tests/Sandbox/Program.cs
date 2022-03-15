@@ -13,6 +13,8 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Repositories;
     using FantasyFL.Data.Seeding;
+    using FantasyFL.Services;
+    using FantasyFL.Services.Contracts;
     using FantasyFL.Services.Data;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Messaging;
@@ -50,30 +52,9 @@
 
         private static async Task<int> SandboxCode(SandboxOptions options, IServiceProvider serviceProvider)
         {
-            var sw = Stopwatch.StartNew();
-
-            var settingsService = serviceProvider.GetService<ISettingsService>();
-            Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
-
-            var data = (ApplicationDbContext)serviceProvider.GetService(typeof(ApplicationDbContext));
-
-            var fixtures = data.Fixtures
-                .Include(f => f.HomeTeam)
-                .Include(f => f.AwayTeam)
-                .OrderBy(x => x.Gameweek.Number).ToList();
-
-            foreach (var fixture in fixtures)
-            {
-                Console.WriteLine($"{fixture.Date} {fixture.Status}: {fixture.HomeTeam.Name} - {fixture.AwayTeam.Name}");
-                if (fixture.Status == "FT")
-                {
-                    Console.WriteLine($"{fixture.HomeGoals} : {fixture.AwayGoals}");
-                }
-
-                Console.WriteLine(new string('*', 10));
-            }
-
-            Console.WriteLine(sw.Elapsed);
+            var input = "https://media.api-sports.io/football/teams/853.png";
+            var result = input.Split("teams/")[1];
+            Console.WriteLine(result);
             return await Task.FromResult(0);
         }
 
@@ -99,7 +80,20 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IParseService, ParseService>();
+            services.AddTransient<IExternalDataService, JsonDataService>();
+            services.AddTransient<IFootballDataService, FootballDataService>();
+            services.AddTransient<IGameweekImportService, GameweekImportService>();
+            services.AddTransient<IPlayersPointsService, PlayersPointsService>();
+            services.AddTransient<IGameweeksService, GameweeksService>();
+            services.AddTransient<IFixturesService, FixturesService>();
+            services.AddTransient<IPlayersService, PlayersService>();
+            services.AddTransient<ITeamsService, TeamsService>();
+            services.AddTransient<ILeaguesService, LeaguesService>();
+            services.AddTransient<ISeedService, SeedService>();
+            services.AddTransient<IPlayersManagementService, PlayersManagementService>();
+            services.AddTransient<IFantasyTeamsService, FantasyTeamsService>();
+            services.AddTransient<IUsersService, UsersService>();
         }
     }
 }

@@ -1,10 +1,8 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
-    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -23,10 +21,10 @@
         {
             if (!this.User.Identity.IsAuthenticated)
             {
-                return this.Redirect("/Identity/Account/Login");
-            }
+                //return this.Redirect("/Identity/Account/Login");
 
-            var userId = this.userManager.GetUserId(this.User);
+                return this.View();
+            }
 
             return this.Redirect("/User/Team");
         }

@@ -168,7 +168,7 @@
                 {
                     ExternId = teamDto.Team.Id,
                     Name = teamDto.Team.Name,
-                    Logo = teamDto.Team.Logo,
+                    Logo = teamDto.Team.Logo.Split("teams/")[1],
                     Stadium = new Stadium
                     {
                         ExternId = teamDto.Stadium.Id,

@@ -91,11 +91,11 @@
             var points = 0;
 
             if ((playerPosition == Position.Goalkeeper || playerPosition == Position.Defender)
-                && concededGoals >= ConcededGoalsLimit)
+                && concededGoals > ConcededGoalsLimit)
             {
                 points = concededGoals * ConcededGoalsDefaultPoints;
             }
-            else if (playerPosition == Position.Midfielder && concededGoals >= ConcededGoalsLimit)
+            else if (playerPosition == Position.Midfielder && concededGoals > ConcededGoalsLimit)
             {
                 points = concededGoals * ConcededGoalsMidfielderPoints;
             }

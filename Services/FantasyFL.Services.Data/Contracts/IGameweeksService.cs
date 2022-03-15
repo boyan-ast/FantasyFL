@@ -14,7 +14,7 @@
 
         Task FinishGameweek(int gameweekId);
 
-        Task CalculateUserGameweekPoints(string userId, int gameweekId);
+        Task<int> CalculateUserGameweekPoints(string userId, int gameweekId);
 
         Gameweek GetCurrent();
 

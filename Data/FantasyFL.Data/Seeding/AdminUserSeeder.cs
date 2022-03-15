@@ -24,6 +24,8 @@
                 .GetService(typeof(ILeaguesService));
             var gameweeksService = (IGameweeksService)serviceProvider
                 .GetService(typeof(IGameweeksService));
+            var usersService = (IUsersService)serviceProvider
+                .GetService(typeof(IUsersService));
 
             var defaultFantasyLeague = await leaguesService.GetLeagueByName(DefaultFantasyLeagueName);
             var startGameweek = gameweeksService.GetNext();
@@ -61,6 +63,8 @@
                 {
                     await userManager.AddToRoleAsync(admin, AdministratorRoleName);
                 }
+
+                await usersService.AddUserGameweeks(admin.Id, admin.StartGameweek.Number);
             }
         }
     }

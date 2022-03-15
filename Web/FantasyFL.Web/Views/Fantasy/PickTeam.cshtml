@@ -9,13 +9,13 @@
 <form asp-controller="Fantasy" asp-action="PickTeam" method="post">
     <div class="form-group align-items-center">
         <div class="col-sm-5 my-2">
-                <label>Goalkeeper: </label>
-                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Goalkeepers,
+            <label>Goalkeeper: </label>
+            <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Goalkeepers,
                         nameof(PlayerSelectViewModel.PlayerId),
                         nameof(PlayerSelectViewModel.Name)))"
-                        class="form-control">
-                    <option>Select Goalkeeper</option>
-                </select>
+                    class="form-control">
+                <option>Select Goalkeeper</option>
+            </select>
             @for (int i = 0; i < 4; i++)
             {
                 <label>Defender @(i + 1): </label>
