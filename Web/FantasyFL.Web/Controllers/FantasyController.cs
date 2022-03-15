@@ -1,6 +1,7 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
@@ -35,12 +36,6 @@
                 return this.Redirect("/PlayersManagement/PickGoalkeepers");
             }
 
-            if (this.TempData.ContainsKey("errors"))
-            {
-                this.ViewData["alertMessage"] = this.TempData["errors"].ToString();
-                this.TempData.Remove("errors");
-            }
-
             var team = await this.fantasyTeamService.GetUserTeamSelectModel(userId);
 
             return this.View(team);
@@ -50,13 +45,21 @@
         [HttpPost]
         public async Task<IActionResult> PickTeam(TeamSelectViewModel team)
         {
-            var playingPlayersIds = new HashSet<int>(team.SelectedPlayers);
-
-            if (playingPlayersIds.Count < 11)
+            if (!this.ModelState.IsValid)
             {
-                this.TempData["errors"] = "You have to select 11 different players.";
-                return this.RedirectToAction(nameof(this.PickTeam));
+                return this.View(team);
             }
+
+            var playingGoalkeepers = team.Goalkeepers.Where(gk => gk.Selected).ToList();
+            var playingDefenders = team.Defenders.Where(d => d.Selected).ToList();
+            var playingMidfielders = team.Midfielders.Where(m => m.Selected).ToList();
+            var playingAttackers = team.Attackers.Where(a => a.Selected).ToList();
+
+            var playingPlayersIds = new HashSet<int>(playingGoalkeepers
+                .Concat(playingDefenders)
+                .Concat(playingMidfielders)
+                .Concat(playingAttackers)
+                .Select(p => p.PlayerId));
 
             var userId = this.userManager.GetUserId(this.User);
             var userTeam = await this.fantasyTeamService.GetUserFantasyTeam(userId);

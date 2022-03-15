@@ -5,59 +5,80 @@
     ViewData["title"] = "Pick Team";
 }
 
-<div asp-validation-summary="All"></div>
-<form asp-controller="Fantasy" asp-action="PickTeam" method="post">
-    <div class="form-group align-items-center">
-        <div class="col-sm-5 my-2">
-            <label>Goalkeeper: </label>
-            <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Goalkeepers,
-                        nameof(PlayerSelectViewModel.PlayerId),
-                        nameof(PlayerSelectViewModel.Name)))"
-                    class="form-control">
-                <option>Select Goalkeeper</option>
-            </select>
-            @for (int i = 0; i < 4; i++)
-            {
-                <label>Defender @(i + 1): </label>
-                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Defenders,
-                        nameof(PlayerSelectViewModel.PlayerId),
-                        nameof(PlayerSelectViewModel.Name)))"
-                    class="form-control">
-                    <option>Select Defender</option>
-                </select>
-            }
-            @for (int i = 0; i < 4; i++)
-            {
-                <label>Midfielder @(i + 1): </label>
-                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Midfielders,
-                        nameof(PlayerSelectViewModel.PlayerId),
-                        nameof(PlayerSelectViewModel.Name)))"
-                    class="form-control">
-                    <option>Select Midfielder</option>
-                </select>
-            }
-            @for (int i = 0; i < 2; i++)
-            {
-                <label>Attacker @(i + 1): </label>
-                <select asp-for="@Model.SelectedPlayers" asp-items="@(new SelectList(Model.Attackers,
-                        nameof(PlayerSelectViewModel.PlayerId),
-                        nameof(PlayerSelectViewModel.Name)))"
-                    class="form-control">
-                    <option>Select Attacker</option>
-                </select>
-            }
-            <input class="btn btn-success mt-3" type="submit" />
-        </div>
-    </div>
-</form>
+<div class="row">
+    <div class="form-group overflow-auto col-md-6 rel-view">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <form asp-controller="Fantasy" asp-action="PickTeam" method="post">
+            <div class="custom-control custom-checkbox my-2">
+                <label>Select Goalkeeper</label>
+                <ul class="list-unstyled">
+                    @for (var i = 0; i < Model.Goalkeepers.Count; i++)
+                    {
+                        <li>
+                            <input type="checkbox" asp-for="@Model.Goalkeepers[i].Selected" class="custom-control-input goalkeeper">
+                            <label asp-for="@Model.Goalkeepers[i].Selected" class="custom-control-label">@Model.Goalkeepers[i].Name</label>
+                            <input type="hidden" asp-for="@Model.Goalkeepers[i].PlayerId" />
+                            <input type="hidden" asp-for="@Model.Goalkeepers[i].Name" />
+                        </li>
+                    }
+                </ul>
+            </div>
 
-<textarea id="error-message" hidden>@ViewData["alertMessage"]</textarea>
+            <div class="custom-control custom-checkbox my-2">
+                <label>Select Defenders</label>
+                <ul class="list-unstyled">
+                    @for (var i = 0; i < Model.Defenders.Count; i++)
+                    {
+                        <li>
+                            <input type="checkbox" asp-for="@Model.Defenders[i].Selected" class="custom-control-input defender">
+                            <label asp-for="@Model.Defenders[i].Selected" class="custom-control-label">@Model.Defenders[i].Name</label>
+                            <input type="hidden" asp-for="@Model.Defenders[i].PlayerId" />
+                            <input type="hidden" asp-for="@Model.Defenders[i].Name" />
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="custom-control custom-checkbox my-2">
+                <label>Select Midfielders</label>
+                <ul class="list-unstyled">
+                    @for (var i = 0; i < Model.Midfielders.Count; i++)
+                    {
+                        <li>
+                            <input type="checkbox" asp-for="@Model.Midfielders[i].Selected" class="custom-control-input midfielder">
+                            <label asp-for="@Model.Midfielders[i].Selected" class="custom-control-label">@Model.Midfielders[i].Name</label>
+                            <input type="hidden" asp-for="@Model.Midfielders[i].PlayerId" />
+                            <input type="hidden" asp-for="@Model.Midfielders[i].Name" />
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="custom-control custom-checkbox my-2">
+                <label>Select Attackers</label>
+                <ul class="list-unstyled">
+                    @for (var i = 0; i < Model.Attackers.Count; i++)
+                    {
+                        <li>
+                            <input type="checkbox" asp-for="@Model.Attackers[i].Selected" class="custom-control-input attacker">
+                            <label asp-for="@Model.Attackers[i].Selected" class="custom-control-label">@Model.Attackers[i].Name</label>
+                            <input type="hidden" asp-for="@Model.Attackers[i].PlayerId" />
+                            <input type="hidden" asp-for="@Model.Attackers[i].Name" />
+                        </li>
+                    }
+                </ul>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+
+    <div class="overflow-auto col-md-6 rel-view formation container-fluid">
+        <h4 class="text-center pt-3 text-light">Formation: 
+            <span id="selected-def">0</span>-<span id="selected-mid">0</span>-<span id="selected-att">0</span>
+        </h4>
+    </div>
+</div>
 
 @section Scripts{
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="~/js/alerts.js"></script>
-<script>
-    document.querySelectorAll('select')
-        .forEach(e => e.removeAttribute('multiple'));
-</script>
+<script src="~/js/selectStartTeam.js"></script>
 }
