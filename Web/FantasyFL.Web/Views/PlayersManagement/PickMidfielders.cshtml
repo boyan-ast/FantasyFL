@@ -7,7 +7,7 @@
 }
 
 <div class="row">
-    <div class="overflow-auto col-md-6" style="height: 600px;">
+    <div class="overflow-auto col-md-6 rel-view">
         <table id="playersTable" class="table table-hover">
             <tbody>
                 @foreach (var player in Model.Players.Where(p => p.Position == Position.Midfielder.ToString()))
@@ -22,7 +22,7 @@
         </table>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 rel-view">
         <form asp-controller="PlayersManagement" asp-action="PickAttackers" id="pickPlayersForm" class="form-inline pl-5" method="post">
             <h4 class="mb-3">Midfielders</h4>
             <hr />
