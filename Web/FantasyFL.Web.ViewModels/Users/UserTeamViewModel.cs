@@ -16,6 +16,8 @@
 
         public IEnumerable<PlayerListingViewModel> FantasyTeamPlayers { get; init; }
 
+        public IEnumerable<UserLeagueListingViewModel> FantasyLeagues { get; init; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<FantasyTeam, UserTeamViewModel>()

@@ -1,0 +1,15 @@
+﻿@using FantasyFL.Web.ViewModels.Leagues
+@model StandingsViewModel
+
+@{
+    ViewData["title"] = Model.Name;
+}
+
+<h3>@Model.Name</h3>
+<h4>@Model.Participants</h4>
+
+<ul>
+@foreach (var user in Model.ApplicationUsers){
+    <li>@user.UserName - @user.TotalPoints</li>
+}
+</ul>

@@ -1,11 +1,24 @@
-﻿@model FantasyFL.Web.ViewModels.Users.UserTeamViewModel
+﻿@model FantasyFL.Web.ViewModels.Users.UserPageViewModel
 
 @{
     ViewData["title"] = "My Team";
 }
 
-<h4>@Model.Name</h4>
-<h3>@Model.TotalPoints</h3>
+<h4>@Model.Team.Name</h4>
+<h3>@Model.Team.TotalPoints</h3>
+
+@foreach (var league in Model.Leagues)
+{
+    <div class="card-footer text-center">
+        <a asp-area=""
+       asp-controller="Leagues"
+       asp-action="Standings"
+       asp-route-id="@league.Id"
+       class="btn btn-outline-dark btn-lg">
+            @league.Name
+        </a>
+    </div>
+}
 
 <table class="table table-sm table-dark">
     <thead>
@@ -16,13 +29,13 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var player in Model.FantasyTeamPlayers.OrderBy(p => p.Position))
+        @foreach (var player in Model.Team.FantasyTeamPlayers.OrderBy(p => p.Position))
         {
             <tr>
                 <td>@player.Name</td>
                 <td>@player.Position.ToString()</td>
                 <td>@player.Team</td>
             </tr>
-        }        
+        }
     </tbody>
 </table>

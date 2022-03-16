@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Data.Contracts;
+    using FantasyFL.Web.ViewModels.Users;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -31,8 +32,15 @@
             }
 
             var team = await this.usersService.GetUserTeam(userId);
+            var leagues = this.usersService.GetUserLeagues(userId);
 
-            return this.View(team);
+            var model = new UserPageViewModel
+            {
+                Team = team,
+                Leagues = leagues,
+            };
+
+            return this.View(model);
         }
     }
 }
