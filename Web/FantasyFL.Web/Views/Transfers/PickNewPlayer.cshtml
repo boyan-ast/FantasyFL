@@ -1,0 +1,39 @@
+﻿@using FantasyFL.Web.ViewModels.Transfers
+@model List<AddPlayerListingViewModel>
+
+@{
+    ViewData["title"] = "Add Player";
+}
+
+<h5 class="text-center text-danger pb-4">Choose a player</h5>
+
+<div class="overflow-auto rel-view">
+    <form asp-action="AddPlayer">
+        <table id="playersTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Name</th>
+                    <th class="text-center" scope="col">Position</th>
+                    <th class="text-center" scope="col">Team</th>
+                    <th class="text-center" scope="col">Add</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model.OrderBy(p => p.Team))
+                {
+                    <tr class="clickable">
+                        <td class="text-center font-weight-bold">@player.Name</td>
+                        <td class="text-center">@player.Position.ToString()</td>
+                        <td class="text-center">@player.Team</td>
+                        <td class="text-center custom-radio">
+                            <input type="radio" name="playerId" class="custom-radio" value="@player.Id" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around pt-3">
+            <input class="btn btn-success" type="submit" value="Add Player" />
+        </div>
+    </form>
+</div>

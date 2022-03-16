@@ -1,0 +1,52 @@
+﻿@using FantasyFL.Web.ViewModels.Transfers
+@model TeamTransfersViewModel
+
+@{
+    ViewData["title"] = "Transfers";
+}
+
+@if (Model.Transfers > 0)
+{
+    <h5 class="text-center text-success pb-4">You can make @Model.Transfers transfer before Gameweek @Model.GameweekNumber</h5>
+}
+else
+{
+    <h5 class="text-center text-danger pb-4">You can't make more transfers before Gameweek @Model.GameweekNumber</h5>
+}
+
+<div class="overflow-auto rel-view">
+    <form asp-action="RemovePlayer">
+        <table id="playersTable" class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Name</th>
+                    <th class="text-center" scope="col">Position</th>
+                    <th class="text-center" scope="col">Team</th>
+                    @if (Model.Transfers > 0)
+                    {
+                        <th class="text-center" scope="col">Remove</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model.Players.OrderBy(p => p.PlayerPosition))
+                {
+                    <tr class="clickable">
+                        <td class="text-center font-weight-bold">@player.PlayerName</td>
+                        <td class="text-center">@player.PlayerPosition.ToString()</td>
+                        <td class="text-center">@player.PlayerTeamName</td>
+                        @if (Model.Transfers > 0)
+                        {
+                            <td class="text-center custom-radio">
+                                <input class="custom-radio" asp-for="RemovedPlayerId" type="radio" value="@player.PlayerId" />
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-around pt-3">
+            <input class="btn btn-success" type="submit" value="Remove Player"/>
+        </div>
+    </form>
+</div>
