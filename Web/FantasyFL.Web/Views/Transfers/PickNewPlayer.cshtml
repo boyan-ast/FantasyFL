@@ -21,7 +21,7 @@
             <tbody>
                 @foreach (var player in Model.OrderBy(p => p.Team))
                 {
-                    <tr class="clickable">
+                    <tr>
                         <td class="text-center font-weight-bold">@player.Name</td>
                         <td class="text-center">@player.Position.ToString()</td>
                         <td class="text-center">@player.Team</td>

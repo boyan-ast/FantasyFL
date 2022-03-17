@@ -10,7 +10,8 @@
         <table class="table">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Username</th>
+                    <th scope="col">Fantasy Team</th>
+                    <th scope="col">user</th>
                     <th class="text-center" scope="col">Points</th>
                 </tr>
             </thead>
@@ -18,8 +19,9 @@
                 @foreach (var user in Model.ApplicationUsers.OrderByDescending(x => x.TotalPoints))
                 {
                     <tr>
+                        <td class="font-weight-bold" >@user.FantasyTeamName</td>
                         <td>@user.UserName</td>
-                        <td class="text-center">@user.TotalPoints</td>
+                        <td class="text-center font-weight-bold">@user.TotalPoints</td>
                     </tr>
                 }
             </tbody>

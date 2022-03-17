@@ -14,7 +14,7 @@
 
         public int TotalPoints { get; init; }
 
-        public IEnumerable<PlayerListingViewModel> FantasyTeamPlayers { get; init; }
+        public IEnumerable<UserPlayerViewModel> FantasyTeamPlayers { get; init; }
 
         public IEnumerable<UserLeagueListingViewModel> FantasyLeagues { get; init; }
 

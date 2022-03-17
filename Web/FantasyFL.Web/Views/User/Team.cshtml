@@ -5,30 +5,38 @@
 }
 
 <div class="row pt-4">
-    <div class="overflow-auto col-md-8">
+    <div class="overflow-auto col-md-9">
         <h4 class="pb-3">Players</h4>
-        <table class="table table-sm ">
-            <thead>
+        <table class="table table-sm">
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Club</th>
+                    <th class="text-center" scope="col">Position</th>
+                    <th class="text-center" scope="col">Club</th>
+                    <th class="text-center" scope="col">Is Playing</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var player in Model.Team.FantasyTeamPlayers.OrderBy(p => p.Position))
                 {
-                <tr>
-                    <td>@player.Name</td>
-                    <td>@player.Position.ToString()</td>
-                    <td>@player.Team</td>
-                </tr>
+                    <tr>
+                        <td>@player.Name</td>
+                        <td class="text-center">@player.Position.ToString()</td>
+                        <td class="text-center">@player.Team</td>
+                        <td class="text-center">
+                            <span class="badge badge-pill
+                                badge-@(player.IsPlaying ? "success" : "danger")">
+                                @(player.IsPlaying ? "Yes" : "No")
+                            </span>
+                        </td>
+
+                    </tr>
                 }
             </tbody>
         </table>
     </div>
 
-    <div class="overflow-auto col-md-4 pl-5 pt-3">
+    <div class="overflow-auto col-md-3 pl-5 pt-3">
         <h4>@Model.Team.Name</h4>
         <h5>Total Points: @Model.Team.TotalPoints</h5>
 
@@ -38,14 +46,14 @@
             <ul>
                 @foreach (var league in Model.Leagues)
                 {
-                <li>
-                    <a asp-area=""
+                    <li>
+                        <a asp-area=""
                        asp-controller="Leagues"
                        asp-action="Standings"
                        asp-route-id="@league.Id">
-                        @league.Name
-                    </a>
-                </li>
+                            @league.Name
+                        </a>
+                    </li>
                 }
             </ul>
         </div>

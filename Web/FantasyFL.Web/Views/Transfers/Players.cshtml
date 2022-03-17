@@ -31,7 +31,7 @@ else
             <tbody>
                 @foreach (var player in Model.Players.OrderBy(p => p.PlayerPosition))
                 {
-                    <tr class="clickable">
+                    <tr>
                         <td class="text-center font-weight-bold">@player.PlayerName</td>
                         <td class="text-center">@player.PlayerPosition.ToString()</td>
                         <td class="text-center">@player.PlayerTeamName</td>
