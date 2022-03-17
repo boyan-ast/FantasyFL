@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FantasyFL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220315120109_InitialMiration")]
-    partial class InitialMiration
+    [Migration("20220317134909_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

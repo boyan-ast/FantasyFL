@@ -48,7 +48,9 @@
             var goalsPoints = CalculateGoalsPoints(playerPosition, player.Goals);
             var savedPenaltiesPoints = CalculateSavedPenaltiesPoints(player.SavedPenalties);
 
-            var concededGoalsPoints = CalculateConcededGoalsPoints(playerPosition, player.ConcededGoals);
+            var concededGoalsPoints = player.MinutesPlayed > 15 ?
+                    CalculateConcededGoalsPoints(playerPosition, player.ConcededGoals) :
+                    0;
             var redCardPoints = player.RedCards > 0 ? RedCardPoints : 0;
             var yellowCardsPoints = redCardPoints > 0 ? 0 : YellowCardPoints;
             var missedPenaltyPoints = player.MissedPenalties * MissedPenaltyPoints;

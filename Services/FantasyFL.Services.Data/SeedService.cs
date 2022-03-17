@@ -41,19 +41,26 @@
             this.fixturesRepository = fixturesRepository;
         }
 
-        public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; } = new List<TeamStadiumDto>();
+        public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; } 
+            = new List<TeamStadiumDto>();
 
         public async Task ImportGameweeks()
         {
-            var gameweeks = await this.footballDataService.GetAllRoundsAsync(LeagueExternId, SeasonYear);
+            var gameweeks = await this.footballDataService
+                .GetAllRoundsAsync(LeagueExternId, SeasonYear);
 
             foreach (var gameweek in gameweeks)
             {
+                var number = int.Parse(gameweek.Split(" - ")[1]);
+
                 var newGameweek = new Gameweek
                 {
                     Name = gameweek,
-                    Number = int.Parse(gameweek.Split(" - ")[1]),
-                    EndDate = this.parseService.ParseDate(CustomData.GameweeksEndDates[gameweek], "dd.MM.yyyy"),
+                    Number = number,
+                    IsImported = number < 20,
+                    IsFinished = number < 20,
+                    EndDate = this.parseService
+                        .ParseDate(CustomData.GameweeksEndDates[gameweek], "dd.MM.yyyy"),
                 };
 
                 await this.gameweeksRepository.AddAsync(newGameweek);
