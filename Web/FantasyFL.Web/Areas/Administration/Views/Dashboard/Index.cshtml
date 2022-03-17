@@ -6,7 +6,7 @@
 }
 
 
-<h2 class="text-center mt-3 mb-4">All Gameweeks</h2>
+<h4 class="text-center mt-3 mb-4">Import Gameweeks Data</h4>
 
 <div class="row justify-content-center col-auto">
     <table class="table m-3">
@@ -21,7 +21,7 @@
             @foreach (var gameweek in Model)
             {
                 <tr>
-                    <td class="text-center" scope="col">@gameweek.Name</td>
+                    <td class="text-center p-3" scope="col">@gameweek.Name</td>
                     <td class="text-center" scope="col">
                         @if (!gameweek.IsImported && gameweek.EndDate < DateTime.UtcNow)
                         {
@@ -29,7 +29,7 @@
                             asp-controller="Dashboard"
                            asp-action="GetData"
                            asp-route-id="@gameweek.Id"
-                           class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Get Data</a>
+                           class="btn btn-outline-dark" role="button" aria-pressed="true">Get Data</a>
                         }
                     </td>
                     <td class="text-center" scope="col">
@@ -42,7 +42,7 @@
                             asp-controller="Dashboard"
                            asp-action="Finish"
                            asp-route-id="@gameweek.Id"
-                           class="btn btn-dark btn-lg active" role="button" aria-pressed="true">Finish</a>
+                           class="btn btn-outline-success" role="button" aria-pressed="true">Finish</a>
                         }
                     </td>
                 </tr>

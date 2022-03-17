@@ -10,7 +10,7 @@
     <div class="overflow-auto col-md-6 rel-view">
         <table id="playersTable" class="table table-hover">
             <tbody>
-                @foreach (var player in Model.Players.Where(p => p.Position == Position.Goalkeeper.ToString()))
+                @foreach (var player in Model.Players.Where(p => p.Position == Position.Goalkeeper))
                 {
                     <tr class="clickable">
                         <td class="text-center font-weight-bold playerName">@player.Name</td>

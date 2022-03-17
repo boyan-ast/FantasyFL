@@ -1,24 +1,40 @@
-﻿@using FantasyFL.Web.ViewModels.Teams
-@model List<TeamPlayerViewModel>
+﻿@using FantasyFL.Web.ViewModels.FirstLeague
+@model TeamPlayersViewModel
 
 @{
     ViewData["title"] = "Players";
 }
 
-<h3 class="text-center">@Model[0].Team</h3>
-
-<div class="row justify-content-center">
-    <div class="col-auto">
+<div class="row pt-4">
+    <div class="overflow-auto col-md-8 rel-view">
         <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th class="text-center" scope="col">Age</th>
+                    <th class="text-center" scope="col">Position</th>
+                </tr>
+            </thead>
             <tbody>
-                @foreach (var player in Model)
+                @foreach (var player in Model.Players
+                .OrderByDescending(p => p.Number.HasValue)
+                .ThenBy(p => p.Number))
                 {
                     <tr>
-                        <td class="text-center font-weight-bold">@player.Name</td>
+                        <td>@player.Number</td>
+                        <td class="font-weight-bold">@player.Name</td>
+                        <td class="text-center">@player.Age</td>
                         <td class="text-center">@player.Position</td>
                     </tr>
                 }
             </tbody>
         </table>
+    </div>
+    <div class="overflow-auto col-md-4 rel-view pl-2">
+        <div class="text-center">
+            <img class="img-fluid" src="~/images/logos/@Model.Logo" alt="logo">
+            <h5 class="text-center pt-3">@Model.Name</h5>
+        </div>
     </div>
 </div>

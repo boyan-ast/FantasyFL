@@ -7,6 +7,7 @@
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
+    using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels.FirstLeague;
     using Microsoft.EntityFrameworkCore;
 
@@ -23,16 +24,21 @@
         {
             var teams = await this.teamsRepository
                 .All()
-                .Select(t => new TeamListingViewModel
-                {
-                    Id = t.Id,
-                    Name = t.Name,
-                    Logo = t.Logo,
-                    Stadium = t.Stadium.Name,
-                })
+                .To<TeamListingViewModel>()
                 .ToListAsync();
 
             return teams;
+        }
+
+        public async Task<TeamPlayersViewModel> GetTeamPlayers(int teamId)
+        {
+            var team = await this.teamsRepository
+                .All()
+                .Where(t => t.Id == teamId)
+                .To<TeamPlayersViewModel>()
+                .FirstOrDefaultAsync();
+
+            return team;
         }
     }
 }

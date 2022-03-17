@@ -5,11 +5,28 @@
     ViewData["title"] = Model.Name;
 }
 
-<h3>@Model.Name</h3>
-<h4>@Model.Participants</h4>
-
-<ul>
-@foreach (var user in Model.ApplicationUsers){
-    <li>@user.UserName - @user.TotalPoints</li>
-}
-</ul>
+<div class="row pt-4">
+    <div class="overflow-auto col-md-8 rel-view">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Username</th>
+                    <th class="text-center" scope="col">Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.ApplicationUsers.OrderByDescending(x => x.TotalPoints))
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td class="text-center">@user.TotalPoints</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="overflow-auto col-md-4 pl-5 pt-3">
+        <p class="h4">Fantasy League: <span class="font-weight-bold">@Model.Name</span></p>
+        <p class="mt-3 font-italic">Participants: @Model.Participants</p>
+    </div>
+</div>

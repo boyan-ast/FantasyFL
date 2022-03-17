@@ -8,5 +8,7 @@
     public interface ITeamsService
     {
         Task<List<TeamListingViewModel>> GetAll();
+
+        Task<TeamPlayersViewModel> GetTeamPlayers(int teamId);
     }
 }

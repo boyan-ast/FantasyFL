@@ -4,16 +4,16 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models.Enums;
+    using FantasyFL.Web.ViewModels.FirstLeague;
     using FantasyFL.Web.ViewModels.PlayersManagement;
-    using FantasyFL.Web.ViewModels.Teams;
 
     public interface IPlayersService
     {
-        Task<List<TeamPlayerViewModel>> GetAllByTeam(int id);
+        Task<List<PlayerViewModel>> GetAllByTeam(int id);
 
-        Task<List<TeamPlayerViewModel>> GetAllByPosition(Position position);
+        Task<List<PlayerViewModel>> GetAllByPosition(Position position);
 
-        Task<List<TeamPlayerViewModel>> GetAllPlayers();
+        Task<List<PlayerViewModel>> GetAllPlayers();
 
         Task<string> GetPlayerTeamName(int playerId);
 

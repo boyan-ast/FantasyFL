@@ -4,17 +4,18 @@
 @{
     ViewData["title"] = "Teams";
 }
-<div class="row">
+<div class="row justify-content-center pt-3">
     @foreach (var team in Model)
     {
         <div class="col-md-3">
-            <div class="component">
+            <div class="component pt-2">
                 <div class="card">
                     <div class="card-header text-center">
                         <img class="card-img" src="~/images/logos/@team.Logo" alt="logo">
                     </div>
                     <div class="card-body text-center">
                         <h4 class="card-title mt-2">@team.Name</h4>
+                        <p class="card-text">@team.StadiumName</p>
                     </div>
                     <div class="card-footer text-center">
                         <a asp-area=""

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using FantasyFL.Web.ViewModels.Teams;
+    using FantasyFL.Web.ViewModels.FirstLeague;
 
     public class PickPlayersFormModel
     {
@@ -14,6 +14,6 @@
 
         public List<PlayerInputModel> Attackers { get; set; }
 
-        public List<TeamPlayerViewModel> Players { get; set; }
+        public List<PlayerViewModel> Players { get; set; }
     }
 }

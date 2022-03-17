@@ -25,9 +25,9 @@
 
         public async Task<IActionResult> Players(int id)
         {
-            var players = await this.playersService.GetAllByTeam(id);
+            var teamPlayers = await this.teamsService.GetTeamPlayers(id);
 
-            return this.View(players);
+            return this.View(teamPlayers);
         }
     }
 }
