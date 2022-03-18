@@ -14,20 +14,17 @@
     public class FantasyTeamsService : IFantasyTeamsService
     {
         private readonly IGameweeksService gameweekService;
-        private readonly IDeletableEntityRepository<Player> playersRepository;
         private readonly IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository;
         private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
         private readonly IRepository<PlayerGameweek> playersGameweeksRepository;
 
         public FantasyTeamsService(
             IGameweeksService gameweekService,
-            IDeletableEntityRepository<Player> playersRepository,
             IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository,
             IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository,
             IRepository<PlayerGameweek> playersGameweeksRepository)
         {
             this.gameweekService = gameweekService;
-            this.playersRepository = playersRepository;
             this.fantasyTeamsPlayersRepository = fantasyTeamsPlayersRepository;
             this.fantasyTeamsRepository = fantasyTeamsRepository;
             this.playersGameweeksRepository = playersGameweeksRepository;

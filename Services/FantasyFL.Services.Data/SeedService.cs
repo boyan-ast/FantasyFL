@@ -30,7 +30,6 @@
             IRepository<Gameweek> gameweeksRepository,
             IDeletableEntityRepository<Player> playersRepository,
             IDeletableEntityRepository<Team> teamsRepository,
-            IRepository<Stadium> stadiumsRepository,
             IRepository<Fixture> fixturesRepository)
         {
             this.footballDataService = footballDataService;
@@ -41,7 +40,7 @@
             this.fixturesRepository = fixturesRepository;
         }
 
-        public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; } 
+        public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; }
             = new List<TeamStadiumDto>();
 
         public async Task ImportGameweeks()
@@ -132,8 +131,8 @@
                 .All()
                 .Select(t => new
                 {
-                    Id = t.Id,
-                    ExternId = t.ExternId,
+                    t.Id,
+                    t.ExternId,
                 })
                 .ToList();
 

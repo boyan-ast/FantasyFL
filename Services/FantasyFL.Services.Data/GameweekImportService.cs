@@ -20,7 +20,6 @@
         private readonly IFootballDataService footballDataService;
         private readonly IParseService parseService;
         private readonly IDeletableEntityRepository<Player> playersRepository;
-        private readonly IDeletableEntityRepository<Team> teamsRepository;
         private readonly IRepository<PlayerGameweek> playersGameweeksRepository;
         private readonly IRepository<Gameweek> gameweeksRepository;
         private readonly IRepository<Fixture> fixturesRepository;
@@ -31,7 +30,6 @@
             IFootballDataService footballDataService,
             IParseService parseService,
             IDeletableEntityRepository<Player> playersRepository,
-            IDeletableEntityRepository<Team> teamsRepository,
             IRepository<PlayerGameweek> playersGameweeksRepository,
             IRepository<Gameweek> gameweeksRepository,
             IRepository<Fixture> fixturesRepository)
@@ -39,7 +37,6 @@
             this.footballDataService = footballDataService;
             this.parseService = parseService;
             this.playersRepository = playersRepository;
-            this.teamsRepository = teamsRepository;
             this.playersGameweeksRepository = playersGameweeksRepository;
             this.gameweeksRepository = gameweeksRepository;
             this.fixturesRepository = fixturesRepository;
@@ -328,7 +325,11 @@
             await this.fixturesRepository.SaveChangesAsync();
         }
 
-        private void UpdatePlayersTeamResult(int winnerExternId, int opponentExternId, List<PlayerGameweek> playersInGameweek, bool isDraw = false)
+        private void UpdatePlayersTeamResult(
+            int winnerExternId,
+            int opponentExternId,
+            List<PlayerGameweek> playersInGameweek,
+            bool isDraw = false)
         {
             if (!isDraw)
             {
@@ -375,7 +376,9 @@
             }
         }
 
-        private void UpdateConcededGoalsOfPlayers(int teamExternId, List<PlayerGameweek> playersInGameweek)
+        private void UpdateConcededGoalsOfPlayers(
+            int teamExternId,
+            List<PlayerGameweek> playersInGameweek)
         {
             var teamPlayers = playersInGameweek
                 .Where(pg => pg.Player.Team.ExternId == teamExternId)

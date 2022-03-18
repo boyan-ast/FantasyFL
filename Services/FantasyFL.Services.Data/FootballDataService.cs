@@ -23,18 +23,11 @@
     {
         private readonly IDictionary<string, ICollection<int>> roundsFixtures;
         private readonly IExternalDataService externalDataService;
-        private readonly IDeletableEntityRepository<Team> teamsRepository;
-        private readonly IDeletableEntityRepository<Player> playersRepository;
 
-        public FootballDataService(
-            IExternalDataService externalDataService,
-            IDeletableEntityRepository<Team> teamsRepository,
-            IDeletableEntityRepository<Player> playersRepository)
+        public FootballDataService(IExternalDataService externalDataService)
         {
             this.roundsFixtures = new Dictionary<string, ICollection<int>>();
             this.externalDataService = externalDataService;
-            this.teamsRepository = teamsRepository;
-            this.playersRepository = playersRepository;
         }
 
         public async Task<IEnumerable<TeamStadiumDto>> GetTeamsAndStadiumsJsonAsync(int leagueId, int season)

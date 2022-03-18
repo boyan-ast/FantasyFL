@@ -50,7 +50,9 @@
             }
         }
 
-        private static async Task<int> SandboxCode(SandboxOptions options, IServiceProvider serviceProvider)
+        private static async Task<int> SandboxCode(
+            SandboxOptions options,
+            IServiceProvider serviceProvider)
         {
             var input = "https://media.api-sports.io/football/teams/853.png";
             var result = input.Split("teams/")[1];

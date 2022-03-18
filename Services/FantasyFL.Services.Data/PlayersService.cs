@@ -16,14 +16,10 @@
     public class PlayersService : IPlayersService
     {
         private readonly IDeletableEntityRepository<Player> playersRepository;
-        private readonly IDeletableEntityRepository<Team> teamsRepository;
 
-        public PlayersService(
-            IDeletableEntityRepository<Player> playersRepository,
-            IDeletableEntityRepository<Team> teamsRepository)
+        public PlayersService(IDeletableEntityRepository<Player> playersRepository)
         {
             this.playersRepository = playersRepository;
-            this.teamsRepository = teamsRepository;
         }
 
         public async Task<List<PlayerViewModel>> GetAllByTeam(int id)

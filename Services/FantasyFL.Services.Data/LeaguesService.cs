@@ -13,14 +13,10 @@
     public class LeaguesService : ILeaguesService
     {
         private readonly IDeletableEntityRepository<FantasyLeague> fantasyLeaguesRepository;
-        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
 
-        public LeaguesService(
-            IDeletableEntityRepository<FantasyLeague> fantasyLeaguesRepository,
-            IDeletableEntityRepository<ApplicationUser> usersRepository)
+        public LeaguesService(IDeletableEntityRepository<FantasyLeague> fantasyLeaguesRepository)
         {
             this.fantasyLeaguesRepository = fantasyLeaguesRepository;
-            this.usersRepository = usersRepository;
         }
 
         // TODO: Make all firstordefault - async
