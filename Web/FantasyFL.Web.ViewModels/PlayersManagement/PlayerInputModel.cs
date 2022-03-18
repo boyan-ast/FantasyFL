@@ -6,7 +6,7 @@
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Select a player.")]
         public string Name { get; set; }
     }
 }

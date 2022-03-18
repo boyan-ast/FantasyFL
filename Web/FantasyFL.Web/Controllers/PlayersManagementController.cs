@@ -144,7 +144,7 @@
 
             var currentGameweek = this.gameweekService.GetCurrent();
 
-            return this.Redirect("/User/Team");
+            return this.Redirect("/Fantasy/PickTeam");
         }
     }
 }

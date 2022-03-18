@@ -6,6 +6,8 @@
     ViewData["Title"] = "Pick Attackers";
 }
 
+<h5 class="pb-3 text-success">@ViewData["Title"]</h5>
+
 <div class="row">
     <div class="overflow-auto col-md-6 rel-view">
         <table id="playersTable" class="table table-hover">
@@ -95,11 +97,4 @@
 @section Scripts {
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="~/js/pickPlayers.js"></script>
-
-<script>
-    function test(e){
-            document.querySelectorAll('.midfielders')
-        .forEach(e => console.log(e));  
-    }
-</script>
 }

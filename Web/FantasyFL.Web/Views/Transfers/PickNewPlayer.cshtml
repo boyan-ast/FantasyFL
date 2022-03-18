@@ -21,7 +21,7 @@
             <tbody>
                 @foreach (var player in Model.OrderBy(p => p.Team))
                 {
-                    <tr>
+                    <tr class="clickable">
                         <td class="text-center font-weight-bold">@player.Name</td>
                         <td class="text-center">@player.Position.ToString()</td>
                         <td class="text-center">@player.Team</td>
@@ -37,3 +37,7 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <script src="~/js/rowClicker.js"></script>
+}

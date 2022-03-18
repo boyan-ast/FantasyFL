@@ -31,13 +31,13 @@ else
             <tbody>
                 @foreach (var player in Model.Players.OrderBy(p => p.PlayerPosition))
                 {
-                    <tr>
+                    <tr class="clickable" onclick="checkRadioButton">
                         <td class="text-center font-weight-bold">@player.PlayerName</td>
                         <td class="text-center">@player.PlayerPosition.ToString()</td>
                         <td class="text-center">@player.PlayerTeamName</td>
                         @if (Model.Transfers > 0)
                         {
-                            <td class="text-center custom-radio">
+                            <td class="text-center">
                                 <input class="custom-radio" asp-for="RemovedPlayerId" type="radio" value="@player.PlayerId" />
                             </td>
                         }
@@ -45,8 +45,16 @@ else
                 }
             </tbody>
         </table>
-        <div class="d-flex justify-content-around pt-3">
-            <input class="btn btn-success" type="submit" value="Remove Player"/>
-        </div>
+        @if (Model.Transfers > 0)
+        {
+            <div class="d-flex justify-content-around pt-3">
+                <input class="btn btn-success" type="submit" value="Remove Player" />
+            </div>
+        }
     </form>
 </div>
+
+
+@section Scripts {
+<script src="~/js/rowClicker.js"></script>
+}

@@ -17,7 +17,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> Players()
+        public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
