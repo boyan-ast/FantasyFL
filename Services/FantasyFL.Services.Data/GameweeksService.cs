@@ -154,7 +154,11 @@
                 .OrderByDescending(gw => gw.Number)
                 .FirstOrDefault(gw => gw.IsFinished);
 
-            // TODO: If null season not started
+            if (gameweek == null)
+            {
+                throw new InvalidOperationException("Season not started yet.");
+            }
+
             return gameweek;
         }
 
@@ -165,7 +169,11 @@
                 .OrderBy(gw => gw.Number)
                 .FirstOrDefault(gw => !gw.IsFinished);
 
-            // TODO: If null season over
+            if (gameweek == null)
+            {
+                throw new InvalidOperationException("The season is over.");
+            }
+
             return gameweek;
         }
 

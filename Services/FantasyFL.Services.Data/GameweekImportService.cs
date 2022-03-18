@@ -242,8 +242,6 @@
                         {
                             player.MinutesPlayed = eventTime > 90 ? 90 : eventTime;
                         }
-
-                        // If the player was a substitute player which was substituted again
                         else
                         {
                             int minutesPlayed = eventTime - (90 - player.MinutesPlayed);
@@ -266,8 +264,6 @@
                             substitutePlayerGameweek.IsPlaying = true;
                         }
                     }
-
-                    // TODO: Implement Goal cancelled and Penalty confirmed
                     else if (type == EventType.Var)
                     {
                         continue;
