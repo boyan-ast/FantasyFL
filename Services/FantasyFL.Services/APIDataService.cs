@@ -4,11 +4,21 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Contracts;
+    using Microsoft.Extensions.Configuration;
 
     using static FantasyFL.Common.GlobalConstants;
 
     public class APIDataService : IExternalDataService
     {
+        private readonly IConfiguration config;
+        private readonly string apiKey;
+
+        public APIDataService(IConfiguration config)
+        {
+            this.config = config;
+            this.apiKey = this.config["APIFootball:Key"];
+        }
+
         public async Task<string> GetSquadAsync(int teamId)
         {
             var url = $"https://v3.football.api-sports.io/players/squads?team={teamId}";
@@ -70,7 +80,7 @@
 
             var httpClient = new HttpClient();
 
-            httpClient.DefaultRequestHeaders.Add("x-apisports-key", Key);
+            httpClient.DefaultRequestHeaders.Add("x-apisports-key", this.apiKey);
 
             using (httpClient)
             {
