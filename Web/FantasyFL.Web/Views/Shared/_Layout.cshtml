@@ -15,47 +15,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown-1" aria-controls="navbarNavDropdown-1"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse text-center" id="navbarNavDropdown-1">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav ml-auto">
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="User" asp-action="Team">My Team</a>
-                            </li>
-                            <li class="nav-item dropdown pr-5">
-                                <a class="nav-link dropdown-toggle" href="#a" id="fantasyDropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                    Fantasy
-                                </a>
-                                <div class="dropdown-menu" aria-slabelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" asp-area="" asp-controller="Fantasy" asp-action="PickTeam">Pick Players</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Fantasy" asp-action="GameweekResult">Gameweek Points</a>
-                                    <a class="dropdown-item" asp-area="" asp-controller="Transfers" asp-action="Index">Transfers</a>
-                                </div>
-                            </li>
-                        }
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#a" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                First League
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" asp-area="" asp-controller="FirstLeague" asp-action="Results">Results</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="FirstLeague" asp-action="Fixtures">Fixtures</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Teams" asp-action="All">Teams</a>
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
+             <partial name="_NavPartial" />
         </nav>
     </header>
 
