@@ -50,3 +50,10 @@
     background-repeat: no-repeat;
     border-radius: 30px;
 }
+
+.player-img {
+    background-image: url("/images/player-img.jpg");
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

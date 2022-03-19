@@ -7,7 +7,7 @@
 <div class="row pt-4">
     <div class="overflow-auto col-md-9">
         <h4 class="pb-3">Players</h4>
-        <table class="table table-sm">
+        <table id="playersTable" class="table table-sm table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Name</th>
@@ -19,7 +19,7 @@
             <tbody>
                 @foreach (var player in Model.Team.FantasyTeamPlayers.OrderBy(p => p.Position))
                 {
-                    <tr>
+                    <tr class="clickable" onclick="location.href = '/User/PlayerStats/@player.PlayerId'">
                         <td>@player.Name</td>
                         <td class="text-center">@player.Position.ToString()</td>
                         <td class="text-center">@player.Team</td>
@@ -29,7 +29,6 @@
                                 @(player.IsPlaying ? "Yes" : "No")
                             </span>
                         </td>
-
                     </tr>
                 }
             </tbody>
@@ -60,3 +59,10 @@
         @*<img class="text-center" src="/images/a-group-logo.jpg" />*@
     </div>
 </div>
+
+<textarea id="error-message" hidden>@ViewData["message"]</textarea>
+
+@section Scripts {
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/js/alerts.js"></script>
+}

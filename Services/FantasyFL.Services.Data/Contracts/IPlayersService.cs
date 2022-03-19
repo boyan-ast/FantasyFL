@@ -5,6 +5,7 @@
 
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Web.ViewModels.FirstLeague;
+    using FantasyFL.Web.ViewModels.Players;
     using FantasyFL.Web.ViewModels.PlayersManagement;
 
     public interface IPlayersService
@@ -17,8 +18,9 @@
 
         Task<string> GetPlayerTeamName(int playerId);
 
-        // TODO: Find why when remove player first gets id = 0
         Task<int> GetPlayerIdByName(string playerName);
+
+        Task<PlayerGameweekViewModel> GetPlayerGameweekPerformance(int playerId);
 
         Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model);
     }

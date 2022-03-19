@@ -11,13 +11,16 @@
     public class UserController : Controller
     {
         private readonly IUsersService usersService;
+        private readonly IPlayersService playersService;
         private readonly IFantasyTeamsService fantasyTeamsService;
 
         public UserController(
             IUsersService usersService,
+            IPlayersService playersService,
             IFantasyTeamsService fantasyTeamsService)
         {
             this.usersService = usersService;
+            this.playersService = playersService;
             this.fantasyTeamsService = fantasyTeamsService;
         }
 
@@ -40,7 +43,28 @@
                 Leagues = leagues,
             };
 
+            if (this.TempData.ContainsKey("message"))
+            {
+                this.ViewData["message"] = this.TempData["message"].ToString();
+                this.TempData.Clear();
+            }
+
             return this.View(model);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> PlayerStats(int id)
+        {
+            var player = await this.playersService.GetPlayerGameweekPerformance(id);
+
+            if (player == null)
+            {
+                this.TempData["message"] = "Player haven't played this gameweek.";
+
+                return this.RedirectToAction(nameof(this.Team));
+            }
+
+            return this.View(player);
         }
     }
 }

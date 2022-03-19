@@ -10,16 +10,24 @@
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels.FirstLeague;
+    using FantasyFL.Web.ViewModels.Players;
     using FantasyFL.Web.ViewModels.PlayersManagement;
     using Microsoft.EntityFrameworkCore;
 
     public class PlayersService : IPlayersService
     {
         private readonly IDeletableEntityRepository<Player> playersRepository;
+        private readonly IRepository<PlayerGameweek> playersGameweeksRepository;
+        private readonly IGameweeksService gameweeksService;
 
-        public PlayersService(IDeletableEntityRepository<Player> playersRepository)
+        public PlayersService(
+            IDeletableEntityRepository<Player> playersRepository,
+            IRepository<PlayerGameweek> playersGameweeksRepository,
+            IGameweeksService gameweeksService)
         {
             this.playersRepository = playersRepository;
+            this.playersGameweeksRepository = playersGameweeksRepository;
+            this.gameweeksService = gameweeksService;
         }
 
         public async Task<List<PlayerViewModel>> GetAllByTeam(int id)
@@ -76,6 +84,19 @@
                 .FirstOrDefaultAsync(p => p.Name == playerName);
 
             return player.Id;
+        }
+
+        public async Task<PlayerGameweekViewModel> GetPlayerGameweekPerformance(int playerId)
+        {
+            var gameweek = this.gameweeksService.GetCurrent();
+
+            var playerStats = await this.playersGameweeksRepository
+                .All()
+                .Where(p => p.PlayerId == playerId && p.GameweekId == gameweek.Id)
+                .To<PlayerGameweekViewModel>()
+                .FirstOrDefaultAsync();
+
+            return playerStats;
         }
 
         public async Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model)

@@ -1,0 +1,46 @@
+﻿@model FantasyFL.Web.ViewModels.Players.PlayerGameweekViewModel
+
+@{
+    ViewData["title"] = Model.Name;
+}
+<div class="row">
+    <div class="form-group overflow-auto col-md-7 rel-view">
+<h3 class="text-center">@ViewData["title"]</h3>
+<p class="h5 text-center pb-3">Gameweek Statistics</p>
+<table class="table table-striped table-hover">
+    <tr>
+        <td>Team</td>
+        <td class="text-center h6">@Model.Team</td>
+    </tr>
+    <tr>
+        <td>Team Result</td>
+        <td class="text-center h6">@Model.TeamResult.ToString()</td>
+    </tr>
+    <tr>
+        <td>Minutes Played</td>
+        <td class="text-center h6">@Model.MinutesPlayed</td>
+    </tr>
+    <tr>
+        <td>Goals</td>
+        <td class="text-center h6">@Model.Goals</td>
+    </tr>
+    <tr>
+        <td>Yellow Cards</td>
+        <td class="text-center h6">@Model.YellowCards</td>
+    <tr>
+        <td>Red Card</td>
+        <td class="text-center h6">@(Model.RedCards != 0 ? "Yes" : "No")</td>
+    </tr>
+    <tr>
+        <td>Conceded Goals</td>
+        <td class="text-center h6">@Model.ConcededGoals</td>
+    </tr>
+    <tr>
+        <td class="font-weight-bolder">Gameweek Points</td>
+        <td class="font-weight-bolder text-center h6">@Model.TotalPoints</td>
+    </tr>
+</table>
+</div>
+    <div class="overflow-auto col-md-5 rel-view player-img container-fluid">
+       </div>
+</div>
