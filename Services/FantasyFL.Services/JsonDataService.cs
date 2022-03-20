@@ -70,7 +70,6 @@
 
             var filePath = runDir + @$"\APIFootballData\{fileName}";
 
-
             if (!File.Exists(filePath))
             {
                 throw new FileNotFoundException();
