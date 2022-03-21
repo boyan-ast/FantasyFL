@@ -8,22 +8,26 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
+    using FantasyFL.Web.ViewModels.Leagues;
     using FantasyFL.Web.ViewModels.Users;
     using Microsoft.EntityFrameworkCore;
 
     public class UsersService : IUsersService
     {
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
         private readonly IDeletableEntityRepository<FantasyLeague> fantasyLeaguesRepository;
         private readonly IRepository<ApplicationUserGameweek> usersGameweeksRepository;
         private readonly IRepository<Gameweek> gameweeksRepository;
 
         public UsersService(
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
             IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository,
             IDeletableEntityRepository<FantasyLeague> fantasyLeaguesRepository,
             IRepository<ApplicationUserGameweek> usersGameweeksRepository,
             IRepository<Gameweek> gameweeksRepository)
         {
+            this.usersRepository = usersRepository;
             this.fantasyTeamsRepository = fantasyTeamsRepository;
             this.fantasyLeaguesRepository = fantasyLeaguesRepository;
             this.usersGameweeksRepository = usersGameweeksRepository;
@@ -62,14 +66,23 @@
             await this.usersGameweeksRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<UserLeagueListingViewModel> GetUserLeagues(string userId)
+        public IEnumerable<LeagueListingViewModel> GetUserLeagues(string userId)
         {
             var leagues = this.fantasyLeaguesRepository
                 .AllAsNoTracking()
                 .Where(l => l.ApplicationUsers.Any(u => u.Id == userId))
-                .To<UserLeagueListingViewModel>();
+                .To<LeagueListingViewModel>();
 
             return leagues;
+        }
+
+        public async Task<ApplicationUser> GetUserById(string userId)
+        {
+            var user = await this.usersRepository
+                .All()
+                .FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user;
         }
     }
 }

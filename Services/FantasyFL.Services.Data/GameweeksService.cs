@@ -150,7 +150,7 @@
         public Gameweek GetCurrent()
         {
             var gameweek = this.gameweekRepository
-                .AllAsNoTracking()
+                .All()
                 .OrderByDescending(gw => gw.Number)
                 .FirstOrDefault(gw => gw.IsFinished);
 
@@ -165,7 +165,7 @@
         public Gameweek GetNext()
         {
             var gameweek = this.gameweekRepository
-                .AllAsNoTracking()
+                .All()
                 .OrderBy(gw => gw.Number)
                 .FirstOrDefault(gw => !gw.IsFinished);
 

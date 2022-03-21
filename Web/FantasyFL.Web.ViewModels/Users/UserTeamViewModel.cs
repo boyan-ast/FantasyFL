@@ -6,7 +6,7 @@
 
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Mapping;
-    using FantasyFL.Web.ViewModels.Players;
+    using FantasyFL.Web.ViewModels.Leagues;
 
     public class UserTeamViewModel : IMapFrom<FantasyTeam>, IHaveCustomMappings
     {
@@ -16,7 +16,7 @@
 
         public IEnumerable<UserPlayerViewModel> FantasyTeamPlayers { get; init; }
 
-        public IEnumerable<UserLeagueListingViewModel> FantasyLeagues { get; init; }
+        public IEnumerable<LeagueListingViewModel> FantasyLeagues { get; init; }
 
         public void CreateMappings(IProfileExpression configuration)
         {

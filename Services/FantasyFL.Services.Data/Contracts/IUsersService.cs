@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using FantasyFL.Data.Models;
+    using FantasyFL.Web.ViewModels.Leagues;
     using FantasyFL.Web.ViewModels.Users;
 
     public interface IUsersService
@@ -11,6 +13,8 @@
 
         Task AddUserGameweeks(string userId, int startGameweekNumber);
 
-        IEnumerable<UserLeagueListingViewModel> GetUserLeagues(string userId);
+        IEnumerable<LeagueListingViewModel> GetUserLeagues(string userId);
+
+        Task<ApplicationUser> GetUserById(string userId);
     }
 }

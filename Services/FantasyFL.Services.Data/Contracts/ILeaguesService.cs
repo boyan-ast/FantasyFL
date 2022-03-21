@@ -1,5 +1,6 @@
 ﻿namespace FantasyFL.Services.Data.Contracts
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
@@ -10,5 +11,11 @@
         Task<FantasyLeague> GetLeagueByName(string leagueName);
 
         Task<StandingsViewModel> GetLeagueStandings(int leagueId);
+
+        Task<List<LeagueListingViewModel>> GetAllLeagues();
+
+        Task CreateLeague(string name, string userId);
+
+        Task JoinLeague(int leagueId, string userId);
     }
 }

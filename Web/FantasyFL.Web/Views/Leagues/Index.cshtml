@@ -1,0 +1,48 @@
+﻿@using FantasyFL.Web.ViewModels.Leagues
+@model LeaguesViewModel
+
+@{
+    ViewData["title"] = "Leagues";
+}
+
+<div class="row pt-4">
+    <div class="col-md-8 rel-view">
+        <table class="table table-striped">
+            <tbody>
+                @foreach (var league in Model.Leagues)
+                {
+                    <tr>
+                        <td class="font-weight-bold h5">@league.Name</td>
+                        <td class="font-weight-bold">
+                            <a asp-area=""
+                           asp-controller="Leagues"
+                           asp-action="Standings"
+                           asp-route-id="@league.Id"
+                           class="btn btn-info">
+                                Standings
+                            </a>
+                        </td>
+                        <td class="font-weight-bold text-right">
+                            @if (!league.ParticipantsIds.Contains(Model.UserId))
+                            {
+
+                                <a asp-area=""
+                               asp-controller="Leagues"
+                               asp-action="Join"
+                               asp-route-id="@league.Id"
+                               class="btn btn-success">
+                                    Join
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="overflow-auto col-md-4 rel-view pl-2">
+        <div class="text-center">
+            <a asp-action="Create" class="btn btn-success btn-lg">Create League</a>
+        </div>
+    </div>
+</div>

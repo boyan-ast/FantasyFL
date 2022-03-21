@@ -282,7 +282,6 @@
 
             var mock = list.AsQueryable().BuildMock();
 
-            // Arrange
             var fixture = new AutoFixture.Fixture()
                 .Customize(new AutoMoqCustomization());
             var mockRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
@@ -292,7 +291,6 @@
                 .Returns(mock.Object);
             var service = fixture.Create<GameweeksService>();
 
-            // Assert
             await Assert.ThrowsAsync<InvalidOperationException>(() => service.FinishGameweek(1));
         }
     }
