@@ -10,16 +10,26 @@
     public class TransfersController : Controller
     {
         private readonly ITransfersService transfersService;
+        private readonly IFantasyTeamsService fantasyTeamService;
 
-        public TransfersController(ITransfersService transfersService)
+        public TransfersController(
+            ITransfersService transfersService,
+            IFantasyTeamsService fantasyTeamService)
         {
             this.transfersService = transfersService;
+            this.fantasyTeamService = fantasyTeamService;
         }
 
         [Authorize]
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (await this.fantasyTeamService.UserTeamIsEmpty(userId))
+            {
+                return this.Redirect("/PlayersManagement/PickGoalkeepers");
+            }
+
 
             var model = await this.transfersService.GetTransfersList(userId);
 

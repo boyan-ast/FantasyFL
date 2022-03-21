@@ -68,7 +68,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IParseService, ParseService>();
-            services.AddTransient<IExternalDataService, APIDataService>();
+            services.AddTransient<IExternalDataService, JsonDataService>();
             services.AddTransient<IFootballDataService, FootballDataService>();
             services.AddTransient<IGameweekImportService, GameweekImportService>();
             services.AddTransient<IPlayersPointsService, PlayersPointsService>();

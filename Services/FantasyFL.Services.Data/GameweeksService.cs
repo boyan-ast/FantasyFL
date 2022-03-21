@@ -165,7 +165,7 @@
         public Gameweek GetNext()
         {
             var gameweek = this.gameweekRepository
-                .All()
+                .AllAsNoTracking()
                 .OrderBy(gw => gw.Number)
                 .FirstOrDefault(gw => !gw.IsFinished);
 
