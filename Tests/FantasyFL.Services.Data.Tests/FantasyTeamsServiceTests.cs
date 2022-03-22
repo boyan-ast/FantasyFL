@@ -17,6 +17,70 @@
 
     public class FantasyTeamsServiceTests
     {
+        [Fact]
+        public async Task UserTeamIsEmptyShouldReturnTrueIfTeamExists()
+        {
+            var teamOne = new FantasyTeam
+            {
+                Id = "team1",
+                OwnerId = "user1",
+                Name = "Team 1",
+                FantasyTeamPlayers = new List<FantasyTeamPlayer>
+                {
+                    new FantasyTeamPlayer
+                    {
+                    },
+                },
+            };
+
+            var list = new List<FantasyTeam>();
+            list.Add(teamOne);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+            var mockRepo = fixture
+                .Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
+
+            mockRepo
+                .Setup(x => x.All())
+                .Returns(list.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            var result = await service.UserTeamIsEmpty("user1");
+
+            Assert.False(result);
+        }
+
+
+        [Fact]
+        public async Task UserTeamIsEmptyShouldReturnFalseIfTeamIsEmpty()
+        {
+            var teamOne = new FantasyTeam
+            {
+                Id = "team1",
+                OwnerId = "user1",
+                Name = "Team 1",
+            };
+
+            var list = new List<FantasyTeam>();
+            list.Add(teamOne);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+            var mockRepo = fixture
+                .Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
+
+            mockRepo
+                .Setup(x => x.All())
+                .Returns(list.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            var result = await service.UserTeamIsEmpty("user2");
+
+            Assert.True(result);
+        }
 
         [Fact]
         public async Task GetUserTeamShouldReturnCorrectTeam()
@@ -64,8 +128,7 @@
             bool firstPlayerIsPlaying,
             string secondPlayerFantasyTeamId,
             int secondPlayerId,
-            bool secondPlayerIsPlaying
-            )
+            bool secondPlayerIsPlaying)
         {
             var fantasyTeamPlayerOne = new FantasyTeamPlayer
             {
@@ -201,6 +264,270 @@
             Assert.Equal("Defender", result.Players.First().Position);
             Assert.Equal(-1, result.Players.First().GameweekPoints);
             Assert.True(result.Players.First().IsPlaying);
+        }
+
+        [Fact]
+        public async Task GetUserPlayersByPostionShouldReturnCorrectPlayers()
+        {
+            var fantasyTeamPlayerOne = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 1,
+                IsPlaying = true,
+                Player = new Player
+                {
+                    Id = 1,
+                    ExternId = 1,
+                    Name = "Player1",
+                    Age = 30,
+                    Position = Position.Defender,
+                    TeamId = 1,
+                },
+            };
+
+            var fantasyTeamPlayerTwo = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 2,
+                IsPlaying = true,
+                Player = new Player
+                {
+                    Id = 2,
+                    ExternId = 2,
+                    Name = "Player2",
+                    Age = 30,
+                    Position = Position.Defender,
+                    TeamId = 1,
+                },
+            };
+
+            var fantasyTeamPlayers = new List<FantasyTeamPlayer>();
+            fantasyTeamPlayers.Add(fantasyTeamPlayerOne);
+            fantasyTeamPlayers.Add(fantasyTeamPlayerTwo);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockFantasyTeamPlayersRepo = fixture
+                 .Freeze<Mock<IDeletableEntityRepository<FantasyTeamPlayer>>>();
+
+            mockFantasyTeamPlayersRepo
+                .Setup(x => x.All())
+                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);
+
+            var fantasyTeamsList = new List<FantasyTeam>()
+            {
+                new FantasyTeam
+                {
+                    Id = "team1",
+                    OwnerId = "user1",
+                    Name = "Team 1",
+                },
+            };
+
+            var mockFantasyTeamRepo = fixture
+                .Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
+
+            mockFantasyTeamRepo
+                .Setup(x => x.All())
+                .Returns(fantasyTeamsList.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            var result = await service.GetUserPlayersByPosition("user1", Position.Defender);
+
+            Assert.Equal(2, result.Count);
+            Assert.Equal("Player1", result[0].Name);
+            Assert.Equal("Player2", result[1].Name);
+        }
+
+        [Fact]
+        public async Task GetUserTeamSelectModelShouldReturnCorrectPlayers()
+        {
+            var fantasyTeamPlayerOne = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 1,
+                IsPlaying = true,
+                Player = new Player
+                {
+                    Id = 1,
+                    ExternId = 1,
+                    Name = "Player1",
+                    Age = 30,
+                    Position = Position.Goalkeeper,
+                    TeamId = 1,
+                },
+            };
+
+            var fantasyTeamPlayerTwo = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 2,
+                IsPlaying = true,
+                Player = new Player
+                {
+                    Id = 2,
+                    ExternId = 2,
+                    Name = "Player2",
+                    Age = 30,
+                    Position = Position.Defender,
+                    TeamId = 1,
+                },
+            };
+
+            var fantasyTeamPlayerThree = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 3,
+                IsPlaying = true,
+                Player = new Player
+                {
+                    Id = 3,
+                    ExternId = 3,
+                    Name = "Player3",
+                    Age = 30,
+                    Position = Position.Defender,
+                    TeamId = 1,
+                },
+            };
+
+            var fantasyTeamPlayerFour = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 4,
+                IsPlaying = true,
+                Player = new Player
+                {
+                    Id = 4,
+                    ExternId = 4,
+                    Name = "Player4",
+                    Age = 30,
+                    Position = Position.Attacker,
+                    TeamId = 1,
+                },
+            };
+
+            var fantasyTeamPlayers = new List<FantasyTeamPlayer>();
+            fantasyTeamPlayers.Add(fantasyTeamPlayerOne);
+            fantasyTeamPlayers.Add(fantasyTeamPlayerTwo);
+            fantasyTeamPlayers.Add(fantasyTeamPlayerThree);
+            fantasyTeamPlayers.Add(fantasyTeamPlayerFour);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockFantasyTeamPlayersRepo = fixture
+                 .Freeze<Mock<IDeletableEntityRepository<FantasyTeamPlayer>>>();
+
+            mockFantasyTeamPlayersRepo
+                .Setup(x => x.All())
+                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);
+
+            var fantasyTeamsList = new List<FantasyTeam>()
+            {
+                new FantasyTeam
+                {
+                    Id = "team1",
+                    OwnerId = "user1",
+                    Name = "Team 1",
+                },
+            };
+
+            var mockFantasyTeamRepo = fixture
+                .Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
+
+            mockFantasyTeamRepo
+                .Setup(x => x.All())
+                .Returns(fantasyTeamsList.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            var result = await service.GetUserTeamSelectModel("user1");
+
+            Assert.Single(result.Goalkeepers);
+            Assert.Equal(2, result.Defenders.Count);
+            Assert.Empty(result.Midfielders);
+            Assert.Single(result.Attackers);
+        }
+
+
+        [Fact]
+        public async Task ClearUserPlayersShouldSetIsPlayingToFalse()
+        {
+            var fantasyTeamPlayerOne = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 1,
+                IsPlaying = true,
+            };
+
+            var fantasyTeamPlayerTwo = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 2,
+                IsPlaying = true,
+            };
+
+            var fantasyTeamPlayers = new List<FantasyTeamPlayer>();
+            fantasyTeamPlayers.Add(fantasyTeamPlayerOne);
+            fantasyTeamPlayers.Add(fantasyTeamPlayerTwo);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockFantasyTeamPlayersRepo = fixture
+                 .Freeze<Mock<IDeletableEntityRepository<FantasyTeamPlayer>>>();
+
+            mockFantasyTeamPlayersRepo
+                .Setup(x => x.All())
+                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);            
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            await service.ClearUserPlayers("team1");
+
+            Assert.False(fantasyTeamPlayerOne.IsPlaying);
+            Assert.False(fantasyTeamPlayerTwo.IsPlaying);
+        }
+
+        [Fact]
+        public async Task UpdatePlayingPlayersShouldSetIsPlayingToTrue()
+        {
+            var fantasyTeamPlayerOne = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 1,
+                IsPlaying = false,
+            };
+
+            var fantasyTeamPlayerTwo = new FantasyTeamPlayer
+            {
+                FantasyTeamId = "team1",
+                PlayerId = 2,
+                IsPlaying = false,
+            };
+
+            var fantasyTeamPlayers = new List<FantasyTeamPlayer>();
+            fantasyTeamPlayers.Add(fantasyTeamPlayerOne);
+            fantasyTeamPlayers.Add(fantasyTeamPlayerTwo);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockFantasyTeamPlayersRepo = fixture
+                 .Freeze<Mock<IDeletableEntityRepository<FantasyTeamPlayer>>>();
+
+            mockFantasyTeamPlayersRepo
+                .Setup(x => x.All())
+                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            await service.UpdatePlayingPlayers("team1", new HashSet<int> { 1, 2 });
+
+            Assert.True(fantasyTeamPlayerOne.IsPlaying);
+            Assert.True(fantasyTeamPlayerTwo.IsPlaying);
         }
     }
 }
