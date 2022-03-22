@@ -52,7 +52,6 @@
             Assert.False(result);
         }
 
-
         [Fact]
         public async Task UserTeamIsEmptyShouldReturnFalseIfTeamIsEmpty()
         {
@@ -451,7 +450,6 @@
             Assert.Single(result.Attackers);
         }
 
-
         [Fact]
         public async Task ClearUserPlayersShouldSetIsPlayingToFalse()
         {
@@ -481,7 +479,7 @@
 
             mockFantasyTeamPlayersRepo
                 .Setup(x => x.All())
-                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);            
+                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);
 
             var service = fixture.Create<FantasyTeamsService>();
 

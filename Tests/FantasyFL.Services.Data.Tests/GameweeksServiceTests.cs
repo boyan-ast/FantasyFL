@@ -80,7 +80,7 @@
             var mockRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
 
             mockRepo
-                .Setup(x => x.AllAsNoTracking())
+                .Setup(x => x.All())
                 .Returns(new List<Gameweek>() { gameweek }.AsQueryable());
             var service = fixture.Create<GameweeksService>();
 
@@ -133,7 +133,7 @@
             var mockRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
 
             mockRepo
-                .Setup(x => x.AllAsNoTracking())
+                .Setup(x => x.All())
                 .Returns(new List<Gameweek>() { gameweek }.AsQueryable());
             var service = fixture.Create<GameweeksService>();
 
