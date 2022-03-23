@@ -5,18 +5,21 @@
     ViewData["title"] = "Create League";
 }
 
-<h1>@ViewData["title"]</h1>
-
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <form method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <input type="submit" class="btn btn-success" />
-        </form>
+<div class="pt-4 leagues ">
+    <h3 class="text-center">@ViewData["title"]</h3>
+    <div class="row justify-content-center rel-view">
+        <div class="col-md-6 text-center">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger font-weight-bold h5"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="h5 font-weight-bold"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger font-weight-bold h5"></span>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-dark" value="Create" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
