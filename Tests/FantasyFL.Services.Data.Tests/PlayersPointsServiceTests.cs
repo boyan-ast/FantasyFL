@@ -1,0 +1,81 @@
+﻿using FantasyFL.Data.Common.Repositories;
+using FantasyFL.Data.Models;
+using FantasyFL.Data.Models.Enums;
+using MockQueryable.Moq;
+using Moq;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
+
+namespace FantasyFL.Services.Data.Tests
+{
+    public class PlayersPointsServiceTests
+    {
+        [Fact]
+        public async Task GetLeagueByNameShouldWorkProperly()
+        {
+            var playerGameweek = new PlayerGameweek
+            {
+                PlayerId = 1,
+                GameweekId = 1,
+                InStartingLineup = true,
+                IsSubstitute = false,
+                MinutesPlayed = 90,
+                Goals = 0,
+                CleanSheet = true,
+                YellowCards = 0,
+                RedCards = 0,
+                SavedPenalties = 0,
+                ConcededGoals = 2,
+                MissedPenalties = 0,
+                OwnGoals = 0,
+                Player = new Player
+                {
+                    Position = Position.Defender,
+                },
+                //BonusPoints = 1,
+                //TotalPoints = -1,
+            };
+
+            //var playerGameweekTwo = new PlayerGameweek
+            //{
+            //    PlayerId = 2,
+            //    GameweekId = 1,
+            //    InStartingLineup = true,
+            //    IsSubstitute = false,
+            //    MinutesPlayed = 90,
+            //    Goals = 0,
+            //    CleanSheet = true,
+            //    YellowCards = 0,
+            //    RedCards = 0,
+            //    SavedPenalties = 0,
+            //    ConcededGoals = 1,
+            //    MissedPenalties = 0,
+            //    OwnGoals = 0,
+            //    Player = new Player
+            //    {
+            //        Position = Position.Midfielder,
+            //    },
+            //    //BonusPoints = 1,
+            //    //TotalPoints = 3,
+            //};
+
+            var list = new List<PlayerGameweek>();
+            list.Add(playerGameweek);
+
+            var mockRepo = new Mock<IRepository<PlayerGameweek>>();
+
+            mockRepo
+                .Setup(x => x.All())
+                .Returns(list.AsQueryable().BuildMock().Object);
+
+            var service = new PlayersPointsService(mockRepo.Object);
+
+            await service.CalculatePoints(1);
+
+            Assert.Equal(3, playerGameweek.TotalPoints);
+            Assert.Equal(1, playerGameweek.BonusPoints);
+        }
+    }
+}

@@ -293,5 +293,134 @@
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => service.FinishGameweek(1));
         }
+
+        [Fact]
+        public async Task FinishGameweekShouldWorkCorrectly()
+        {
+            var gameweek = new Gameweek
+            {
+                Id = 2,
+                Name = "Gameweek 2",
+                Number = 2,
+                IsImported = true,
+                IsFinished = false,
+                EndDate = new DateTime(2022, 02, 22),
+            };
+
+            var list = new List<Gameweek>();
+            list.Add(gameweek);
+
+            var mock = list.AsQueryable().BuildMock();
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+            var mockRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
+
+            mockRepo
+                .Setup(x => x.All())
+                .Returns(mock.Object);
+
+            var mockUsersRepo = fixture
+                .Freeze<Mock<IDeletableEntityRepository<ApplicationUser>>>();
+
+            var users = new List<ApplicationUser>()
+            {
+                new ApplicationUser
+                {
+                    Id = "user1",
+                    StartGameweek = new Gameweek
+                    {
+                        Id = 1,
+                        Number = 1,
+                    },
+                },
+            };
+
+            mockUsersRepo
+                .Setup(x => x.All())
+                .Returns(users.AsQueryable().BuildMock().Object);
+
+            var mockUsersGameweeksRepo = fixture
+                .Freeze<Mock<IRepository<ApplicationUserGameweek>>>();
+
+            var usersGameweeks = new List<ApplicationUserGameweek>()
+            {
+                new ApplicationUserGameweek
+                {
+                    UserId = "user1",
+                    GameweekId = 2,
+                },
+            };
+
+            mockUsersGameweeksRepo
+                .Setup(x => x.All())
+                .Returns(usersGameweeks.AsQueryable().BuildMock().Object);
+
+            var playerGameweek = new PlayerGameweek
+            {
+                PlayerId = 1,
+                GameweekId = 2,
+                InStartingLineup = true,
+                IsSubstitute = false,
+                MinutesPlayed = 90,
+                Goals = 0,
+                CleanSheet = true,
+                YellowCards = 0,
+                RedCards = 0,
+                SavedPenalties = 0,
+                ConcededGoals = 2,
+                MissedPenalties = 0,
+                OwnGoals = 0,
+                TotalPoints = 3,
+            };
+
+            var playersGameweeksList = new List<PlayerGameweek>();
+            playersGameweeksList.Add(playerGameweek);
+
+            var mockPlayerGameweekRepo = playersGameweeksList.AsQueryable().BuildMock();
+
+            var mockFantasyTeam = new List<FantasyTeam>()
+            {
+                new FantasyTeam
+                {
+                    Id = "team1",
+                    OwnerId = "user1",
+                    Name = "Test Team",
+                },
+            }.AsQueryable().BuildMock();
+
+            var mockFantasyTeamPlayers = new List<FantasyTeamPlayer>()
+            {
+                new FantasyTeamPlayer
+                {
+                    FantasyTeamId = "team1",
+                    PlayerId = 1,
+                    IsPlaying = true,
+                    IsDeleted = false,
+                },
+            }.AsQueryable().BuildMock();
+
+            var mockRepoPlayerGameweek = fixture.Freeze<Mock<IRepository<PlayerGameweek>>>();
+            var mockRepoFantasyTeam = fixture.Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
+            var mockRepoFantasyTeamsPlayers = fixture.Freeze<Mock<IDeletableEntityRepository<FantasyTeamPlayer>>>();
+
+            mockRepoFantasyTeam
+                .Setup(x => x.All())
+                .Returns(mockFantasyTeam.Object);
+
+            mockRepoFantasyTeamsPlayers
+                .Setup(x => x.AllAsNoTracking())
+                .Returns(mockFantasyTeamPlayers.Object);
+
+            mockRepoPlayerGameweek
+                .Setup(x => x.AllAsNoTracking())
+                .Returns(mockPlayerGameweekRepo.Object);
+
+            var service = fixture.Create<GameweeksService>();
+
+            await service.FinishGameweek(2);
+
+            Assert.Equal(3, users.First().TotalPoints);
+        }
     }
 }
