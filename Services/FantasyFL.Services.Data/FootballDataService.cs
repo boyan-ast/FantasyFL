@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
-    using FantasyFL.Data.Common.Repositories;
-    using FantasyFL.Data.Models;
     using FantasyFL.Services.Contracts;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Data.InputModels.Events;
@@ -21,12 +18,10 @@
 
     public class FootballDataService : IFootballDataService
     {
-        private readonly IDictionary<string, ICollection<int>> roundsFixtures;
         private readonly IExternalDataService externalDataService;
 
         public FootballDataService(IExternalDataService externalDataService)
         {
-            this.roundsFixtures = new Dictionary<string, ICollection<int>>();
             this.externalDataService = externalDataService;
         }
 
@@ -109,11 +104,6 @@
             var fixtureInfo = JsonConvert.DeserializeObject<EventResponseDto>(fixtureJson);
 
             return fixtureInfo.Response;
-        }
-
-        public ICollection<int> GetFixturesIds(string roundName)
-        {
-            return this.roundsFixtures[roundName];
         }
     }
 }
