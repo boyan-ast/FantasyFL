@@ -19,8 +19,6 @@
 
         public Task<IEnumerable<EventDto>> GetFixtureEventsAsync(int fixtureId);
 
-        public ICollection<int> GetFixturesIds(string round);
-
         public Task<IEnumerable<TeamStadiumDto>> GetTeamsAndStadiumsJsonAsync(int leagueId, int season);
 
         public Task<TeamPlayersInfoDto> GetTeamSquadJsonAsync(int teamId);

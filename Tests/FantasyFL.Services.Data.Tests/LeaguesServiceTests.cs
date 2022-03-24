@@ -5,14 +5,12 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
-    using AutoMapper;
+
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels;
-    using FantasyFL.Web.ViewModels.Leagues;
-    using Microsoft.Extensions.DependencyInjection;
     using MockQueryable.Moq;
     using Moq;
     using Xunit;
