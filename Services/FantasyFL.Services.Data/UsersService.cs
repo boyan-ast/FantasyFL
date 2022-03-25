@@ -34,7 +34,19 @@
             this.gameweeksRepository = gameweeksRepository;
         }
 
-        public async Task<UserTeamViewModel> GetUserTeam(string userId)
+        public async Task<FantasyTeam> GetUserFantasyTeam(string userId)
+        {
+            var team = await this.fantasyTeamsRepository
+                .All()
+                .Include(t => t.FantasyTeamPlayers)
+                .ThenInclude(ft => ft.Player)
+                .Where(t => t.OwnerId == userId)
+                .FirstOrDefaultAsync();
+
+            return team;
+        }
+
+        public async Task<UserTeamViewModel> GetUserTeamViewModel(string userId)
         {
             var team = await this.fantasyTeamsRepository
                 .AllAsNoTracking()

@@ -34,7 +34,7 @@
                 return this.Redirect("/PlayersManagement/PickGoalkeepers");
             }
 
-            var team = await this.usersService.GetUserTeam(userId);
+            var team = await this.usersService.GetUserTeamViewModel(userId);
             var leagues = this.usersService.GetUserLeagues(userId);
 
             var model = new UserPageViewModel

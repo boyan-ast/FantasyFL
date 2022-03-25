@@ -16,6 +16,7 @@
     public class TransfersService : ITransfersService
     {
         private readonly IGameweeksService gameweeksService;
+        private readonly IUsersService usersService;
         private readonly IRepository<ApplicationUserGameweek> usersGameweeksRepository;
         private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
         private readonly IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamPlayerRepository;
@@ -23,12 +24,14 @@
 
         public TransfersService(
             IGameweeksService gameweeksService,
+            IUsersService usersService,
             IRepository<ApplicationUserGameweek> usersGameweeksRepository,
             IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository,
             IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamPlayerRepository,
             IDeletableEntityRepository<Player> playersRepository)
         {
             this.gameweeksService = gameweeksService;
+            this.usersService = usersService;
             this.usersGameweeksRepository = usersGameweeksRepository;
             this.fantasyTeamsRepository = fantasyTeamsRepository;
             this.fantasyTeamPlayerRepository = fantasyTeamPlayerRepository;
@@ -37,13 +40,7 @@
 
         public async Task AddPlayer(string userId, int playerId)
         {
-            // TODO: Take this from service
-            var userTeam = await this.fantasyTeamsRepository
-                .All()
-                .Include(t => t.FantasyTeamPlayers)
-                .ThenInclude(ft => ft.Player)
-                .Where(t => t.OwnerId == userId)
-                .FirstOrDefaultAsync();
+            var userTeam = await this.usersService.GetUserFantasyTeam(userId);
 
             userTeam.FantasyTeamPlayers.Add(new FantasyTeamPlayer
             {
@@ -55,13 +52,7 @@
 
         public async Task<List<AddPlayerListingViewModel>> GetPlayersToTransfer(string userId, int removedPlayerId)
         {
-            // TODO: Take this from service
-            var userTeam = await this.fantasyTeamsRepository
-                .AllAsNoTracking()
-                .Include(t => t.FantasyTeamPlayers)
-                .ThenInclude(ft => ft.Player)
-                .Where(t => t.OwnerId == userId)
-                .FirstOrDefaultAsync();
+            var userTeam = await this.usersService.GetUserFantasyTeam(userId);
 
             var removedPlayer = await this.playersRepository
                 .AllAsNoTracking()
@@ -94,11 +85,7 @@
 
         public async Task RemovePlayer(string userId, int playerId)
         {
-            // TODO: Take this from service
-            var userTeam = await this.fantasyTeamsRepository
-                .AllAsNoTracking()
-                .Where(t => t.OwnerId == userId)
-                .FirstOrDefaultAsync();
+            var userTeam = await this.usersService.GetUserFantasyTeam(userId);
 
             var fantasyTeamPlayer = await this.fantasyTeamPlayerRepository
                 .All()

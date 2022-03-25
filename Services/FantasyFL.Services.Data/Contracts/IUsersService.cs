@@ -9,7 +9,9 @@
 
     public interface IUsersService
     {
-        Task<UserTeamViewModel> GetUserTeam(string userId);
+        Task<FantasyTeam> GetUserFantasyTeam(string userId);
+
+        Task<UserTeamViewModel> GetUserTeamViewModel(string userId);
 
         Task AddUserGameweeks(string userId, int startGameweekNumber);
 
