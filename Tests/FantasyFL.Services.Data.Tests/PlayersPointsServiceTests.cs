@@ -1,15 +1,16 @@
-﻿using FantasyFL.Data.Common.Repositories;
-using FantasyFL.Data.Models;
-using FantasyFL.Data.Models.Enums;
-using MockQueryable.Moq;
-using Moq;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace FantasyFL.Services.Data.Tests
+﻿namespace FantasyFL.Services.Data.Tests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using FantasyFL.Data.Common.Repositories;
+    using FantasyFL.Data.Models;
+    using FantasyFL.Data.Models.Enums;
+    using MockQueryable.Moq;
+    using Moq;
+    using Xunit;
+
     public class PlayersPointsServiceTests
     {
         [Fact]
@@ -34,32 +35,7 @@ namespace FantasyFL.Services.Data.Tests
                 {
                     Position = Position.Defender,
                 },
-                //BonusPoints = 1,
-                //TotalPoints = -1,
             };
-
-            //var playerGameweekTwo = new PlayerGameweek
-            //{
-            //    PlayerId = 2,
-            //    GameweekId = 1,
-            //    InStartingLineup = true,
-            //    IsSubstitute = false,
-            //    MinutesPlayed = 90,
-            //    Goals = 0,
-            //    CleanSheet = true,
-            //    YellowCards = 0,
-            //    RedCards = 0,
-            //    SavedPenalties = 0,
-            //    ConcededGoals = 1,
-            //    MissedPenalties = 0,
-            //    OwnGoals = 0,
-            //    Player = new Player
-            //    {
-            //        Position = Position.Midfielder,
-            //    },
-            //    //BonusPoints = 1,
-            //    //TotalPoints = 3,
-            //};
 
             var list = new List<PlayerGameweek>();
             list.Add(playerGameweek);

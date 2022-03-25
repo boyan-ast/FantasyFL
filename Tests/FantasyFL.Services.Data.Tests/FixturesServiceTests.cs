@@ -73,6 +73,26 @@
         }
 
         [Fact]
+        public async Task GetAllInCurrentGameweekShouldWorkIfGameweekNull()
+        {
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockGameweeksService = fixture
+                .Freeze<Mock<IGameweeksService>>();
+
+            mockGameweeksService
+                .Setup(x => x.GetCurrent())
+                .Returns((Gameweek)null);
+
+            var service = fixture.Create<FixturesService>();
+
+            var result = await service.GetAllInCurrentGameweek();
+
+            Assert.Empty(result);
+        }
+
+        [Fact]
         public async Task GetAllInNextGameweekShouldWorkCorrectly()
         {
             var fixture = new AutoFixture.Fixture()

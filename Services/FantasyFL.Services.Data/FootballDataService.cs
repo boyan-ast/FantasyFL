@@ -31,11 +31,6 @@
 
             var teamsResponse = JsonConvert.DeserializeObject<TeamsResponseDto>(json);
 
-            if (teamsResponse.Results == 0)
-            {
-                throw new ArgumentException($"League {leagueId} in season {season} does not contain any teams.");
-            }
-
             return teamsResponse.Response;
         }
 
@@ -44,11 +39,6 @@
             var json = await this.externalDataService.GetSquadAsync(teamId);
 
             var squadResponse = JsonConvert.DeserializeObject<PlayersResponseDto>(json);
-
-            if (squadResponse.Results == 0)
-            {
-                throw new ArgumentException($"Team {teamId} does not exist.");
-            }
 
             return squadResponse.Response[0];
         }
@@ -59,11 +49,6 @@
 
             var roundsResponse = JsonConvert.DeserializeObject<GameweeksResponseDto>(roundsJson);
 
-            if (roundsResponse.Results == 0)
-            {
-                throw new ArgumentException($"No gameweeks in league {leagueId} for season {seasonId}.");
-            }
-
             return roundsResponse.Rounds;
         }
 
@@ -72,11 +57,6 @@
             var fixturesJson = await this.externalDataService.GetFixturesByRoundAsync(gameweekName, year);
 
             var fixturesResponse = JsonConvert.DeserializeObject<FixturesResponseDto>(fixturesJson);
-
-            if (fixturesResponse.Results == 0)
-            {
-                throw new ArgumentException($"No fixtures in {gameweekName} for year {year}.");
-            }
 
             return fixturesResponse.FixturesInfo;
         }
@@ -88,11 +68,6 @@
             lineupsJson = lineupsJson.Replace(@"""id"":null,", @"""id"":9999999,");
 
             var lineups = JsonConvert.DeserializeObject<LineupsResponseDto>(lineupsJson);
-
-            if (lineups.Results != 2)
-            {
-                throw new ArgumentException("Lineups have to be 2.");
-            }
 
             return lineups.Response;
         }

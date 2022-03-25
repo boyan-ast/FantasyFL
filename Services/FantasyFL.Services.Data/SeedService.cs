@@ -40,9 +40,6 @@
             this.fixturesRepository = fixturesRepository;
         }
 
-        public IEnumerable<TeamStadiumDto> TeamsAndStadiumsDto { get; private set; }
-            = new List<TeamStadiumDto>();
-
         public async Task ImportGameweeks()
         {
             var gameweeks = await this.footballDataService
@@ -161,14 +158,11 @@
 
         public async Task ImportTeams()
         {
-            if (!this.TeamsAndStadiumsDto.Any())
-            {
-                this.TeamsAndStadiumsDto =
-                    (await this.footballDataService.GetTeamsAndStadiumsJsonAsync(LeagueExternId, SeasonYear))
-                    .ToList();
-            }
+            var teams = (await this.footballDataService
+                .GetTeamsAndStadiumsJsonAsync(LeagueExternId, SeasonYear))
+                .ToList();
 
-            foreach (var teamDto in this.TeamsAndStadiumsDto)
+            foreach (var teamDto in teams)
             {
                 var team = new Team
                 {
