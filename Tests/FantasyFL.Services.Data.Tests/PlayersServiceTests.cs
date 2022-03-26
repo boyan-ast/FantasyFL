@@ -26,7 +26,7 @@
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }
 
-        [Fact] 
+        [Fact]
         public async Task GetAllByTeamWorks()
         {
             var playerOne = new Player
