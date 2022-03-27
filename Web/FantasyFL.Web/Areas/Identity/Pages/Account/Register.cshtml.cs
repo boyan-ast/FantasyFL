@@ -10,6 +10,7 @@
 
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
+    using FantasyFL.Web.Infrastructure.ValidationAttributes;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -87,6 +88,7 @@
             [Required]
             [MinLength(DefaultNameMinLength)]
             [MaxLength(DefaultNameMaxLength)]
+            [UniqueTeamName]
             [Display(Name = "Fantasy Team Name")]
             public string FantasyTeamName { get; set; }
         }

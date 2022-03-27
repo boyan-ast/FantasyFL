@@ -42,6 +42,15 @@
         [HttpPost]
         public async Task<IActionResult> Create(CreateLeagueInputModel input)
         {
+            var league = await this.leaguesService.GetLeagueByName(input.Name);
+
+            if (league != null)
+            {
+                var errorMessage = $"League named {input.Name} already exists.";
+                this.ModelState.AddModelError(string.Empty, errorMessage);
+                this.TempData["Alert"] = errorMessage;
+            }
+
             if (!this.ModelState.IsValid)
             {
                 return this.View(input);

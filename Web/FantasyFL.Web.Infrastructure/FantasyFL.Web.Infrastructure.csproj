@@ -18,4 +18,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\FantasyFL.Services.Data\FantasyFL.Services.Data.csproj" />
+  </ItemGroup>
+
 </Project>

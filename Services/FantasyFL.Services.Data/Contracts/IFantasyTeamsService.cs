@@ -22,5 +22,7 @@
         Task UpdatePlayingPlayers(string teamId, HashSet<int> playersIds);
 
         Task<TeamSelectViewModel> GetUserTeamSelectModel(string userId);
+
+        bool FantasyTeamNameExists(string name);
     }
 }

@@ -177,5 +177,12 @@
 
             await this.fantasyTeamsRepository.SaveChangesAsync();
         }
+
+        public bool FantasyTeamNameExists(string name)
+        {
+            return this.fantasyTeamsRepository
+                .AllAsNoTracking()
+                .Any(t => t.Name == name);
+        }
     }
 }
