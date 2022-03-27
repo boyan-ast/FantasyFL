@@ -19,5 +19,7 @@
         Gameweek GetCurrent();
 
         Gameweek GetNext();
+
+        Task<int> GetGameweekNumberById(int id);
     }
 }

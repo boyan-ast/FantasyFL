@@ -177,6 +177,15 @@
             return gameweek;
         }
 
+        public async Task<int> GetGameweekNumberById(int id)
+        {
+            var gameweek = await this.gameweekRepository
+                .AllAsNoTracking()
+                .FirstOrDefaultAsync(gw => gw.Id == id);
+
+            return gameweek.Number;
+        }
+
         private bool PreviousIsFinished(int currentNumber)
         {
             var previousGameweek = this.gameweekRepository
