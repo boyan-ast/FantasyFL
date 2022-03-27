@@ -43,11 +43,11 @@
                 Leagues = leagues,
             };
 
-            if (this.TempData.ContainsKey("message"))
-            {
-                this.ViewData["message"] = this.TempData["message"].ToString();
-                this.TempData.Clear();
-            }
+            //if (this.TempData.ContainsKey("Message"))
+            //{
+            //    this.ViewData["message"] = this.TempData["Message"].ToString();
+            //    this.TempData.Clear();
+            //}
 
             return this.View(model);
         }
@@ -59,7 +59,7 @@
 
             if (player == null)
             {
-                this.TempData["message"] = "Player haven't played this gameweek.";
+                this.TempData["Message"] = "Player haven't played this gameweek.";
 
                 return this.RedirectToAction(nameof(this.Team));
             }

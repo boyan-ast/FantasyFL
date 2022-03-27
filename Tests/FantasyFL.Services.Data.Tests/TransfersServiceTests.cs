@@ -25,6 +25,129 @@
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }
 
+        public static IEnumerable<object[]> PlayersData =>
+            new List<object[]>
+            {
+                new object[]
+                {
+                    new Player
+                    {
+                        Id = 1,
+                        Name = "Removed Player",
+                        Position = Position.Goalkeeper,
+                        TeamId = 1001,
+                        Team = new Team
+                        {
+                            Name = "UserTeam",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 101,
+                        Name = "Player One",
+                        Position = Position.Goalkeeper,
+                        TeamId = 2001,
+                        Team = new Team
+                        {
+                            Name = "Team One",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 201,
+                        Name = "Player Two",
+                        Position = Position.Defender,
+                        TeamId = 2001,
+                        Team = new Team
+                        {
+                            Name = "Team One",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 301,
+                        Name = "Player Three",
+                        Position = Position.Attacker,
+                        TeamId = 2001,
+                        Team = new Team
+                        {
+                            Name = "Team One",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 401,
+                        Name = "Player Four",
+                        Position = Position.Goalkeeper,
+                        TeamId = 3001,
+                        Team = new Team
+                        {
+                            Name = "Team Two",
+                        },
+                    },
+                    2,
+                },
+                new object[]
+                {
+                    new Player
+                    {
+                        Id = 1,
+                        Name = "Removed Player",
+                        Position = Position.Goalkeeper,
+                        TeamId = 1001,
+                        Team = new Team
+                        {
+                            Name = "UserTeam",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 101,
+                        Name = "Player One",
+                        Position = Position.Goalkeeper,
+                        TeamId = 2001,
+                        Team = new Team
+                        {
+                            Name = "Team One",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 201,
+                        Name = "Player Two",
+                        Position = Position.Goalkeeper,
+                        TeamId = 3001,
+                        Team = new Team
+                        {
+                            Name = "Team One",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 301,
+                        Name = "Player Three",
+                        Position = Position.Goalkeeper,
+                        TeamId = 4001,
+                        Team = new Team
+                        {
+                            Name = "Team One",
+                        },
+                    },
+                    new Player
+                    {
+                        Id = 401,
+                        Name = "Player Four",
+                        Position = Position.Goalkeeper,
+                        TeamId = 4001,
+                        Team = new Team
+                        {
+                            Name = "Team Two",
+                        },
+                    },
+                    5,
+                },
+            };
+
         [Fact]
         public async Task AddPlayerAddsCorrectDataToTheDatabase()
         {
@@ -403,128 +526,5 @@
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => service.RemovePlayer("user1", 1));
         }
-
-        public static IEnumerable<object[]> PlayersData =>
-            new List<object[]>
-            {
-                new object[]
-                {
-                    new Player
-                    {
-                        Id = 1,
-                        Name = "Removed Player",
-                        Position = Position.Goalkeeper,
-                        TeamId = 1001,
-                        Team = new Team
-                        {
-                            Name = "UserTeam",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 101,
-                        Name = "Player One",
-                        Position = Position.Goalkeeper,
-                        TeamId = 2001,
-                        Team = new Team
-                        {
-                            Name = "Team One",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 201,
-                        Name = "Player Two",
-                        Position = Position.Defender,
-                        TeamId = 2001,
-                        Team = new Team
-                        {
-                            Name = "Team One",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 301,
-                        Name = "Player Three",
-                        Position = Position.Attacker,
-                        TeamId = 2001,
-                        Team = new Team
-                        {
-                            Name = "Team One",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 401,
-                        Name = "Player Four",
-                        Position = Position.Goalkeeper,
-                        TeamId = 3001,
-                        Team = new Team
-                        {
-                            Name = "Team Two",
-                        },
-                    },
-                    2,
-                },
-                new object[]
-                {
-                    new Player
-                    {
-                        Id = 1,
-                        Name = "Removed Player",
-                        Position = Position.Goalkeeper,
-                        TeamId = 1001,
-                        Team = new Team
-                        {
-                            Name = "UserTeam",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 101,
-                        Name = "Player One",
-                        Position = Position.Goalkeeper,
-                        TeamId = 2001,
-                        Team = new Team
-                        {
-                            Name = "Team One",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 201,
-                        Name = "Player Two",
-                        Position = Position.Goalkeeper,
-                        TeamId = 3001,
-                        Team = new Team
-                        {
-                            Name = "Team One",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 301,
-                        Name = "Player Three",
-                        Position = Position.Goalkeeper,
-                        TeamId = 4001,
-                        Team = new Team
-                        {
-                            Name = "Team One",
-                        },
-                    },
-                    new Player
-                    {
-                        Id = 401,
-                        Name = "Player Four",
-                        Position = Position.Goalkeeper,
-                        TeamId = 4001,
-                        Team = new Team
-                        {
-                            Name = "Team Two",
-                        },
-                    },
-                    5,
-                },
-            };
     }
 }

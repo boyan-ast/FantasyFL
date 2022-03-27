@@ -42,7 +42,6 @@
 
             var mock = list.AsQueryable().BuildMock();
 
-            // Arrange
             var fixture = new AutoFixture.Fixture()
                 .Customize(new AutoMoqCustomization());
             var mockRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
@@ -52,10 +51,8 @@
                 .Returns(mock.Object);
             var service = fixture.Create<GameweeksService>();
 
-            // Act
             var result = await service.GetAllAsync();
 
-            // Assert
             Assert.Equal(2, result.Count);
             Assert.Equal("Gameweek 1", result[0].Name);
             Assert.True(result[0].IsImported);
@@ -235,7 +232,6 @@
                 },
             }.AsQueryable().BuildMock();
 
-            // Arrange
             var fixture = new AutoFixture.Fixture()
                 .Customize(new AutoMoqCustomization());
             var mockRepoPlayerGameweek = fixture.Freeze<Mock<IRepository<PlayerGameweek>>>();
@@ -256,12 +252,10 @@
 
             var service = fixture.Create<GameweeksService>();
 
-            // Act
             var result = await service.CalculateUserGameweekPoints("user", 1);
 
             var expected = playerIsPlaying ? totalPoints : 0;
 
-            // Assert
             Assert.Equal(expected, result);
         }
 

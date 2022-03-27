@@ -10,7 +10,6 @@
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
-    using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels;
     using MockQueryable.Moq;

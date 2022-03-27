@@ -30,7 +30,6 @@
                 return this.Redirect("/PlayersManagement/PickGoalkeepers");
             }
 
-
             var model = await this.transfersService.GetTransfersList(userId);
 
             return this.View(model);
@@ -43,7 +42,7 @@
 
             await this.transfersService.RemovePlayer(userId, removedPlayerId);
 
-            this.TempData["removedPlayerId"] = removedPlayerId;
+            this.TempData["RemovedPlayerId"] = removedPlayerId;
 
             return this.RedirectToAction("PickNewPlayer");
         }
@@ -56,8 +55,8 @@
 
             int removedPlayerId;
 
-            removedPlayerId = (int)this.TempData["removedPlayerId"];
-            this.TempData.Clear();
+            removedPlayerId = (int)this.TempData["RemovedPlayerId"];
+            //this.TempData.Clear();
 
             var players = await this.transfersService.GetPlayersToTransfer(userId, removedPlayerId);
 

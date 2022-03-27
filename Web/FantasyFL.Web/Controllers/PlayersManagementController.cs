@@ -1,6 +1,5 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
@@ -18,18 +17,15 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IPlayersManagementService playersManagementService;
         private readonly IPlayersService playersService;
-        private readonly IGameweeksService gameweekService;
 
         public PlayersManagementController(
             UserManager<ApplicationUser> userManager,
             IPlayersManagementService playersManagementService,
-            IPlayersService playersService,
-            IGameweeksService gameweekService)
+            IPlayersService playersService)
         {
             this.userManager = userManager;
             this.playersManagementService = playersManagementService;
             this.playersService = playersService;
-            this.gameweekService = gameweekService;
         }
 
         [Authorize]
@@ -43,15 +39,12 @@
                 Players = allPlayers,
             };
 
-            if (this.TempData.ContainsKey("players"))
+            if (this.TempData.ContainsKey("Players"))
             {
-                this.ViewData["alertMessage"] = this.TempData["alert"].ToString();
-                this.TempData["players"] = JsonConvert
-                    .DeserializeObject<PickPlayersFormModel>(this.TempData["players"].ToString());
-                pickGoalkeepersModel = this.TempData["players"] as PickPlayersFormModel;
+                this.TempData["Players"] = JsonConvert
+                    .DeserializeObject<PickPlayersFormModel>(this.TempData["Players"].ToString());
+                pickGoalkeepersModel = this.TempData["Players"] as PickPlayersFormModel;
                 pickGoalkeepersModel.Players = allPlayers;
-
-                this.TempData.Clear();
             }
 
             return this.View(pickGoalkeepersModel);
@@ -61,7 +54,6 @@
         [HttpPost]
         public async Task<IActionResult> PickDefenders(PickPlayersFormModel model)
         {
-            // TODO: Validate model
             var allPlayers = await this.playersService
                 .GetAllPlayers();
 
@@ -78,7 +70,6 @@
         [HttpPost]
         public async Task<IActionResult> PickMidfielders(PickPlayersFormModel model)
         {
-            // TODO: Validate model
             var allPlayers = await this.playersService
                 .GetAllPlayers();
 
@@ -96,7 +87,6 @@
         [HttpPost]
         public async Task<IActionResult> PickAttackers(PickPlayersFormModel model)
         {
-            // TODO: Validate model
             var allPlayers = await this.playersService
                 .GetAllPlayers();
 
@@ -127,13 +117,13 @@
                         string.Empty,
                         errorMessage);
 
-                    this.TempData["alert"] += errorMessage + '\n';
+                    this.TempData["Alert"] += errorMessage + '\n';
                 }
             }
 
             if (!this.ModelState.IsValid)
             {
-                this.TempData["players"] = JsonConvert.SerializeObject(model);
+                this.TempData["Players"] = JsonConvert.SerializeObject(model);
 
                 return this.RedirectToAction("PickGoalkeepers");
             }
@@ -141,8 +131,6 @@
             var userId = this.userManager.GetUserId(this.User);
 
             await this.playersManagementService.AddPlayersToTeam(model, userId);
-
-            var currentGameweek = this.gameweekService.GetCurrent();
 
             return this.Redirect("/Fantasy/PickTeam");
         }

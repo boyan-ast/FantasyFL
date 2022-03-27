@@ -3,12 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
     using System.Threading.Tasks;
 
     using AutoFixture;
     using AutoFixture.AutoMoq;
-    using FantasyFL.Common;
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
@@ -17,10 +15,6 @@
     using FantasyFL.Services.Data.InputModels.Fixtures;
     using FantasyFL.Services.Data.InputModels.Players;
     using FantasyFL.Services.Data.InputModels.Teams;
-    using FantasyFL.Services.Mapping;
-    using FantasyFL.Web.ViewModels;
-    using FantasyFL.Web.ViewModels.PlayersManagement;
-    using MockQueryable.Moq;
     using Moq;
     using Xunit;
 

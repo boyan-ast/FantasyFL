@@ -1,18 +1,11 @@
 ﻿namespace FantasyFL.Services.Data.Tests
 {
-    using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
 
-    using AutoFixture;
-    using AutoFixture.AutoMoq;
-    using FantasyFL.Data.Common.Repositories;
-    using FantasyFL.Data.Models;
     using FantasyFL.Services.Contracts;
-    using MockQueryable.Moq;
     using Moq;
     using Xunit;
 
