@@ -86,6 +86,15 @@
             return player.Id;
         }
 
+        public async Task<Position> GetPlayerPosition(int playerId)
+        {
+            var player = await this.playersRepository
+            .All()
+            .FirstOrDefaultAsync(p => p.Id == playerId);
+
+            return player.Position;
+        }
+
         public async Task<PlayerGameweekViewModel> GetPlayerGameweekPerformance(int playerId)
         {
             var gameweek = this.gameweeksService.GetCurrent();

@@ -416,5 +416,34 @@
 
             Assert.Equal(3, users.First().TotalPoints);
         }
+
+        [Fact]
+        public async Task GetNumberByIdReturnsCorrectResult()
+        {
+            var gameweek = new Gameweek
+            {
+                Id = 21,
+                Name = "Gameweek 21",
+                Number = 23,
+            };
+
+            var list = new List<Gameweek>();
+            list.Add(gameweek);
+
+            var mock = list.AsQueryable().BuildMock();
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+            var mockRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
+
+            mockRepo
+                .Setup(x => x.AllAsNoTracking())
+                .Returns(mock.Object);
+            var service = fixture.Create<GameweeksService>();
+
+            var result = await service.GetGameweekNumberById(21);
+
+            Assert.Equal(23, result);
+        }
     }
 }

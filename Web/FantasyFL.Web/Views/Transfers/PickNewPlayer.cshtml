@@ -7,8 +7,9 @@
 
 <h5 class="text-center text-danger pb-4">Choose a player</h5>
 
-<div class="overflow-auto rel-view">
+
     <form asp-action="AddPlayer">
+        <div class="overflow-auto rel-view">
         <table id="playersTable" class="table table-hover">
             <thead>
                 <tr>
@@ -32,11 +33,12 @@
                 }
             </tbody>
         </table>
+        </div>
         <div class="d-flex justify-content-around pt-3">
-            <input class="btn btn-success" type="submit" value="Add Player" />
+            <input id="action-btn" class="btn btn-success" type="submit" value="Add Player" hidden />
         </div>
     </form>
-</div>
+
 
 @section Scripts {
     <script src="~/js/rowClicker.js"></script>

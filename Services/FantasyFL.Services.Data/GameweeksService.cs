@@ -69,7 +69,6 @@
             return gameweeksViewModel;
         }
 
-        // TODO: Add Async to the names of the methods
         public async Task GetPlayersData(int gameweekId)
         {
             var gameweek = await this.gameweekRepository

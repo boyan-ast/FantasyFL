@@ -15,7 +15,7 @@ else
 }
 
 <div class="overflow-auto rel-view">
-    <form asp-action="RemovePlayer">
+    <form asp-action="PickNewPlayer">
         <table id="playersTable" class="table table-hover">
             <thead>
                 <tr>
@@ -48,7 +48,7 @@ else
         @if (Model.Transfers > 0)
         {
             <div class="d-flex justify-content-around pt-3">
-                <input class="btn btn-success" type="submit" value="Remove Player" />
+                <input id="action-btn" class="btn btn-success" type="submit" value="Remove Player" hidden />
             </div>
         }
     </form>

@@ -50,17 +50,17 @@
             await this.fantasyTeamPlayerRepository.SaveChangesAsync();
         }
 
-        public async Task<List<AddPlayerListingViewModel>> GetPlayersToTransfer(string userId, int removedPlayerId)
+        public async Task<List<AddPlayerListingViewModel>> GetPlayersToTransfer(string userId, Position removedPlayerPosition)
         {
             var userTeam = await this.usersService.GetUserFantasyTeam(userId);
 
-            var removedPlayer = await this.playersRepository
-                .AllAsNoTracking()
-                .FirstOrDefaultAsync(p => p.Id == removedPlayerId);
+            //var removedPlayer = await this.playersRepository
+            //    .AllAsNoTracking()
+            //    .FirstOrDefaultAsync(p => p.Id == removedPlayerId);
 
-            var position = removedPlayer.Position;
+            //var position = removedPlayer.Position;
 
-            var players = await this.GetFilteredPlayers(userTeam, position);
+            var players = await this.GetFilteredPlayers(userTeam, removedPlayerPosition);
 
             return players;
         }
@@ -104,17 +104,15 @@
                 .Where(u => u.UserId == userId && u.GameweekId == gameweekId)
                 .FirstOrDefaultAsync();
 
-            if (userGameweek.Transfers == 0)
+            if (fantasyTeamPlayer != null)
             {
-                throw new InvalidOperationException();
+                userGameweek.Transfers -= 1;
+
+                this.fantasyTeamPlayerRepository.Delete(fantasyTeamPlayer);
+
+                await this.usersGameweeksRepository.SaveChangesAsync();
+                await this.fantasyTeamPlayerRepository.SaveChangesAsync();
             }
-
-            userGameweek.Transfers -= 1;
-
-            this.fantasyTeamPlayerRepository.Delete(fantasyTeamPlayer);
-
-            await this.usersGameweeksRepository.SaveChangesAsync();
-            await this.fantasyTeamPlayerRepository.SaveChangesAsync();
         }
 
         private async Task<List<AddPlayerListingViewModel>> GetFilteredPlayers(

@@ -239,7 +239,7 @@
 
             var service = fixture.Create<TransfersService>();
 
-            var result = await service.GetPlayersToTransfer("user1", 1);
+            var result = await service.GetPlayersToTransfer("user1", Position.Goalkeeper);
 
             Assert.Equal(expectedCount, result.Count);
         }

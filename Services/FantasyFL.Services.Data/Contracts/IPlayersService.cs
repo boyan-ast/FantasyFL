@@ -20,6 +20,8 @@
 
         Task<int> GetPlayerIdByName(string playerName);
 
+        Task<Position> GetPlayerPosition(int playerId);
+
         Task<PlayerGameweekViewModel> GetPlayerGameweekPerformance(int playerId);
 
         Task<IDictionary<string, int>> GetPlayersTeamsCount(PickPlayersFormModel model);

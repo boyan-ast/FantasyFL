@@ -11,13 +11,16 @@
     {
         private readonly ITransfersService transfersService;
         private readonly IFantasyTeamsService fantasyTeamService;
+        private readonly IPlayersService playersService;
 
         public TransfersController(
             ITransfersService transfersService,
-            IFantasyTeamsService fantasyTeamService)
+            IFantasyTeamsService fantasyTeamService,
+            IPlayersService playersService)
         {
             this.transfersService = transfersService;
             this.fantasyTeamService = fantasyTeamService;
+            this.playersService = playersService;
         }
 
         [Authorize]
@@ -36,29 +39,17 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> RemovePlayer(int removedPlayerId)
-        {
-            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            await this.transfersService.RemovePlayer(userId, removedPlayerId);
-
-            this.TempData["RemovedPlayerId"] = removedPlayerId;
-
-            return this.RedirectToAction("PickNewPlayer");
-        }
-
-        [Authorize]
-        public async Task<IActionResult> PickNewPlayer()
+        [HttpPost]
+        public async Task<IActionResult> PickNewPlayer(int removedPlayerId)
         {
             // TODO: Not open it if the team is full
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            int removedPlayerId;
+            var playerPosition = await this.playersService.GetPlayerPosition(removedPlayerId);
 
-            removedPlayerId = (int)this.TempData["RemovedPlayerId"];
-            //this.TempData.Clear();
+            await this.transfersService.RemovePlayer(userId, removedPlayerId);
 
-            var players = await this.transfersService.GetPlayersToTransfer(userId, removedPlayerId);
+            var players = await this.transfersService.GetPlayersToTransfer(userId, playerPosition);
 
             return this.View(players);
         }
