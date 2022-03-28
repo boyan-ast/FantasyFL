@@ -7,18 +7,18 @@
 
 <div class="row pt-4 leagues">
     <div class="col-md-8 rel-view">
-        <table class="table table-striped">
+        <table class="table table-dark table-striped table-hover">
             <tbody>
                 @foreach (var league in Model.Leagues)
                 {
                     <tr>
-                        <td class="font-weight-bold h4 text-dark align-middle">@league.Name</td>
+                        <td class="font-weight-bold h5 text-light align-middle">@league.Name</td>
                         <td class="font-weight-bold">
                             <a asp-area=""
                            asp-controller="Leagues"
                            asp-action="Standings"
                            asp-route-id="@league.Id"
-                           class="btn btn-dark align-middle">
+                           class="btn btn-light align-middle">
                                 Standings
                             </a>
                         </td>
@@ -30,7 +30,7 @@
                                asp-controller="Leagues"
                                asp-action="Join"
                                asp-route-id="@league.Id"
-                               class="btn btn-dark">
+                               class="btn btn-light">
                                     Join
                                 </a>
                             }

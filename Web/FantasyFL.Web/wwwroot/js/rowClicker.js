@@ -14,6 +14,12 @@ function addRowHandlers() {
                 let radioElement = e.currentTarget.querySelector('input[type="radio"]');
                 if (radioElement != null) {
                     radioElement.checked = true;
+
+                    let removePlayerInputElement = document.getElementById("action-btn");
+
+                    if (removePlayerInputElement != null) {
+                        removePlayerInputElement.removeAttribute("hidden");
+                    }
                 }
             };
         };

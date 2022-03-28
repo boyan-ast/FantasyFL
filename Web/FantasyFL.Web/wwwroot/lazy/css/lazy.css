@@ -1535,7 +1535,7 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
     }
 
         .nav.nav-pills .nav-item .nav-link.active {
-            background-color: #611F6A;
+            background-color: black;
             box-shadow: 0px 3px 5px rgba(97,31,106,0.2);
             color: #fff;
             font-weight: bold
