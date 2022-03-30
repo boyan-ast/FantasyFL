@@ -1,72 +1,32 @@
 ﻿@using FantasyFL.Common
 @{
     this.ViewData["Title"] = "Home Page";
-    this.Layout = "";
+    this.Layout = "_LayoutIndex";
 }
 
-
-
-@*<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-hero bg-primary text-white" id="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-12 text-center">
+                <div class="title">
+                    <h1 class="display-4 text-white">Welcome to Fantasy First League!</h1>
+                    <h4 class="text-white font-weight-light">Manage your own fantasy team and become a champion</h4>
+                </div>
+            </div>
+        </div>
     </div>
-*@
+</div>
 
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lazy/css/lazy.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/lazy/css/demo.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
-</head>
-
-<body class="index">
-    <nav class="navbar navbar-expand-md navbar-transparent navbar-light">
-        <partial name="_NavPartial" />
-    </nav>
-
-    <div class="page-hero bg-primary text-white" id="banner">
-        <div class="container">
+<div class="intro bg-light">
+    <div class="container">
+        <div class="section desc">
             <div class="row">
-                <div class="col-12 col-lg-12 text-center">
-                    <div class="title">
-                        <h1 class="display-4 text-white">Welcome to Fantasy First League!</h1>
-                        <h4 class="text-white font-weight-light">Manage your own fantasy team and become a champion</h4>
-                    </div>
+                <div class="col-12 col-md-8 offset-md-2">
+                    <p class="lead">
+                        <b>Fantasy First League</b> is a game that casts you in the role of a Fantasy manager of Bulgarian First League players.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="intro bg-light">
-        <div class="container">
-            <div class="section desc">
-                <div class="row">
-                    <div class="col-12 col-md-8 offset-md-2">
-                        <p class="lead">
-                            <b>Fantasy First League</b> is a game that casts you in the role of a Fantasy manager of Bulgarian First League players.
-                            </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-    <script src="~/lazy/popper/popper.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
-    <script src="~/lazy/js/lazy.js" asp-append-version="true"></script>
-</body>
-</html>
+</div>

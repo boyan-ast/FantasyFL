@@ -47,7 +47,6 @@
             services.Configure<IdentityOptions>(
                 options =>
                 {
-                    options.Password.RequireDigit = true;
                     options.Password.RequiredLength = 6;
                 });
 

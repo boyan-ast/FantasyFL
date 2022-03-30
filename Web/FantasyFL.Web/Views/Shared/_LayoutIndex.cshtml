@@ -1,11 +1,11 @@
 ﻿@using FantasyFL.Common
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
-    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
@@ -13,19 +13,18 @@
     <link rel="stylesheet" href="~/lazy/css/demo.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
 </head>
-<body>
+
+<body class="index">
     <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-             <partial name="_NavPartial" />
+        <nav class="navbar navbar-expand-md navbar-transparent navbar-light">
+            <partial name="_NavPartial" />
         </nav>
     </header>
 
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3 pt-3">
-            @this.RenderBody()
-        </main>
-    </div>
+    <partial name="_CookieConsentPartial" />
+    <main>
+        @this.RenderBody()
+    </main>
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -42,6 +41,5 @@
     <script src="~/lazy/popper/popper.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="~/lazy/js/lazy.js" asp-append-version="true"></script>
-    @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
