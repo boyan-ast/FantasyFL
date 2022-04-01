@@ -8,13 +8,13 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    public class UserController : Controller
+    public class UserTeamController : Controller
     {
         private readonly IUsersService usersService;
         private readonly IPlayersService playersService;
         private readonly IFantasyTeamsService fantasyTeamsService;
 
-        public UserController(
+        public UserTeamController(
             IUsersService usersService,
             IPlayersService playersService,
             IFantasyTeamsService fantasyTeamsService)
@@ -25,7 +25,7 @@
         }
 
         [Authorize]
-        public async Task<IActionResult> Team()
+        public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -43,12 +43,6 @@
                 Leagues = leagues,
             };
 
-            //if (this.TempData.ContainsKey("Message"))
-            //{
-            //    this.ViewData["message"] = this.TempData["Message"].ToString();
-            //    this.TempData.Clear();
-            //}
-
             return this.View(model);
         }
 
@@ -61,7 +55,7 @@
             {
                 this.TempData["Message"] = "Player haven't played this gameweek.";
 
-                return this.RedirectToAction(nameof(this.Team));
+                return this.RedirectToAction(nameof(this.Index));
             }
 
             return this.View(player);

@@ -1,5 +1,6 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
@@ -117,7 +118,7 @@
                         string.Empty,
                         errorMessage);
 
-                    this.TempData["Alert"] += errorMessage + '\n';
+                    this.TempData["Alert"] += errorMessage + Environment.NewLine;
                 }
             }
 

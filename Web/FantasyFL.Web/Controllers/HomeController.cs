@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
 
@@ -24,7 +24,7 @@
                 return this.View();
             }
 
-            return this.Redirect("/User/Team");
+            return this.Redirect("/UserTeam");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

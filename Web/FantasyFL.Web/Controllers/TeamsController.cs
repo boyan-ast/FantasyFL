@@ -8,12 +8,10 @@
     public class TeamsController : Controller
     {
         private readonly ITeamsService teamsService;
-        private readonly IPlayersService playersService;
 
-        public TeamsController(ITeamsService teamsService, IPlayersService playersService)
+        public TeamsController(ITeamsService teamsService)
         {
             this.teamsService = teamsService;
-            this.playersService = playersService;
         }
 
         public async Task<IActionResult> All()

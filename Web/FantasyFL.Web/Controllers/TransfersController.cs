@@ -61,7 +61,7 @@
 
             await this.transfersService.AddPlayer(userId, playerId);
 
-            return this.Redirect("/User/Team");
+            return this.Redirect("/UserTeam/Index");
         }
     }
 }

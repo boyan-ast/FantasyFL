@@ -19,7 +19,7 @@
             <tbody>
                 @foreach (var player in Model.Team.FantasyTeamPlayers.OrderBy(p => p.Position))
                 {
-                    <tr class="clickable" onclick="location.href = '/User/PlayerStats/@player.PlayerId'">
+                    <tr class="clickable" onclick="location.href = '/UserTeam/PlayerStats/@player.PlayerId'">
                         <td>@player.Name</td>
                         <td class="text-center">@player.Position.ToString()</td>
                         <td class="text-center">@player.Team</td>

@@ -54,12 +54,6 @@
         {
             var userTeam = await this.usersService.GetUserFantasyTeam(userId);
 
-            //var removedPlayer = await this.playersRepository
-            //    .AllAsNoTracking()
-            //    .FirstOrDefaultAsync(p => p.Id == removedPlayerId);
-
-            //var position = removedPlayer.Position;
-
             var players = await this.GetFilteredPlayers(userTeam, removedPlayerPosition);
 
             return players;

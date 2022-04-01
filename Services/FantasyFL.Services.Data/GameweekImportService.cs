@@ -88,9 +88,9 @@
 
                 var allPlayersInFixture =
                     this.PlayersInitialAdding(
-                        (IEnumerable<int>)allPlayers,
-                        (IEnumerable<int>)startedPlayers,
-                        (int)gameweekId,
+                        allPlayers,
+                        startedPlayers,
+                        gameweekId,
                         allPlayersInGameweekExternIds);
 
                 foreach (var player in allPlayersInFixture)
