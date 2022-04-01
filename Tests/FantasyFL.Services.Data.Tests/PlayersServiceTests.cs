@@ -438,5 +438,34 @@
 
             Assert.Equal(4, result["Test Team"]);
         }
+
+        [Fact]
+        public async Task GetPlayerPositionReturnsCorrectResult()
+        {
+            var player = new Player
+            {
+                Id = 101,
+                Position = Position.Defender,
+            };
+
+            var playersList = new List<Player>();
+            playersList.Add(player);
+
+            var mock = playersList.AsQueryable().BuildMock();
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+            var mockRepo = fixture.Freeze<Mock<IDeletableEntityRepository<Player>>>();
+
+            mockRepo
+                .Setup(x => x.All())
+                .Returns(mock.Object);
+
+            var service = fixture.Create<PlayersService>();
+
+            var result = await service.GetPlayerPosition(101);
+
+            Assert.Equal(Position.Defender, result);
+        }
     }
 }

@@ -58,6 +58,8 @@
             Assert.True(result[0].IsImported);
             Assert.True(result[0].IsFinished);
             Assert.Equal(new DateTime(2022, 02, 22), result[0].EndDate);
+            Assert.True(result[0].PreviousIsFinished);
+            Assert.True(result[1].PreviousIsFinished);
         }
 
         [Fact]
