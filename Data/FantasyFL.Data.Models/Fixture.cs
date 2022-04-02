@@ -8,7 +8,7 @@
 
     using static FantasyFL.Common.GlobalConstants;
 
-    public class Fixture : BaseModel<int>
+    public class Fixture : BaseDeletableModel<int>
     {
         public int ExternId { get; set; }
 

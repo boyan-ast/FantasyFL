@@ -1,10 +1,12 @@
 ﻿namespace FantasyFL.Data.Models
 {
+    using System;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    using FantasyFL.Data.Common.Models;
     using FantasyFL.Data.Models.Enums;
 
-    public class PlayerGameweek
+    public class PlayerGameweek : IDeletableEntity
     {
         [ForeignKey(nameof(Player))]
         public int PlayerId { get; set; }
@@ -46,5 +48,10 @@
 
         [NotMapped]
         public bool IsPlaying { get; set; }
+
+        // Deletable entity
+        public bool IsDeleted { get; set; }
+
+        public DateTime? DeletedOn { get; set; }
     }
 }
