@@ -1,5 +1,6 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -33,9 +34,17 @@
                 return this.Redirect("/PlayersManagement/PickGoalkeepers");
             }
 
-            var model = await this.transfersService.GetTransfersList(userId);
+            try
+            {
+                var model = await this.transfersService.GetTransfersList(userId);
 
-            return this.View(model);
+                return this.View(model);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.TempData["Message"] = ex.Message;
+                return this.RedirectToAction("Index", "UserTeam");
+            }
         }
 
         [Authorize]

@@ -42,6 +42,10 @@
     </div>
 </div>
 
+<textarea id="error-message" hidden>@TempData["Message"]</textarea>
+
 @section Scripts {
-<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/js/alerts.js"></script>
 }

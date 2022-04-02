@@ -61,12 +61,7 @@
 
         public async Task<TeamTransfersViewModel> GetTransfersList(string userId)
         {
-            var gameweekId = this.gameweeksService.GetNext()?.Id;
-
-            if (gameweekId == null)
-            {
-                throw new InvalidOperationException();
-            }
+            var gameweekId = this.gameweeksService.GetNext().Id;
 
             var userGameweek = await this.usersGameweeksRepository
                 .All()

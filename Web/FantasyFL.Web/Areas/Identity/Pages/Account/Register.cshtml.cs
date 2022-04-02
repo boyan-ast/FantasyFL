@@ -105,6 +105,20 @@
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
+                try
+                {
+                    var startGameweek = this.gameweeksService.GetNext();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    this.TempData["Message"] =
+                        ex.Message +
+                        Environment.NewLine +
+                        "Come back next year.";
+
+                    return this.Page();
+                }
+
                 var user = new ApplicationUser
                 {
                     UserName = this.Input.Username,

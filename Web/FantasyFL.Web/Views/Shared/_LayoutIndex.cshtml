@@ -41,5 +41,6 @@
     <script src="~/lazy/popper/popper.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="~/lazy/js/lazy.js" asp-append-version="true"></script>
+    @await this.RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

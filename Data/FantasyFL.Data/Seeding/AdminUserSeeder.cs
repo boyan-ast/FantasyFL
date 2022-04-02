@@ -18,22 +18,30 @@
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
-            var roleManager = serviceProvider.GetService<RoleManager<ApplicationRole>>();
-
-            var leaguesService = (ILeaguesService)serviceProvider
-                .GetService(typeof(ILeaguesService));
-            var gameweeksService = (IGameweeksService)serviceProvider
-                .GetService(typeof(IGameweeksService));
-            var usersService = (IUsersService)serviceProvider
-                .GetService(typeof(IUsersService));
-
-            var defaultFantasyLeague = await leaguesService.GetLeagueByName(DefaultFantasyLeagueName);
-            var startGameweek = gameweeksService.GetNext();
 
             var userExists = await userManager.Users.AnyAsync(u => u.UserName == AdministratorUserName);
 
             if (!userExists)
             {
+                var roleManager = serviceProvider.GetService<RoleManager<ApplicationRole>>();
+
+                var leaguesService = (ILeaguesService)serviceProvider
+                    .GetService(typeof(ILeaguesService));
+                // var gameweeksService = (IGameweeksService)serviceProvider
+                //    .GetService(typeof(IGameweeksService));
+                var gameweeksRepository = (IRepository<Gameweek>)serviceProvider
+                    .GetService(typeof(IRepository<Gameweek>));
+                var usersService = (IUsersService)serviceProvider
+                    .GetService(typeof(IUsersService));
+
+                var defaultFantasyLeague = await leaguesService.GetLeagueByName(DefaultFantasyLeagueName);
+
+                // var startGameweek = gameweeksService.GetNext();
+
+                var startGameweek = gameweeksRepository
+                        .All()
+                        .FirstOrDefault(gw => gw.Number == 1);
+
                 var admin = new ApplicationUser
                 {
                     UserName = AdministratorUserName,
