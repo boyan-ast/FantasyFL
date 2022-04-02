@@ -11,6 +11,7 @@
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels;
+    using FantasyFL.Web.ViewModels.Leagues;
     using MockQueryable.Moq;
     using Moq;
     using Xunit;
@@ -281,9 +282,16 @@
                 mockRepo.Object,
                 mockUsersService.Object);
 
-            await service.CreateLeague("TestLeague", "user1");
+            var leagueInputModel = new CreateLeagueInputModel
+            {
+                Name = "TestLeague",
+                Description = "TestTestTest",
+            };
+
+            await service.CreateLeague(leagueInputModel, "user1");
 
             Assert.Equal("TestLeague", list[0].Name);
+            Assert.Equal("TestTestTest", list[0].Description);
             Assert.Contains("user1", list[0].ApplicationUsers.Select(u => u.Id));
             Assert.Contains("TestUser", list[0].ApplicationUsers.Select(u => u.UserName));
         }

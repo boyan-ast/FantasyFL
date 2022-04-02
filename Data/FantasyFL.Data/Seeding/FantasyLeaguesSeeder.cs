@@ -15,7 +15,13 @@
                 return;
             }
 
-            await dbContext.FantasyLeagues.AddAsync(new FantasyLeague { Name = "Bulgaria" });
+            await dbContext
+                .FantasyLeagues
+                .AddAsync(new FantasyLeague
+                {
+                    Name = "Bulgaria",
+                    Description = "The league of all FantasyFL users.",
+                });
         }
     }
 }

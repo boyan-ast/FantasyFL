@@ -26,6 +26,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using static FantasyFL.Common.GlobalConstants;
+
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -47,7 +49,7 @@
             services.Configure<IdentityOptions>(
                 options =>
                 {
-                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredLength = PasswordMinLength;
                 });
 
             services.Configure<CookiePolicyOptions>(

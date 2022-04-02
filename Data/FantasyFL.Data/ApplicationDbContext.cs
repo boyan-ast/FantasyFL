@@ -44,8 +44,6 @@
 
         public DbSet<FantasyLeague> FantasyLeagues { get; init; }
 
-        public DbSet<Setting> Settings { get; init; }
-
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

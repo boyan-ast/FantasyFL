@@ -25,7 +25,6 @@
             this.usersService = usersService;
         }
 
-        // TODO: Make all firstordefault - async
         public async Task<FantasyLeague> GetLeagueByName(string leagueName)
         {
             var league = await this.fantasyLeaguesRepository
@@ -55,11 +54,12 @@
             return leagues;
         }
 
-        public async Task CreateLeague(string name, string userId)
+        public async Task CreateLeague(CreateLeagueInputModel leagueModel, string userId)
         {
             var league = new FantasyLeague
             {
-                Name = name,
+                Name = leagueModel.Name,
+                Description = leagueModel.Description,
             };
 
             await this.fantasyLeaguesRepository.AddAsync(league);

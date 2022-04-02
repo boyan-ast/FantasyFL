@@ -58,7 +58,7 @@
 
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            await this.leaguesService.CreateLeague(input.Name, userId);
+            await this.leaguesService.CreateLeague(input, userId);
 
             return this.RedirectToAction(nameof(this.Index));
         }

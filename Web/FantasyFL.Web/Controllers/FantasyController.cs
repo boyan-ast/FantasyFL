@@ -1,5 +1,6 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -67,16 +68,24 @@
             await this.fantasyTeamService.ClearUserPlayers(userTeam.Id);
             await this.fantasyTeamService.UpdatePlayingPlayers(userTeam.Id, playingPlayersIds);
 
-            return this.Redirect("/UserTeam/Index");
+            return this.RedirectToAction("Index", "UserTeam");
         }
 
         [Authorize]
         public async Task<IActionResult> GameweekResult()
         {
             var userId = this.userManager.GetUserId(this.User);
-            var userGameweekTeam = await this.fantasyTeamService.GetUserGameweekTeam(userId);
 
-            return this.View(userGameweekTeam);
+            try
+            {
+                var userGameweekTeam = await this.fantasyTeamService.GetUserGameweekTeam(userId);
+                return this.View(userGameweekTeam);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.TempData["Message"] = ex.Message;
+                return this.RedirectToAction("Index", "UserTeam");
+            }
         }
     }
 }

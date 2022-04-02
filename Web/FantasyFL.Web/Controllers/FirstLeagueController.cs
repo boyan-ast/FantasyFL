@@ -1,5 +1,6 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -17,21 +18,31 @@
 
         public async Task<IActionResult> Results()
         {
-            var fixtures = await this.fixturesService.GetAllInCurrentGameweek();
-
-            if (!fixtures.Any())
+            try
             {
-                return this.Redirect("/FirstLeague/Fitures");
+                var fixtures = await this.fixturesService.GetAllInCurrentGameweek();
+                return this.View(fixtures);
             }
-
-            return this.View(fixtures);
+            catch (InvalidOperationException ex)
+            {
+                this.TempData["Message"] = ex.Message;
+                return this.RedirectToAction("Fixtures");
+            }
         }
 
         public async Task<IActionResult> Fixtures()
         {
-            var fixtures = await this.fixturesService.GetAllInNextGameweek();
+            try
+            {
+                var fixtures = await this.fixturesService.GetAllInNextGameweek();
 
-            return this.View(fixtures);
+                return this.View(fixtures);
+            }
+            catch (InvalidOperationException ex)
+            {
+                this.TempData["Message"] = ex.Message;
+                return this.RedirectToAction("Results");
+            }
         }
     }
 }

@@ -10,5 +10,10 @@
         [MinLength(DefaultNameMinLength)]
         [MaxLength(DefaultNameMaxLength)]
         public string Name { get; init; }
+
+        [Required]
+        [MinLength(DefaultDescriptionMinLength)]
+        [MaxLength(DefaultDescriptionMaxLength)]
+        public string Description { get; init; }
     }
 }

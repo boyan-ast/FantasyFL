@@ -13,6 +13,10 @@
         [MaxLength(DefaultNameMaxLength)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(DefaultDescriptionMaxLength)]
+        public string Description { get; set; }
+
         public ICollection<ApplicationUser> ApplicationUsers { get; set; } = new HashSet<ApplicationUser>();
     }
 }

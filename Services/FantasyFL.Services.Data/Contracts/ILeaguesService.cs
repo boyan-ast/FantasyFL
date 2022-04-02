@@ -14,7 +14,7 @@
 
         Task<List<LeagueListingViewModel>> GetAllLeagues();
 
-        Task CreateLeague(string name, string userId);
+        Task CreateLeague(CreateLeagueInputModel model, string userId);
 
         Task JoinLeague(int leagueId, string userId);
     }
