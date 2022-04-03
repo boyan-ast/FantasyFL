@@ -51,7 +51,6 @@
         [HttpPost]
         public async Task<IActionResult> PickNewPlayer(int removedPlayerId)
         {
-            // TODO: Not open it if the team is full
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var playerPosition = await this.playersService.GetPlayerPosition(removedPlayerId);

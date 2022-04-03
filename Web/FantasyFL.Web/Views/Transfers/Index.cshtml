@@ -14,8 +14,9 @@ else
     <h5 class="text-center text-danger pb-4">You can't make more transfers before Gameweek @Model.GameweekNumber</h5>
 }
 
-<div class="overflow-auto rel-view">
-    <form asp-action="PickNewPlayer">
+
+<form asp-action="PickNewPlayer">
+    <div class="overflow-auto rel-view">
         <table id="playersTable" class="table table-hover">
             <thead>
                 <tr>
@@ -45,16 +46,16 @@ else
                 }
             </tbody>
         </table>
-        @if (Model.Transfers > 0)
-        {
-            <div class="d-flex justify-content-around pt-3">
-                <input id="action-btn" class="btn btn-success" type="submit" value="Remove Player" hidden />
-            </div>
-        }
-    </form>
-</div>
+    </div>
+    @if (Model.Transfers > 0)
+    {
+        <div class="d-flex justify-content-around pt-3">
+            <input id="action-btn" class="btn btn-success" type="submit" value="Remove Player" hidden />
+        </div>
+    }
+</form>
 
 
 @section Scripts {
-    <script src="~/js/rowClicker.js"></script>
+<script src="~/js/rowClicker.js"></script>
 }

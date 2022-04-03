@@ -1,6 +1,8 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
@@ -18,20 +20,32 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IPlayersManagementService playersManagementService;
         private readonly IPlayersService playersService;
+        private readonly IFantasyTeamsService fantasyTeamsService;
 
         public PlayersManagementController(
             UserManager<ApplicationUser> userManager,
             IPlayersManagementService playersManagementService,
-            IPlayersService playersService)
+            IPlayersService playersService,
+            IFantasyTeamsService fantasyTeamsService)
         {
             this.userManager = userManager;
             this.playersManagementService = playersManagementService;
             this.playersService = playersService;
+            this.fantasyTeamsService = fantasyTeamsService;
         }
 
         [Authorize]
         public async Task<IActionResult> PickGoalkeepers()
         {
+            var userId = this.userManager.GetUserId(this.User);
+
+            bool userTeamIsEmpty = await this.fantasyTeamsService.UserTeamIsEmpty(userId);
+
+            if (!userTeamIsEmpty)
+            {
+                return this.RedirectToAction("Index", "UserTeam");
+            }
+
             var allPlayers = await this.playersService
                 .GetAllPlayers();
 
@@ -117,13 +131,19 @@
                     this.ModelState.AddModelError(
                         string.Empty,
                         errorMessage);
-
-                    this.TempData["Alert"] += errorMessage + Environment.NewLine;
                 }
             }
 
             if (!this.ModelState.IsValid)
             {
+                foreach (var modelState in this.ModelState.Values)
+                {
+                    foreach (var modelError in modelState.Errors)
+                    {
+                        this.TempData["Alert"] += modelError.ErrorMessage + Environment.NewLine;
+                    }
+                }
+
                 this.TempData["Players"] = JsonConvert.SerializeObject(model);
 
                 return this.RedirectToAction("PickGoalkeepers");
