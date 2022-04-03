@@ -325,7 +325,7 @@
 
             var service = fixture.Create<TransfersService>();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => service.GetTransfersList("user1"));
+            await Assert.ThrowsAsync<NullReferenceException>(() => service.GetTransfersList("user1"));
         }
 
         [Fact]
