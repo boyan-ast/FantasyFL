@@ -35,7 +35,6 @@
             try
             {
                 var fixtures = await this.fixturesService.GetAllInNextGameweek();
-
                 return this.View(fixtures);
             }
             catch (InvalidOperationException ex)

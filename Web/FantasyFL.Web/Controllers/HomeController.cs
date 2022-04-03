@@ -11,8 +11,7 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
 
-        public HomeController(
-            UserManager<ApplicationUser> userManager)
+        public HomeController(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
         }

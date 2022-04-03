@@ -1,1 +1,257 @@
-{"get":"fixtures\/events","parameters":{"fixture":"771022"},"errors":[],"results":11,"paging":{"current":1,"total":1},"response":[{"time":{"elapsed":20,"extra":null},"team":{"id":1426,"name":"CSKA 1948","logo":"https:\/\/media.api-sports.io\/football\/teams\/1426.png"},"player":{"id":40325,"name":"A. Kolev"},"assist":{"id":null,"name":null},"type":"Goal","detail":"Normal Goal","comments":null},{"time":{"elapsed":49,"extra":null},"team":{"id":634,"name":"Botev Plovdiv","logo":"https:\/\/media.api-sports.io\/football\/teams\/634.png"},"player":{"id":20811,"name":"A. Baroan"},"assist":{"id":null,"name":null},"type":"Goal","detail":"Normal Goal","comments":null},{"time":{"elapsed":64,"extra":null},"team":{"id":634,"name":"Botev Plovdiv","logo":"https:\/\/media.api-sports.io\/football\/teams\/634.png"},"player":{"id":20811,"name":"A. Baroan"},"assist":{"id":null,"name":null},"type":"Goal","detail":"Normal Goal","comments":null},{"time":{"elapsed":67,"extra":null},"team":{"id":1426,"name":"CSKA 1948","logo":"https:\/\/media.api-sports.io\/football\/teams\/1426.png"},"player":{"id":10926,"name":"A. Bastunov"},"assist":{"id":88125,"name":"M. Toshev"},"type":"subst","detail":"Substitution 1","comments":null},{"time":{"elapsed":74,"extra":null},"team":{"id":634,"name":"Botev Plovdiv","logo":"https:\/\/media.api-sports.io\/football\/teams\/634.png"},"player":{"id":11087,"name":"T. Nedelev"},"assist":{"id":48163,"name":"P. Konat\u00e9"},"type":"subst","detail":"Substitution 1","comments":null},{"time":{"elapsed":76,"extra":null},"team":{"id":634,"name":"Botev Plovdiv","logo":"https:\/\/media.api-sports.io\/football\/teams\/634.png"},"player":{"id":10975,"name":"N. Minkov"},"assist":{"id":85416,"name":"M. Brahimi"},"type":"subst","detail":"Substitution 2","comments":null},{"time":{"elapsed":79,"extra":null},"team":{"id":1426,"name":"CSKA 1948","logo":"https:\/\/media.api-sports.io\/football\/teams\/1426.png"},"player":{"id":80761,"name":"E. Martinov"},"assist":{"id":78108,"name":"I. Klimentov"},"type":"subst","detail":"Substitution 2","comments":null},{"time":{"elapsed":85,"extra":null},"team":{"id":634,"name":"Botev Plovdiv","logo":"https:\/\/media.api-sports.io\/football\/teams\/634.png"},"player":{"id":20811,"name":"A. Baroan"},"assist":{"id":129960,"name":"D. Tonev"},"type":"subst","detail":"Substitution 3","comments":null},{"time":{"elapsed":85,"extra":null},"team":{"id":1426,"name":"CSKA 1948","logo":"https:\/\/media.api-sports.io\/football\/teams\/1426.png"},"player":{"id":28624,"name":"G. Ivanov"},"assist":{"id":null,"name":null},"type":"Goal","detail":"Normal Goal","comments":null},{"time":{"elapsed":86,"extra":null},"team":{"id":634,"name":"Botev Plovdiv","logo":"https:\/\/media.api-sports.io\/football\/teams\/634.png"},"player":{"id":14274,"name":"Roberto Pun\u010dec"},"assist":{"id":null,"name":null},"type":"Card","detail":"Yellow Card","comments":null},{"time":{"elapsed":90,"extra":1},"team":{"id":1426,"name":"CSKA 1948","logo":"https:\/\/media.api-sports.io\/football\/teams\/1426.png"},"player":{"id":11317,"name":"G. Rusev"},"assist":{"id":10901,"name":"M. Topuzov"},"type":"subst","detail":"Substitution 3","comments":null}]}
+{
+  "get": "fixtures\/events",
+  "parameters": {
+    "fixture": "771022"
+  },
+  "errors": [
+  ],
+  "results": 11,
+  "paging": {
+    "current": 1,
+    "total": 1
+  },
+  "response": [
+    {
+      "time": {
+        "elapsed": 20,
+        "extra": null
+      },
+      "team": {
+        "id": 1426,
+        "name": "CSKA 1948",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/1426.png"
+      },
+      "player": {
+        "id": 40325,
+        "name": "A. Kolev"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Goal",
+      "detail": "Normal Goal",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 49,
+        "extra": null
+      },
+      "team": {
+        "id": 634,
+        "name": "Botev Plovdiv",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/634.png"
+      },
+      "player": {
+        "id": 20811,
+        "name": "A. Baroan"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Goal",
+      "detail": "Normal Goal",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 64,
+        "extra": null
+      },
+      "team": {
+        "id": 634,
+        "name": "Botev Plovdiv",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/634.png"
+      },
+      "player": {
+        "id": 20811,
+        "name": "A. Baroan"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Goal",
+      "detail": "Normal Goal",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 67,
+        "extra": null
+      },
+      "team": {
+        "id": 1426,
+        "name": "CSKA 1948",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/1426.png"
+      },
+      "player": {
+        "id": 10926,
+        "name": "A. Bastunov"
+      },
+      "assist": {
+        "id": 88125,
+        "name": "M. Toshev"
+      },
+      "type": "subst",
+      "detail": "Substitution 1",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 74,
+        "extra": null
+      },
+      "team": {
+        "id": 634,
+        "name": "Botev Plovdiv",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/634.png"
+      },
+      "player": {
+        "id": 11087,
+        "name": "T. Nedelev"
+      },
+      "assist": {
+        "id": 48163,
+        "name": "P. Konat\u00e9"
+      },
+      "type": "subst",
+      "detail": "Substitution 1",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 76,
+        "extra": null
+      },
+      "team": {
+        "id": 634,
+        "name": "Botev Plovdiv",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/634.png"
+      },
+      "player": {
+        "id": 10975,
+        "name": "N. Minkov"
+      },
+      "assist": {
+        "id": 85416,
+        "name": "M. Brahimi"
+      },
+      "type": "subst",
+      "detail": "Substitution 2",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 79,
+        "extra": null
+      },
+      "team": {
+        "id": 1426,
+        "name": "CSKA 1948",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/1426.png"
+      },
+      "player": {
+        "id": 80761,
+        "name": "E. Martinov"
+      },
+      "assist": {
+        "id": 78108,
+        "name": "I. Klimentov"
+      },
+      "type": "subst",
+      "detail": "Substitution 2",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 85,
+        "extra": null
+      },
+      "team": {
+        "id": 634,
+        "name": "Botev Plovdiv",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/634.png"
+      },
+      "player": {
+        "id": 20811,
+        "name": "A. Baroan"
+      },
+      "assist": {
+        "id": 129960,
+        "name": "D. Tonev"
+      },
+      "type": "subst",
+      "detail": "Substitution 3",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 85,
+        "extra": null
+      },
+      "team": {
+        "id": 1426,
+        "name": "CSKA 1948",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/1426.png"
+      },
+      "player": {
+        "id": 28624,
+        "name": "G. Ivanov"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Goal",
+      "detail": "Normal Goal",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 86,
+        "extra": null
+      },
+      "team": {
+        "id": 634,
+        "name": "Botev Plovdiv",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/634.png"
+      },
+      "player": {
+        "id": 14274,
+        "name": "Roberto Pun\u010dec"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Card",
+      "detail": "Yellow Card",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 90,
+        "extra": 1
+      },
+      "team": {
+        "id": 1426,
+        "name": "CSKA 1948",
+        "logo": "https:\/\/media.api-sports.io\/football\/teams\/1426.png"
+      },
+      "player": {
+        "id": 11317,
+        "name": "G. Rusev"
+      },
+      "assist": {
+        "id": 10901,
+        "name": "M. Topuzov"
+      },
+      "type": "subst",
+      "detail": "Substitution 3",
+      "comments": null
+    }
+  ]
+}

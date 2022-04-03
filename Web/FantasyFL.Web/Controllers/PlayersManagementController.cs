@@ -126,7 +126,7 @@
             {
                 if (playersCount > MaxCountPlayersFromSameTeam)
                 {
-                    string errorMessage = $"More than {MaxCountPlayersFromSameTeam} players from {team} selected!";
+                    string errorMessage = $"More than {MaxCountPlayersFromSameTeam} players from {team} selected.";
 
                     this.ModelState.AddModelError(
                         string.Empty,

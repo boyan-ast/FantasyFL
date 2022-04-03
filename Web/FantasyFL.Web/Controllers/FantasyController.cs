@@ -51,6 +51,7 @@
                 return this.View(team);
             }
 
+            // TODO: Move this to fantasyTeamService
             var playingGoalkeepers = team.Goalkeepers.Where(gk => gk.Selected).ToList();
             var playingDefenders = team.Defenders.Where(d => d.Selected).ToList();
             var playingMidfielders = team.Midfielders.Where(m => m.Selected).ToList();
