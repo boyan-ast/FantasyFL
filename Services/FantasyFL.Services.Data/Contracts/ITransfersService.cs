@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Web.ViewModels.Transfers;
 

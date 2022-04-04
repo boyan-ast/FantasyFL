@@ -11,6 +11,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
+    using FantasyFL.Web.ViewModels.Fantasy;
     using MockQueryable.Moq;
     using Moq;
     using Xunit;
@@ -591,6 +592,61 @@
 
             Assert.True(fantasyTeamPlayerOne.IsPlaying);
             Assert.True(fantasyTeamPlayerTwo.IsPlaying);
+        }
+
+        [Fact]
+        public void GetPlayingPlayersIdsShouldReturnCorrectResult()
+        {
+            var playerOne = new PlayerSelectViewModel
+            {
+                PlayerId = 1,
+                Selected = true,
+            };
+
+            var playerTwo = new PlayerSelectViewModel
+            {
+                PlayerId = 2,
+                Selected = true,
+            };
+
+            var playerThree = new PlayerSelectViewModel
+            {
+                PlayerId = 3,
+                Selected = true,
+            };
+
+            var playerFour = new PlayerSelectViewModel
+            {
+                PlayerId = 4,
+                Selected = false,
+            };
+
+            var teamModel = new TeamSelectViewModel
+            {
+                Goalkeepers = new List<PlayerSelectViewModel>(),
+                Defenders = new List<PlayerSelectViewModel>()
+                {
+                    playerOne,
+                },
+                Midfielders = new List<PlayerSelectViewModel>()
+                {
+                    playerTwo,
+                },
+                Attackers = new List<PlayerSelectViewModel>()
+                {
+                    playerThree,
+                    playerFour,
+                },
+            };
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            var result = service.GetPlayingPlayersIds(teamModel);
+
+            Assert.Equal(3, result.Count);
         }
     }
 }

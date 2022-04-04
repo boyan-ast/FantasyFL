@@ -41,7 +41,6 @@
             await this.fantasyTeamsRepository.SaveChangesAsync();
         }
 
-        // TODO: Check if this method must be here and if there is no other in UsersService
         public async Task<FantasyTeam> GetUserTeam(string userId)
         {
             var fantasyTeam = await this.fantasyTeamsRepository

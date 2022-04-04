@@ -4,8 +4,8 @@
 
     public interface IGameweekImportService
     {
-        public Task ImportLineups(int gameweekNumber);
+        Task ImportLineups(int gameweekNumber);
 
-        public Task ImportEvents(int gameweekNumber);
+        Task ImportEvents(int gameweekNumber);
     }
 }

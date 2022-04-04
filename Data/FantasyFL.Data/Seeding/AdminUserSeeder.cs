@@ -27,16 +27,12 @@
 
                 var leaguesService = (ILeaguesService)serviceProvider
                     .GetService(typeof(ILeaguesService));
-                // var gameweeksService = (IGameweeksService)serviceProvider
-                //    .GetService(typeof(IGameweeksService));
                 var gameweeksRepository = (IRepository<Gameweek>)serviceProvider
                     .GetService(typeof(IRepository<Gameweek>));
                 var usersService = (IUsersService)serviceProvider
                     .GetService(typeof(IUsersService));
 
                 var defaultFantasyLeague = await leaguesService.GetLeagueByName(DefaultFantasyLeagueName);
-
-                // var startGameweek = gameweeksService.GetNext();
 
                 var startGameweek = gameweeksRepository
                         .All()

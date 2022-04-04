@@ -24,5 +24,7 @@
         Task<TeamSelectViewModel> GetUserTeamSelectModel(string userId);
 
         bool FantasyTeamNameExists(string name);
+
+        HashSet<int> GetPlayingPlayersIds(TeamSelectViewModel teamModel);
     }
 }

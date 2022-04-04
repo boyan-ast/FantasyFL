@@ -23,7 +23,9 @@
     using static FantasyFL.Common.GlobalConstants;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class RegisterModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
@@ -93,7 +95,9 @@
             public string FantasyTeamName { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public async Task OnGetAsync(string returnUrl = null)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             this.ReturnUrl = returnUrl;
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -128,7 +132,6 @@
                         Name = this.Input.FantasyTeamName,
                     },
 
-                    // TODO: If season over not able to register
                     StartGameweek = this.gameweeksService.GetNext(),
                 };
 

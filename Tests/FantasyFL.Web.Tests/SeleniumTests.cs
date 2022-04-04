@@ -166,7 +166,6 @@
             Assert.Equal("Register", registerNavLinkTitle);
         }
 
-
         public void Dispose()
         {
             this.Dispose(true);

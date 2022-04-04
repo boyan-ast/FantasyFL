@@ -5,12 +5,11 @@
     using FantasyFL.Services.Data.Contracts;
     using Microsoft.AspNetCore.Mvc;
 
-    // TODO: Rename this controller
-    public class DashboardController : AdministrationController
+    public class DataController : AdministrationController
     {
         private readonly IGameweeksService gameweeksService;
 
-        public DashboardController(IGameweeksService gameweeksService)
+        public DataController(IGameweeksService gameweeksService)
         {
             this.gameweeksService = gameweeksService;
         }
@@ -26,14 +25,14 @@
         {
             await this.gameweeksService.GetPlayersData(id);
 
-            return this.Redirect("/Administration/Dashboard");
+            return this.Redirect("/Administration/Data");
         }
 
         public async Task<IActionResult> Finish(int id)
         {
             await this.gameweeksService.FinishGameweek(id);
 
-            return this.Redirect("/Administration/Dashboard");
+            return this.Redirect("/Administration/Data");
         }
     }
 }

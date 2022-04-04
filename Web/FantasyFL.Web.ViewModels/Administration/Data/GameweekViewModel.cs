@@ -1,4 +1,4 @@
-﻿namespace FantasyFL.Web.ViewModels.Administration.Dashboard
+﻿namespace FantasyFL.Web.ViewModels.Administration.Data
 {
     using System;
 

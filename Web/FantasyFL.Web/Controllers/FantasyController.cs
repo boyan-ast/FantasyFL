@@ -51,21 +51,10 @@
                 return this.View(team);
             }
 
-            // TODO: Move this to fantasyTeamService
-            var playingGoalkeepers = team.Goalkeepers.Where(gk => gk.Selected).ToList();
-            var playingDefenders = team.Defenders.Where(d => d.Selected).ToList();
-            var playingMidfielders = team.Midfielders.Where(m => m.Selected).ToList();
-            var playingAttackers = team.Attackers.Where(a => a.Selected).ToList();
-
-            var playingPlayersIds = new HashSet<int>(playingGoalkeepers
-                .Concat(playingDefenders)
-                .Concat(playingMidfielders)
-                .Concat(playingAttackers)
-                .Select(p => p.PlayerId));
-
             var userId = this.userManager.GetUserId(this.User);
             var userTeam = await this.fantasyTeamService.GetUserFantasyTeam(userId);
 
+            var playingPlayersIds = this.fantasyTeamService.GetPlayingPlayersIds(team);
             await this.fantasyTeamService.ClearUserPlayers(userTeam.Id);
             await this.fantasyTeamService.UpdatePlayingPlayers(userTeam.Id, playingPlayersIds);
 

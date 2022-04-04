@@ -4,12 +4,12 @@
 
     public interface ISeedService
     {
-        public Task ImportTeams();
+        Task ImportTeams();
 
-        public Task ImportPlayers();
+        Task ImportPlayers();
 
-        public Task ImportGameweeks();
+        Task ImportGameweeks();
 
-        public Task ImportFixtures();
+        Task ImportFixtures();
     }
 }

@@ -4,6 +4,6 @@
 
     public interface IPlayersPointsService
     {
-        public Task CalculatePoints(int gameweekId);
+        Task CalculatePoints(int gameweekId);
     }
 }

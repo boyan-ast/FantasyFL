@@ -184,5 +184,21 @@
                 .AllAsNoTracking()
                 .Any(t => t.Name == name);
         }
+
+        public HashSet<int> GetPlayingPlayersIds(TeamSelectViewModel team)
+        {
+            var playingGoalkeepers = team.Goalkeepers.Where(gk => gk.Selected).ToList();
+            var playingDefenders = team.Defenders.Where(d => d.Selected).ToList();
+            var playingMidfielders = team.Midfielders.Where(m => m.Selected).ToList();
+            var playingAttackers = team.Attackers.Where(a => a.Selected).ToList();
+
+            var playingPlayersIds = new HashSet<int>(playingGoalkeepers
+                .Concat(playingDefenders)
+                .Concat(playingMidfielders)
+                .Concat(playingAttackers)
+                .Select(p => p.PlayerId));
+
+            return playingPlayersIds;
+        }
     }
 }

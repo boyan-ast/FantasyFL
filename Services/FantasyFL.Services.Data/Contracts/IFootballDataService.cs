@@ -11,16 +11,16 @@
 
     public interface IFootballDataService
     {
-        public Task<string[]> GetAllRoundsAsync(int league, int season);
+        Task<string[]> GetAllRoundsAsync(int league, int season);
 
-        public Task<IEnumerable<FixtureInfoDto>> GetAllFixturesByGameweekAsync(string gameweekName, int year);
+        Task<IEnumerable<FixtureInfoDto>> GetAllFixturesByGameweekAsync(string gameweekName, int year);
 
-        public Task<IEnumerable<TeamLineupDto>> GetLineupsAsync(int fixtureId);
+        Task<IEnumerable<TeamLineupDto>> GetLineupsAsync(int fixtureId);
 
-        public Task<IEnumerable<EventDto>> GetFixtureEventsAsync(int fixtureId);
+        Task<IEnumerable<EventDto>> GetFixtureEventsAsync(int fixtureId);
 
-        public Task<IEnumerable<TeamStadiumDto>> GetTeamsAndStadiumsJsonAsync(int leagueId, int season);
+        Task<IEnumerable<TeamStadiumDto>> GetTeamsAndStadiumsJsonAsync(int leagueId, int season);
 
-        public Task<TeamPlayersInfoDto> GetTeamSquadJsonAsync(int teamId);
+        Task<TeamPlayersInfoDto> GetTeamSquadJsonAsync(int teamId);
     }
 }

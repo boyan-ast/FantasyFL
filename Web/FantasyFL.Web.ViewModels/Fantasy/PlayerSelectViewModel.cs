@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FantasyFL.Web.ViewModels.Fantasy
+﻿namespace FantasyFL.Web.ViewModels.Fantasy
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class PlayerSelectViewModel
     {
         public int PlayerId { get; init; }

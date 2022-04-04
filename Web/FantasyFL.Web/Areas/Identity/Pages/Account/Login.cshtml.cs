@@ -17,7 +17,9 @@
     using Microsoft.Extensions.Logging;
 
     [AllowAnonymous]
+#pragma warning disable SA1649 // File name should match first type name
     public class LoginModel : PageModel
+#pragma warning restore SA1649 // File name should match first type name
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -57,7 +59,9 @@
             public bool RememberMe { get; set; }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public async Task OnGetAsync(string returnUrl = null)
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
             if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
