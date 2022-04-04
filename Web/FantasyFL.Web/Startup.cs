@@ -1,7 +1,8 @@
 ﻿namespace FantasyFL.Web
 {
     using System.Reflection;
-
+    
+    using Azure.Storage.Blobs;
     using FantasyFL.Data;
     using FantasyFL.Data.Common;
     using FantasyFL.Data.Common.Repositories;
@@ -77,7 +78,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IParseService, ParseService>();
-            services.AddTransient<IExternalDataService, JsonDataService>();
+            services.AddTransient<IExternalDataService, BlobDataService>();
             services.AddTransient<IFootballDataService, FootballDataService>();
             services.AddTransient<IGameweekImportService, GameweekImportService>();
             services.AddTransient<IPlayersPointsService, PlayersPointsService>();
@@ -91,6 +92,9 @@
             services.AddTransient<IFantasyTeamsService, FantasyTeamsService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ITransfersService, TransfersService>();
+
+            services.AddSingleton(x =>
+                new BlobServiceClient(this.configuration["BlobConnectionString"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
