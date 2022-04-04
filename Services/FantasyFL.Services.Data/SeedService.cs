@@ -1,7 +1,6 @@
 ﻿namespace FantasyFL.Services.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -11,7 +10,6 @@
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Contracts;
     using FantasyFL.Services.Data.Contracts;
-    using FantasyFL.Services.Data.InputModels.Teams;
 
     using static FantasyFL.Common.GlobalConstants;
 
@@ -56,7 +54,7 @@
                     IsImported = number < 20,
                     IsFinished = number < 20,
                     EndDate = this.parseService
-                        .ParseDate(CustomData.GameweeksEndDates[gameweek], "dd.MM.yyyy"),
+                        .ParseDate(GameweeksData.GameweeksEndDates[gameweek], "dd.MM.yyyy"),
                 };
 
                 await this.gameweeksRepository.AddAsync(newGameweek);

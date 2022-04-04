@@ -1,0 +1,283 @@
+﻿@model string[]
+
+@{
+    this.ViewData["Title"] = "Game Rules";
+}
+
+<h3>@this.ViewData["Title"]</h3>
+
+<div class="accordion" id="accordionRules">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    Pick Your Initial Squad
+                </button>
+            </h2>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionRules">
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tbody>
+                        <tr>
+                            <td>
+                                To be part of the game select a fantasy squad of 15 players:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="pl-4">2 Goalkeepers</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-4">5 Defenders</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-4">5 Midfielders</td>
+                        </tr>
+                        <tr>
+                            <td class="pl-4">3 Forwards</td>
+                        </tr>
+                        <tr>
+                            <td>You can select up to 3 players from a single First League team.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Choose Your Starting Lineup
+                </button>
+            </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionRules">
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Before the start of each Gameweek, select 11 players from your squad in the formation you prefer.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>It can be any formation providing 1 goalkeeper and 10 field players.</td>
+                        </tr>
+                        <tr>
+                            <td>Your Gameweek points will be scored by these 11 players.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Transfers
+                </button>
+            </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionRules">
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tbody>
+                        <tr>
+                            <td>
+                                After selecting your fantasy squad you can buy and sell one player before the start of each Gameweek.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>When picking new player you will see only players in the position of the transfered out one.</td>
+                        </tr>
+                        <tr>
+                            <td>You can select up to 3 players from a single First League team. If you have the maximum number from a team, its players won't be listed.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Deadlines
+                </button>
+            </h2>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="collapseFour" data-parent="#accordionRules">
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Selecting starting lineup and making transfers must be made before the start of next Gameweek in order to take effect for these matches.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Gameweeks start and end according to the schedule of Bulgarian First League.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-md-6">
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Gameweek</th>
+                                <th scope="col">Deadline</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Length; i++)
+                            {
+                                <tr>
+                                    <td>Gameweek @(i+1)</td>
+                                    <td>@Model[i]</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingFive">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Scoring
+                </button>
+            </h2>
+        </div>
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionRules">
+            <div class="card-body">
+                Your fantasy football players will score points based on their performance in First League during the season.
+                <div class="col-md-8 pt-3">
+                    <table class="table table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Action</th>
+                                <th scope="col">Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>For playing up to 45 minutes</td>
+                                <td class="text-center">1</td>
+                            </tr>
+                            <tr>
+                                <td>For playing up to 60 minutes</td>
+                                <td class="text-center">2</td>
+                            </tr>
+                            <tr>
+                                <td>For playing 60 minutes or more (excluding stoppage time)</td>
+                                <td class="text-center">3</td>
+                            </tr>
+                            <tr>
+                                <td>For each goal scored by a goalkeeper</td>
+                                <td class="text-center">9</td>
+                            </tr>
+                            <tr>
+                                <td>For each goal scored by a defender</td>
+                                <td class="text-center">7</td>
+                            </tr>
+                            <tr>
+                                <td>For each goal scored by a midfielder</td>
+                                <td class="text-center">6</td>
+                            </tr>
+                            <tr>
+                                <td>For each goal scored by a forward</td>
+                                <td class="text-center">5</td>
+                            </tr>
+                            <tr>
+                                <td>For a clean sheet by a goalkeeper or defender</td>
+                                <td class="text-center">4</td>
+                            </tr>
+                            <tr>
+                                <td>For a clean sheet by a midfielder</td>
+                                <td class="text-center">2</td>
+                            </tr>
+                            <tr>
+                                <td>For each penalty save</td>
+                                <td class="text-center">5</td>
+                            </tr>
+                            <tr>
+                                <td>For each penalty miss</td>
+                                <td class="text-center">-4</td>
+                            </tr>
+                            <tr>
+                                <td>For every goal if conceded more than one by a goalkeeper or defender</td>
+                                <td class="text-center">-2</td>
+                            </tr>
+                            <tr>
+                                <td>For every goal if conceded more than one by a midfielder</td>
+                                <td class="text-center">-1</td>
+                            </tr>
+                            <tr>
+                                <td>For each yellow card</td>
+                                <td class="text-center">-2</td>
+                            </tr>
+                            <tr>
+                                <td>For each red card</td>
+                                <td class="text-center">-4</td>
+                            </tr>
+                            <tr>
+                                <td>For each own goal</td>
+                                <td class="text-center">-3</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="table-active font-weight-bold">Bonus points</td>
+                            </tr>
+                            <tr>
+                                <td>For playing more than 15 minutes and team won</td>
+                                <td class="text-center">1</td>
+                            </tr>
+                            <tr>
+                                <td>For scoring more than one goal</td>
+                                <td class="text-center">2</td>
+                            </tr>
+                            <tr>
+                                <td>For saving more than one penalty</td>
+                                <td class="text-center">3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" id="headingSix">
+            <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    Leagues
+                </button>
+            </h2>
+        </div>
+        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionRules">
+            <div class="card-body">
+                <table class="table table-borderless table-sm">
+                    <tbody>
+                        <tr>
+                            <td>
+                                After selecting your initial squad you automatically join the global league of all Fantasy First League players - <span class="font-weight-bold">Bulgaria</span>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>You can create and join leagues to compete with friends and other game players.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

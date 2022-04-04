@@ -70,7 +70,7 @@
             var points = 0;
 
             if (player.MinutesPlayed >= BonusPointsMinMinutes
-                && player.TeamResult != TeamResult.Lost)
+                && player.TeamResult == TeamResult.Won)
             {
                 points += TeamWonBonusPoints;
             }

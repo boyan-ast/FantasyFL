@@ -7,6 +7,8 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
+    using static FantasyFL.Common.GameweeksData;
+
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
@@ -24,6 +26,16 @@
             }
 
             return this.Redirect("/UserTeam");
+        }
+
+        public IActionResult Rules()
+        {
+            return this.View(GameweeksDeadlines);
+        }
+
+        public IActionResult Privacy()
+        {
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

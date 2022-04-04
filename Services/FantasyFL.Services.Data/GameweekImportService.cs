@@ -41,14 +41,7 @@
             this.gameweeksRepository = gameweeksRepository;
             this.fixturesRepository = fixturesRepository;
 
-            this.playersIds = this.playersRepository
-                .All()
-                .Select(p => new
-                {
-                    p.Id,
-                    p.ExternId,
-                })
-                .ToDictionary(p => p.ExternId, p => p.Id);
+            this.playersIds = this.GetPlayersIds(this.playersRepository);
         }
 
         public async Task ImportLineups(int gameweekId)
@@ -440,6 +433,20 @@
             }
 
             return playersGameweek;
+        }
+
+        private IDictionary<int, int> GetPlayersIds(IDeletableEntityRepository<Player> playersRepository)
+        {
+            var playersIds = this.playersRepository
+                .All()
+                .Select(p => new
+                {
+                    p.Id,
+                    p.ExternId,
+                })
+                .ToDictionary(p => p.ExternId, p => p.Id);
+
+            return playersIds;
         }
     }
 }
