@@ -52,14 +52,14 @@
                     CalculateConcededGoalsPoints(playerPosition, player.ConcededGoals) :
                     0;
             var redCardPoints = player.RedCards > 0 ? RedCardPoints : 0;
-            var yellowCardsPoints = redCardPoints > 0 ? 0 : YellowCardPoints;
+            var yellowCardsPoints = redCardPoints > 0 ? 0 : player.YellowCards * YellowCardPoints;
             var missedPenaltyPoints = player.MissedPenalties * MissedPenaltyPoints;
             var ownGoalsPoints = player.OwnGoals * OwnGoalPoints;
 
             var bonusPoints = CalculateBonusPoints(player);
             player.BonusPoints = bonusPoints;
 
-            var totalPoints = (minutesPlayedPoints + cleanSheetPoints + goalsPoints + savedPenaltiesPoints + bonusPoints) -
+            var totalPoints = (minutesPlayedPoints + cleanSheetPoints + goalsPoints + savedPenaltiesPoints) -
                 (concededGoalsPoints + yellowCardsPoints + redCardPoints + missedPenaltyPoints + ownGoalsPoints) + bonusPoints;
 
             player.TotalPoints = totalPoints;

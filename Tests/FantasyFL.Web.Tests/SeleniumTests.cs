@@ -135,7 +135,7 @@
 
             var result = this.browser
                 .FindElement(By
-                    .CssSelector("ul.navbar-nav > li.nav-item > a[title='Admin']"))
+                    .CssSelector("ul.navbar-nav > li:nth-child(2) > a"))
                 .Text;
 
             Assert.Equal("Import Data", result);

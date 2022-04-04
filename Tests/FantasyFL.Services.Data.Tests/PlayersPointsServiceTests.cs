@@ -14,7 +14,7 @@
     public class PlayersPointsServiceTests
     {
         [Fact]
-        public async Task GetLeagueByNameShouldWorkProperly()
+        public async Task CalculatePointsShouldWorkAsExpected()
         {
             var playerGameweek = new PlayerGameweek
             {
@@ -24,13 +24,14 @@
                 IsSubstitute = false,
                 MinutesPlayed = 90,
                 Goals = 0,
-                CleanSheet = true,
+                CleanSheet = false,
                 YellowCards = 0,
                 RedCards = 0,
                 SavedPenalties = 0,
                 ConcededGoals = 2,
                 MissedPenalties = 0,
                 OwnGoals = 0,
+                TeamResult = TeamResult.Won,
                 Player = new Player
                 {
                     Position = Position.Defender,
@@ -50,7 +51,7 @@
 
             await service.CalculatePoints(1);
 
-            Assert.Equal(3, playerGameweek.TotalPoints);
+            Assert.Equal(0, playerGameweek.TotalPoints);
             Assert.Equal(1, playerGameweek.BonusPoints);
         }
     }

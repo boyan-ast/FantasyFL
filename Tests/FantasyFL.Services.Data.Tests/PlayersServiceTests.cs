@@ -21,14 +21,11 @@
 
     public class PlayersServiceTests
     {
-        public PlayersServiceTests()
-        {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-        }
-
         [Fact]
         public async Task GetAllByTeamWorks()
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var playerOne = new Player
             {
                 Id = 1,
@@ -83,6 +80,8 @@
         [Fact]
         public async Task GetAllPlayersReturnsCorrectData()
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var playerOne = new Player
             {
                 Id = 1,
@@ -139,6 +138,8 @@
         [Fact]
         public async Task GetAllByPositionWorksCorrectly()
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var playerOne = new Player
             {
                 Id = 1,
