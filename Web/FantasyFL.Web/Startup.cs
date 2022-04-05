@@ -1,7 +1,7 @@
 ﻿namespace FantasyFL.Web
 {
     using System.Reflection;
-    
+
     using Azure.Storage.Blobs;
     using FantasyFL.Data;
     using FantasyFL.Data.Common;
@@ -94,7 +94,7 @@
             services.AddTransient<ITransfersService, TransfersService>();
 
             services.AddSingleton(x =>
-                new BlobServiceClient(this.configuration["BlobConnectionString"]));
+                new BlobServiceClient(this.configuration.GetValue<string>("Blob:ConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

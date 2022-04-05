@@ -9,7 +9,7 @@
 
         public string Name { get; init; }
 
-        public int Number { get; init; }
+        public int? Number { get; init; }
 
         [JsonProperty("pos")]
         public string Position { get; init; }

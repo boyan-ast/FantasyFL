@@ -1,6 +1,7 @@
 ﻿namespace FantasyFL.Web.Tests
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
 
     using OpenQA.Selenium;
@@ -55,15 +56,10 @@
             Assert.Equal("Hello Admin!", userNavLinkText);
         }
 
-        [Fact]
+        [Fact(Skip = "Require blob connection string")]
         public void ResultsPageShouldReturnCompleteList()
         {
-            this.browser.Navigate().GoToUrl(this.server.RootUri);
-
-            this.browser
-                .FindElement(By
-                    .CssSelector("div.dropdown-menu > a.dropdown-item[href='/FirstLeague/Results']"))
-                .Click();
+            this.browser.Navigate().GoToUrl(this.server.RootUri + @"/FirstLeague/Results");
 
             var tableRows = this.browser
                 .FindElements(By.CssSelector("table.table > tbody > tr"))
@@ -72,7 +68,7 @@
             Assert.Equal(7, tableRows);
         }
 
-        [Fact]
+        [Fact(Skip = "Require blob connection string")]
         public void FixturesPageShouldReturnCompleteList()
         {
             this.browser.Navigate().GoToUrl(this.server.RootUri);

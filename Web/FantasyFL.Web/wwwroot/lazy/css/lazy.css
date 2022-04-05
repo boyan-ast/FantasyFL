@@ -11,7 +11,7 @@
 }
 
 .bg-primary {
-    background-image: url("/images/img-01.jpg") !important;
+    background-image: url("/images/home.jpg") !important;
     background-position: center !important; /* Center the image */
     background-repeat: no-repeat !important; /* Do not repeat the image */
     background-size: cover !important; /* Resize the background image to cover the entire container */
