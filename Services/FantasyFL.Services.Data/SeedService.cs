@@ -51,8 +51,8 @@
                 {
                     Name = gameweek,
                     Number = number,
-                    IsImported = number < 20,
-                    IsFinished = number < 20,
+                    IsImported = number < 17,
+                    IsFinished = number < 17,
                     EndDate = this.parseService
                         .ParseDate(GameweeksData.GameweeksEndDates[gameweek], "dd.MM.yyyy"),
                 };

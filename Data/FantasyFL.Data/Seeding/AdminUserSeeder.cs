@@ -25,14 +25,10 @@
             {
                 var roleManager = serviceProvider.GetService<RoleManager<ApplicationRole>>();
 
-                var leaguesService = (ILeaguesService)serviceProvider
-                    .GetService(typeof(ILeaguesService));
                 var gameweeksRepository = (IRepository<Gameweek>)serviceProvider
                     .GetService(typeof(IRepository<Gameweek>));
                 var usersService = (IUsersService)serviceProvider
                     .GetService(typeof(IUsersService));
-
-                var defaultFantasyLeague = await leaguesService.GetLeagueByName(DefaultFantasyLeagueName);
 
                 var startGameweek = gameweeksRepository
                         .All()
@@ -49,8 +45,6 @@
                     },
                     StartGameweek = startGameweek,
                 };
-
-                admin.FantasyLeagues.Add(defaultFantasyLeague);
 
                 var result = await userManager.CreateAsync(admin, AdministratorPassword);
 
