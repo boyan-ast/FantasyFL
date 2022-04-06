@@ -94,7 +94,7 @@
             services.AddTransient<ITransfersService, TransfersService>();
 
             services.AddSingleton(x =>
-                new BlobServiceClient(this.configuration.GetValue<string>("Blob:ConnectionString")));
+                new BlobServiceClient(this.configuration.GetValue<string>("FantasyBlobConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

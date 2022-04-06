@@ -16,7 +16,7 @@
         public APIDataService(IConfiguration config)
         {
             this.config = config;
-            this.apiKey = this.config["APIFootball:Key"];
+            this.apiKey = this.config["APIFootballKey"];
         }
 
         public async Task<string> GetSquadAsync(int teamId)
