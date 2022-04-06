@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FantasyFL.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220406081731_InitialMigration")]
+    [Migration("20220406113015_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/UserSecrets",
+      "type": "secrets.keyVault",
+      "connectionId": "VaultUri"
+    },
+    "mssql1": {
+      "secretStore": "AzureKeyVault",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/fantasyfl123/databases/FantasyFL",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:MyDbConnection"
+    }
+  }
+}
