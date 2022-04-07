@@ -15,13 +15,16 @@
     public class FantasyController : Controller
     {
         private readonly IFantasyTeamsService fantasyTeamService;
+        private readonly IGameweeksService gameweeksService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public FantasyController(
             IFantasyTeamsService fantasyTeamService,
+            IGameweeksService gameweeksService,
             UserManager<ApplicationUser> userManager)
         {
             this.fantasyTeamService = fantasyTeamService;
+            this.gameweeksService = gameweeksService;
             this.userManager = userManager;
         }
 
@@ -65,6 +68,14 @@
         public async Task<IActionResult> GameweekResult()
         {
             var userId = this.userManager.GetUserId(this.User);
+            var userRegisteredBeforeGameweek =
+                await this.gameweeksService.UserIsRegisteredBeforeCurrentGameweek(userId);
+
+            if (!userRegisteredBeforeGameweek)
+            {
+                this.TempData["Message"] = "You haven't participated this gameweek.";
+                return this.RedirectToAction("Index", "UserTeam");
+            }
 
             try
             {

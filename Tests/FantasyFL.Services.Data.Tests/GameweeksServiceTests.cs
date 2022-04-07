@@ -441,11 +441,60 @@
             mockRepo
                 .Setup(x => x.AllAsNoTracking())
                 .Returns(mock.Object);
+
             var service = fixture.Create<GameweeksService>();
 
             var result = await service.GetGameweekNumberById(21);
 
             Assert.Equal(23, result);
+        }
+
+        [Theory]
+        [InlineData("userId1", true)]
+        [InlineData("userId2", false)]
+        public async Task UserIsRegisteredBeforeCurrentGameweekWorksAsExpected(string userId, bool expectedResult)
+        {
+            var gameweek = new Gameweek
+            {
+                Id = 21,
+                Name = "Gameweek 21",
+                Number = 21,
+                IsFinished = true,
+            };
+
+            var gameweeksList = new List<Gameweek>();
+            gameweeksList.Add(gameweek);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockGameweeksRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
+
+            mockGameweeksRepo
+                .Setup(x => x.All())
+                .Returns(gameweeksList.AsQueryable().BuildMock().Object);
+
+            var userGameweek = new ApplicationUserGameweek
+            {
+                UserId = "userId1",
+                GameweekId = 21,
+            };
+
+            var usersGameweeksList = new List<ApplicationUserGameweek>();
+            usersGameweeksList.Add(userGameweek);
+
+            var mockUserGameweeksRepo = fixture
+                .Freeze<Mock<IRepository<ApplicationUserGameweek>>>();
+
+            mockUserGameweeksRepo
+                .Setup(x => x.AllAsNoTracking())
+                .Returns(usersGameweeksList.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<GameweeksService>();
+
+            var result = await service.UserIsRegisteredBeforeCurrentGameweek(userId);
+
+            Assert.Equal(expectedResult, result);
         }
     }
 }

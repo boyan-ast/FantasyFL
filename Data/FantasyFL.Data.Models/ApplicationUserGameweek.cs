@@ -1,11 +1,10 @@
 ﻿namespace FantasyFL.Data.Models
 {
-    using FantasyFL.Data.Common.Models;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    using static FantasyFL.Common.GlobalConstants;
+    using FantasyFL.Data.Common.Models;
 
     public class ApplicationUserGameweek : IDeletableEntity
     {
@@ -24,7 +23,6 @@
 
         public int Points { get; set; } = 0;
 
-        // Deletable entity
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }

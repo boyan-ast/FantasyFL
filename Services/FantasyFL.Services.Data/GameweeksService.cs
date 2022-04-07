@@ -176,6 +176,16 @@
             return gameweek;
         }
 
+        public async Task<bool> UserIsRegisteredBeforeCurrentGameweek(string userId)
+        {
+            var currentGameweekId = this.GetCurrent().Number;
+            var userIsRegisteredBeforeGameweek = await this.usersGameweeksRepository
+                .AllAsNoTracking()
+                .AnyAsync(gw => gw.UserId == userId && gw.GameweekId == currentGameweekId);
+
+            return userIsRegisteredBeforeGameweek;
+        }
+
         public async Task<int> GetGameweekNumberById(int id)
         {
             var gameweek = await this.gameweekRepository

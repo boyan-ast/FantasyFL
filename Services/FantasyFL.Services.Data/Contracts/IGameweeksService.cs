@@ -20,6 +20,8 @@
 
         Gameweek GetNext();
 
+        Task<bool> UserIsRegisteredBeforeCurrentGameweek(string userId);
+
         Task<int> GetGameweekNumberById(int id);
     }
 }

@@ -267,71 +267,6 @@
         }
 
         [Fact]
-        public async Task GetUserGameweekWorksIfGameweekNull()
-        {
-            var fantasyTeamPlayerOne = new FantasyTeamPlayer
-            {
-                FantasyTeamId = "team1",
-                PlayerId = 1,
-                IsPlaying = true,
-                Player = new Player
-                {
-                    Id = 1,
-                    ExternId = 1,
-                    Name = "Player1",
-                    Age = 30,
-                    Position = Position.Defender,
-                    TeamId = 1,
-                },
-            };
-
-            var fantasyTeamPlayers = new List<FantasyTeamPlayer>();
-            fantasyTeamPlayers.Add(fantasyTeamPlayerOne);
-
-            var fantasyTeamsList = new List<FantasyTeam>()
-            {
-                new FantasyTeam
-                {
-                    Id = "team1",
-                    OwnerId = "user1",
-                    Name = "Team 1",
-                },
-            };
-
-            var fixture = new AutoFixture.Fixture()
-                .Customize(new AutoMoqCustomization());
-
-            var mockGameweeksService = fixture
-                .Freeze<Mock<IGameweeksService>>();
-
-            mockGameweeksService
-                .Setup(x => x.GetCurrent())
-                .Returns((Gameweek)null);
-
-            var mockFantasyTeamRepo = fixture
-                .Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
-
-            mockFantasyTeamRepo
-                .Setup(x => x.All())
-                .Returns(fantasyTeamsList.AsQueryable().BuildMock().Object);
-
-            var mockFantasyTeamPlayersRepo = fixture
-                 .Freeze<Mock<IDeletableEntityRepository<FantasyTeamPlayer>>>();
-
-            mockFantasyTeamPlayersRepo
-                .Setup(x => x.AllAsNoTracking())
-                .Returns(fantasyTeamPlayers.AsQueryable().BuildMock().Object);
-
-            var service = fixture.Create<FantasyTeamsService>();
-
-            var result = await service.GetUserGameweekTeam("user1");
-
-            Assert.Equal("Team 1", result.Name);
-            Assert.Equal(0, result.Gameweek);
-            Assert.Single(result.Players);
-        }
-
-        [Fact]
         public async Task GetUserPlayersByPostionShouldReturnCorrectPlayers()
         {
             var fantasyTeamPlayerOne = new FantasyTeamPlayer
@@ -621,9 +556,18 @@
                 Selected = false,
             };
 
+            var playerFive = new PlayerSelectViewModel
+            {
+                PlayerId = 5,
+                Selected = true,
+            };
+
             var teamModel = new TeamSelectViewModel
             {
-                Goalkeepers = new List<PlayerSelectViewModel>(),
+                Goalkeepers = new List<PlayerSelectViewModel>()
+                {
+                    playerFive,
+                },
                 Defenders = new List<PlayerSelectViewModel>()
                 {
                     playerOne,
@@ -646,7 +590,38 @@
 
             var result = service.GetPlayingPlayersIds(teamModel);
 
-            Assert.Equal(3, result.Count);
+            Assert.Equal(4, result.Count);
+        }
+
+        [Theory]
+        [InlineData("team1", true)]
+        [InlineData("team2", false)]
+        public void FantasyTeamNameExistingWorksAsExpected(string teamName, bool expectedResult)
+        {
+            var fantasyTeam = new FantasyTeam
+            {
+                Id = "1",
+                Name = "team1",
+            };
+
+            var fantasyTeams = new List<FantasyTeam>();
+            fantasyTeams.Add(fantasyTeam);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockFantasyTeamRepo = fixture
+                 .Freeze<Mock<IDeletableEntityRepository<FantasyTeam>>>();
+
+            mockFantasyTeamRepo
+                .Setup(x => x.AllAsNoTracking())
+                .Returns(fantasyTeams.AsQueryable().BuildMock().Object);
+
+            var service = fixture.Create<FantasyTeamsService>();
+
+            var result = service.FantasyTeamNameExists(teamName);
+
+            Assert.Equal(expectedResult, result);
         }
     }
 }
