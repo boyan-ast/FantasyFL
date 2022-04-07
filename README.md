@@ -1,20 +1,20 @@
 # FantasyFL
 
-## Project Introduction ##
+## :pencil: Project Introduction ##
  
 **FantasyFL** (Fantasy First League) is my project for the **SoftUni** course [**ASP.NET Core**](https://softuni.bg/trainings/3593/csharp-web-basics-basics-january-2022).
 
-## Project Overview ##
+## :soccer: Project Overview ##
 
 FantasyFL (Fantasy First League) is a game that puts you in a role of Fantasy manager of Bulgarian First Football League players. You create your own Fantasy Team and pick a squad of 15 players from the season 2021/2022. They score points for your team according to their performance in the matches. Points are awarded to players based on different match events. Your team's points will be scored by your Starting XI for the match round - "Gameweek".
 
 The rules of the game are described in detail on the _**Rules**_ page.
 
-## Data ##
+## :floppy_disk: Data ##
 
 The data related to First Bulgarian League is provided by [API-Football](https://www.api-football.com/).
 
-## How Project Works ##
+## :flashlight: How Project Works ##
 
 **Guests**
 * Can register and log in using a local account
@@ -40,9 +40,9 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * All data needed for the start of the Bulgarian First League season 2021/2022 will be seeded (_Teams_, _Players_, _Gameweeks_, _Fixtures_, _Stadiums_)
 * For the purpose of demonstrating the functionallity, it will be simulated that the upcomming Gameweek is the number 20 (the first in 2022)
 
-## Unit tests code coverage ##
+## :pencil: Unit tests code coverage ##
 
-## Build With ##
+## :hammer: Build With ##
 
 * ASP.NET Core 6.0
 * EF Core 6.0
@@ -63,9 +63,9 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * Sweet Alert
 * StyleCop Analyzers
 
-## Link ##
+## :link: Link ##
 
-## Database Diagram ##
+## :floppy_disk: Database Diagram ##
 
 ![database-diagram](https://user-images.githubusercontent.com/62556633/162214252-db4c9924-594f-437a-a3fe-b12c9cf7e0c1.png)
 
