@@ -9,6 +9,7 @@
     using AutoFixture.AutoMoq;
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
+    using FantasyFL.Services.Data.Contracts;
     using MockQueryable.Moq;
     using Moq;
     using Xunit;
@@ -495,6 +496,52 @@
             var result = await service.UserIsRegisteredBeforeCurrentGameweek(userId);
 
             Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public async Task GetPlayersDataWorksAsExpected()
+        {
+            var gameweek = new Gameweek
+            {
+                Id = 21,
+                Name = "Gameweek 21",
+                Number = 21,
+                IsImported = false,
+            };
+
+            var gameweeksList = new List<Gameweek>();
+            gameweeksList.Add(gameweek);
+
+            var fixture = new AutoFixture.Fixture()
+                .Customize(new AutoMoqCustomization());
+
+            var mockGameweeksRepo = fixture.Freeze<Mock<IRepository<Gameweek>>>();
+
+            mockGameweeksRepo
+                .Setup(x => x.All())
+                .Returns(gameweeksList.AsQueryable().BuildMock().Object);
+
+            var mockGameweekImportService = fixture.Freeze<Mock<IGameweekImportService>>();
+
+            mockGameweekImportService
+                .Setup(x => x.ImportLineups(It.IsAny<int>()))
+                .Verifiable();
+
+            mockGameweekImportService
+                .Setup(x => x.ImportEvents(It.IsAny<int>()))
+                .Verifiable();
+
+            var mockPlayersService = fixture.Freeze<Mock<IPlayersPointsService>>();
+
+            mockPlayersService
+                .Setup(x => x.CalculatePoints(It.IsAny<int>()))
+                .Verifiable();
+
+            var service = fixture.Create<GameweeksService>();
+
+            await service.GetPlayersData(21);
+
+            Assert.True(gameweek.IsImported);
         }
     }
 }

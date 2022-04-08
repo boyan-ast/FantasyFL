@@ -22,7 +22,7 @@
         private readonly IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamsPlayersRepository;
         private readonly IRepository<ApplicationUserGameweek> usersGameweeksRepository;
         private readonly IGameweekImportService gameweekImportService;
-        private readonly IPlayersPointsService playersService;
+        private readonly IPlayersPointsService playersPointsService;
 
         public GameweeksService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
@@ -41,7 +41,7 @@
             this.fantasyTeamsPlayersRepository = fantasyTeamsPlayersRepository;
             this.usersGameweeksRepository = usersGameweeksRepository;
             this.gameweekImportService = gameweekImportService;
-            this.playersService = playersService;
+            this.playersPointsService = playersService;
         }
 
         public async Task<List<GameweekViewModel>> GetAllAsync()
@@ -82,7 +82,7 @@
 
             await this.gameweekImportService.ImportLineups(gameweekId);
             await this.gameweekImportService.ImportEvents(gameweekId);
-            await this.playersService.CalculatePoints(gameweekId);
+            await this.playersPointsService.CalculatePoints(gameweekId);
 
             gameweek.IsImported = true;
 

@@ -162,6 +162,40 @@
             Assert.Equal("Register", registerNavLinkTitle);
         }
 
+        [Fact]
+        public void RulesPageOpensAsExpected()
+        {
+            this.browser.Navigate().GoToUrl(this.server.RootUri);
+
+            this.browser
+                .FindElement(By
+                    .CssSelector("li.nav-item > a.nav-link[href='/Home/Rules']"))
+                .Click();
+
+            var titleText = this.browser
+                .FindElement(By.CssSelector("main > h3"))
+                .Text;
+
+            Assert.Equal("Game Rules", titleText);
+        }
+
+        [Fact]
+        public void PrivacyPageOpensAsExpected()
+        {
+            this.browser.Navigate().GoToUrl(this.server.RootUri);
+
+            this.browser
+                .FindElement(By
+                    .CssSelector("footer > div > a[href='/Home/Privacy']"))
+                .Click();
+
+            var titleText = this.browser
+                .FindElement(By.CssSelector("main > h1"))
+                .Text;
+
+            Assert.StartsWith("Privacy Policy", titleText);
+        }
+
         public void Dispose()
         {
             this.Dispose(true);
