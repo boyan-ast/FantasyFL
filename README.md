@@ -35,8 +35,8 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * Can import data from Azure Blob Storage and local files
 
 **Running the project for the firs time**
-* The data from [API-Football](https://www.api-football.com/) will be added to the project together with a service that can proccess it
-* The other data sources - [API-Football](https://www.api-football.com/) directly and Azure Blob Storage require sensitive data, stored inside Azure Key Vault
+* The default provider of [API-Football](https://www.api-football.com/) data in the project is Azure Blob Storage
+* The data provider can be modified by changing the registered service for external data
 * All data needed for the start of the Bulgarian First League season 2021/2022 will be seeded (_Teams_, _Players_, _Gameweeks_, _Fixtures_, _Stadiums_)
 * For the purpose of demonstrating the functionallity, it will be simulated that the upcomming Gameweek is number 20 (the first in 2022)
 
