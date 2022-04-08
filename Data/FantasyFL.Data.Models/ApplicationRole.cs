@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace FantasyFL.Data.Models
+﻿namespace FantasyFL.Data.Models
 {
     using System;
 

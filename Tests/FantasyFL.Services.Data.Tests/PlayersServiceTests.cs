@@ -8,6 +8,7 @@
 
     using AutoFixture;
     using AutoFixture.AutoMoq;
+
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
@@ -15,8 +16,11 @@
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels;
     using FantasyFL.Web.ViewModels.PlayersManagement;
+
     using MockQueryable.Moq;
+
     using Moq;
+
     using Xunit;
 
     public class PlayersServiceTests

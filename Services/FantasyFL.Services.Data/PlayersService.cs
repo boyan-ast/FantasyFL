@@ -12,6 +12,7 @@
     using FantasyFL.Web.ViewModels.FirstLeague;
     using FantasyFL.Web.ViewModels.Players;
     using FantasyFL.Web.ViewModels.PlayersManagement;
+
     using Microsoft.EntityFrameworkCore;
 
     public class PlayersService : IPlayersService

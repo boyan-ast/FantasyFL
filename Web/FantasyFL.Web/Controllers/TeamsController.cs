@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Data.Contracts;
+
     using Microsoft.AspNetCore.Mvc;
 
     public class TeamsController : Controller

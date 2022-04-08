@@ -1,6 +1,5 @@
 ﻿namespace FantasyFL.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -12,6 +11,7 @@
     using FantasyFL.Services.Data.InputModels.Lineups;
     using FantasyFL.Services.Data.InputModels.Players;
     using FantasyFL.Services.Data.InputModels.Teams;
+
     using Newtonsoft.Json;
 
     using static FantasyFL.Common.GlobalConstants;

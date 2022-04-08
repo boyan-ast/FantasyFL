@@ -2,22 +2,14 @@
 {
     using System.Diagnostics;
 
-    using FantasyFL.Data.Models;
     using FantasyFL.Web.ViewModels;
-    using Microsoft.AspNetCore.Identity;
+
     using Microsoft.AspNetCore.Mvc;
 
     using static FantasyFL.Common.GameweeksData;
 
     public class HomeController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManager;
-
-        public HomeController(UserManager<ApplicationUser> userManager)
-        {
-            this.userManager = userManager;
-        }
-
         public IActionResult Index()
         {
             if (!this.User.Identity.IsAuthenticated)

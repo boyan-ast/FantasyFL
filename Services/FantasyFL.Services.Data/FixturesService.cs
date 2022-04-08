@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,6 +9,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Fixtures;
+
     using Microsoft.EntityFrameworkCore;
 
     public class FixturesService : IFixturesService

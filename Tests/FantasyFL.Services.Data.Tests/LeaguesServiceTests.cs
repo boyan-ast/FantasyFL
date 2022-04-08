@@ -12,8 +12,11 @@
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels;
     using FantasyFL.Web.ViewModels.Leagues;
+
     using MockQueryable.Moq;
+
     using Moq;
+
     using Xunit;
 
     public class LeaguesServiceTests

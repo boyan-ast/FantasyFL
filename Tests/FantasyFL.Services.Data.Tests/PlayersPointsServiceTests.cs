@@ -7,8 +7,11 @@
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
+
     using MockQueryable.Moq;
+
     using Moq;
+
     using Xunit;
 
     public class PlayersPointsServiceTests

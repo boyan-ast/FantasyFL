@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Data.Contracts;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -28,10 +29,11 @@
         public async Task<IActionResult> Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userTeamIsEmpty = await this.fantasyTeamService.UserTeamIsEmpty(userId);
 
-            if (await this.fantasyTeamService.UserTeamIsEmpty(userId))
+            if (userTeamIsEmpty)
             {
-                return this.Redirect("/PlayersManagement/PickGoalkeepers");
+                return this.RedirectToAction("PickGoalkeepers", "PlayersManagement");
             }
 
             try
@@ -69,7 +71,7 @@
 
             await this.transfersService.AddPlayer(userId, playerId);
 
-            return this.Redirect("/UserTeam/Index");
+            return this.RedirectToAction("Index", "UserTeam");
         }
     }
 }

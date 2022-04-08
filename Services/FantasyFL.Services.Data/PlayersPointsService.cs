@@ -7,6 +7,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
+
     using Microsoft.EntityFrameworkCore;
 
     using static FantasyFL.Common.PlayerPointsConstants;

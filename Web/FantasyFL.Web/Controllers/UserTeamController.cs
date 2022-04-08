@@ -5,6 +5,7 @@
 
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Users;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -31,7 +32,7 @@
 
             if (await this.fantasyTeamsService.UserTeamIsEmpty(userId))
             {
-                return this.Redirect("/PlayersManagement/PickGoalkeepers");
+                return this.RedirectToAction("PickGoalkeepers", "PlayersManagement");
             }
 
             var team = await this.usersService.GetUserTeamViewModel(userId);
@@ -55,7 +56,7 @@
             {
                 this.TempData["Message"] = "Player haven't played this gameweek.";
 
-                return this.RedirectToAction(nameof(this.Index));
+                return this.RedirectToAction("Index");
             }
 
             return this.View(player);

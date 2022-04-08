@@ -11,6 +11,7 @@
     using FantasyFL.Services.Contracts;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Data.Enums;
+
     using Microsoft.EntityFrameworkCore;
 
     using static FantasyFL.Common.GlobalConstants;

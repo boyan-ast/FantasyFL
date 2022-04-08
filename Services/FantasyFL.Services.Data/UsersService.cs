@@ -10,6 +10,7 @@
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels.Leagues;
     using FantasyFL.Web.ViewModels.Users;
+
     using Microsoft.EntityFrameworkCore;
 
     public class UsersService : IUsersService

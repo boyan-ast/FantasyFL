@@ -5,6 +5,7 @@
 
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Leagues;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

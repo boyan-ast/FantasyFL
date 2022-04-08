@@ -11,6 +11,7 @@
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels.Transfers;
+
     using Microsoft.EntityFrameworkCore;
 
     public class TransfersService : ITransfersService
@@ -18,7 +19,6 @@
         private readonly IGameweeksService gameweeksService;
         private readonly IUsersService usersService;
         private readonly IRepository<ApplicationUserGameweek> usersGameweeksRepository;
-        private readonly IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository;
         private readonly IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamPlayerRepository;
         private readonly IDeletableEntityRepository<Player> playersRepository;
 
@@ -26,14 +26,12 @@
             IGameweeksService gameweeksService,
             IUsersService usersService,
             IRepository<ApplicationUserGameweek> usersGameweeksRepository,
-            IDeletableEntityRepository<FantasyTeam> fantasyTeamsRepository,
             IDeletableEntityRepository<FantasyTeamPlayer> fantasyTeamPlayerRepository,
             IDeletableEntityRepository<Player> playersRepository)
         {
             this.gameweeksService = gameweeksService;
             this.usersService = usersService;
             this.usersGameweeksRepository = usersGameweeksRepository;
-            this.fantasyTeamsRepository = fantasyTeamsRepository;
             this.fantasyTeamPlayerRepository = fantasyTeamPlayerRepository;
             this.playersRepository = playersRepository;
         }

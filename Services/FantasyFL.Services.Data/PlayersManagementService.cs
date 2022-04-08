@@ -8,6 +8,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.PlayersManagement;
+
     using Microsoft.EntityFrameworkCore;
 
     public class PlayersManagementService : IPlayersManagementService

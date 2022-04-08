@@ -1,12 +1,11 @@
 ﻿namespace Sandbox
 {
     using System;
-    using System.Diagnostics;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using CommandLine;
+
     using FantasyFL.Data;
     using FantasyFL.Data.Common;
     using FantasyFL.Data.Common.Repositories;
@@ -18,6 +17,7 @@
     using FantasyFL.Services.Data;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Messaging;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;

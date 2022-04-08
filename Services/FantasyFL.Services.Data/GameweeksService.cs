@@ -9,9 +9,8 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Administration.Data;
-    using Microsoft.EntityFrameworkCore;
 
-    using static FantasyFL.Common.GlobalConstants;
+    using Microsoft.EntityFrameworkCore;
 
     public class GameweeksService : IGameweeksService
     {

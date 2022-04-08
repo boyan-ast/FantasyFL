@@ -7,6 +7,7 @@
 
     using AutoFixture;
     using AutoFixture.AutoMoq;
+
     using FantasyFL.Data.Common.Repositories;
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
@@ -15,7 +16,9 @@
     using FantasyFL.Services.Data.InputModels.Fixtures;
     using FantasyFL.Services.Data.InputModels.Players;
     using FantasyFL.Services.Data.InputModels.Teams;
+
     using Moq;
+
     using Xunit;
 
     public class SeedServiceTests

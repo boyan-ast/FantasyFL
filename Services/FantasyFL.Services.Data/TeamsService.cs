@@ -9,6 +9,7 @@
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels.FirstLeague;
+
     using Microsoft.EntityFrameworkCore;
 
     public class TeamsService : ITeamsService

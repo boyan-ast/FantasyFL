@@ -30,7 +30,5 @@
         public const int SeasonYear = 2021;
 
         public const int MaxCountPlayersFromSameTeam = 3;
-
-        public const string Key = "7bc3ae889e47bd27f66bb24917dad84f";
     }
 }

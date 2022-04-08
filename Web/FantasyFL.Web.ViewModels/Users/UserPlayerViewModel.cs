@@ -1,6 +1,7 @@
 ﻿namespace FantasyFL.Web.ViewModels.Users
 {
     using AutoMapper;
+
     using FantasyFL.Data.Models;
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Mapping;

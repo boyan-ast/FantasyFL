@@ -1,16 +1,16 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.PlayersManagement;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+
     using Newtonsoft.Json;
 
     using static FantasyFL.Common.GlobalConstants;
@@ -153,7 +153,7 @@
 
             await this.playersManagementService.AddPlayersToTeam(model, userId);
 
-            return this.Redirect("/Fantasy/PickTeam");
+            return this.RedirectToAction("PickTeam", "Fantasy");
         }
     }
 }

@@ -6,7 +6,9 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Contracts;
+
     using Moq;
+
     using Xunit;
 
     public class FootballDataServiceTests

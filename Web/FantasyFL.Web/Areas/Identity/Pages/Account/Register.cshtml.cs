@@ -11,6 +11,7 @@
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.Infrastructure.ValidationAttributes;
+
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;

@@ -10,8 +10,11 @@
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Mapping;
     using FantasyFL.Web.ViewModels;
+
     using MockQueryable.Moq;
+
     using Moq;
+
     using Xunit;
 
     public class TeamsServiceTests

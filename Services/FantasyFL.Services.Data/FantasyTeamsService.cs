@@ -1,6 +1,5 @@
 ﻿namespace FantasyFL.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -10,6 +9,7 @@
     using FantasyFL.Data.Models.Enums;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Fantasy;
+
     using Microsoft.EntityFrameworkCore;
 
     public class FantasyTeamsService : IFantasyTeamsService

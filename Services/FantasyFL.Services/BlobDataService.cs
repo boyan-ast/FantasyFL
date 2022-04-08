@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using Azure.Storage.Blobs;
+
     using FantasyFL.Services.Contracts;
 
     public class BlobDataService : IExternalDataService

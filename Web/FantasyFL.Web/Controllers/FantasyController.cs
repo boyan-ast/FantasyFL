@@ -1,13 +1,12 @@
 ﻿namespace FantasyFL.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Data.Contracts;
     using FantasyFL.Web.ViewModels.Fantasy;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -37,7 +36,7 @@
 
             if (userTeamIsEmpty)
             {
-                return this.Redirect("/PlayersManagement/PickGoalkeepers");
+                return this.RedirectToAction("PickGoalkeepers", "PlayersManagement");
             }
 
             var team = await this.fantasyTeamService.GetUserTeamSelectModel(userId);

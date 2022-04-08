@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using FantasyFL.Services.Contracts;
+
     using Microsoft.Extensions.Configuration;
 
     using static FantasyFL.Common.GlobalConstants;

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using AutoMapper;
+
     using FantasyFL.Data.Models;
     using FantasyFL.Services.Mapping;
 
