@@ -19,14 +19,11 @@
 
     public class TeamsServiceTests
     {
-        public TeamsServiceTests()
-        {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
-        }
-
         [Fact]
         public async Task GetAllReturnsCorrectViewModels()
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var teamOne = new Team
             {
                 Id = 1,
@@ -77,6 +74,8 @@
         [Fact]
         public async Task GetTeamPlayersReturnsCorrectViewModels()
         {
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
             var team = new Team
             {
                 Id = 1,
