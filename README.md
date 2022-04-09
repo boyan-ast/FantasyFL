@@ -30,7 +30,7 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * Can access the Gameweek Statistics of all players part of their Fantasy Team
 
 **Admin**
-* Is responsible for importing the data after the end of each week Gameweek
+* Is responsible for importing the data after the end of each week Gameweek and marking it as finished
 * Can import data directly from [API-Football](https://www.api-football.com/)
 * Can import data from Azure Blob Storage and local files
 
@@ -42,6 +42,8 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * In order to test the admin functionality of the project, the the following credentials are provided - Username: Admin, Password: admin123
 
 ## :pencil: Unit tests code coverage ##
+
+![unitTestCodeCoverage](https://user-images.githubusercontent.com/62556633/162568840-df70387d-cbe0-4140-ac89-18d1b86fa529.png)
 
 ## :hammer: Built With ##
 
@@ -65,6 +67,8 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * StyleCop Analyzers
 
 ## :link: Link ##
+
+https://fantasyfl.azurewebsites.net/
 
 ## :floppy_disk: Database Diagram ##
 
