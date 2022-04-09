@@ -74,7 +74,7 @@ https://fantasyfl.azurewebsites.net/
 
 ![database-diagram](https://user-images.githubusercontent.com/62556633/162214252-db4c9924-594f-437a-a3fe-b12c9cf7e0c1.png)
 
-## Template authors ##
+## Template Authors ##
 
 - [Nikolay Kostov](https://github.com/NikolayIT)
 - [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
