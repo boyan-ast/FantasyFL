@@ -41,7 +41,7 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * For the purpose of demonstrating the functionallity, it will be simulated that the upcomming Gameweek is number 20 (the first in 2022)
 * In order to test the admin functionality of the project, the the following credentials are provided - Username: Admin, Password: admin123
 
-## :pencil: Unit tests code coverage ##
+## :pencil: Unit Tests Code Coverage ##
 
 ![unitTestCodeCoverage](https://user-images.githubusercontent.com/62556633/162568840-df70387d-cbe0-4140-ac89-18d1b86fa529.png)
 
