@@ -39,10 +39,11 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * The data provider can be modified by changing the registered service for external data
 * All data needed for the start of the Bulgarian First League season 2021/2022 will be seeded (_Teams_, _Players_, _Gameweeks_, _Fixtures_, _Stadiums_)
 * For the purpose of demonstrating the functionallity, it will be simulated that the upcomming Gameweek is number 20 (the first in 2022)
+* In order to test the admin functionality of the project, the the following credentials are provided - Username: Admin, Password: admin123
 
 ## :pencil: Unit tests code coverage ##
 
-## :hammer: Build With ##
+## :hammer: Built With ##
 
 * ASP.NET Core 6.0
 * EF Core 6.0
