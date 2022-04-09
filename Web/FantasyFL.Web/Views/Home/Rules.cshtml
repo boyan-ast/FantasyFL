@@ -1,4 +1,5 @@
 ﻿@model string[]
+@using static FantasyFL.Common.PlayerPointsConstants
 
 @{
     this.ViewData["Title"] = "Game Rules";
@@ -170,83 +171,83 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>For playing up to 45 minutes</td>
-                                <td class="text-center">1</td>
+                                <td>For playing up to @AnyMinutesPlayedLimit minutes</td>
+                                <td class="text-center">@AnyMinutesPlayedPoints</td>
                             </tr>
                             <tr>
-                                <td>For playing up to 60 minutes</td>
-                                <td class="text-center">2</td>
+                                <td>For playing up to @MediumMinutesPlayedLimit minutes</td>
+                                <td class="text-center">@MediumMinutesPlayedPoints</td>
                             </tr>
                             <tr>
-                                <td>For playing 60 minutes or more (excluding stoppage time)</td>
-                                <td class="text-center">3</td>
+                                <td>For playing @MediumMinutesPlayedLimit minutes or more (excluding stoppage time)</td>
+                                <td class="text-center">@MaximumMinutesPlayedPoints</td>
                             </tr>
                             <tr>
                                 <td>For each goal scored by a goalkeeper</td>
-                                <td class="text-center">9</td>
+                                <td class="text-center">@GoalPointsGoalkeeper</td>
                             </tr>
                             <tr>
                                 <td>For each goal scored by a defender</td>
-                                <td class="text-center">7</td>
+                                <td class="text-center">@GoalPointsDefender</td>
                             </tr>
                             <tr>
                                 <td>For each goal scored by a midfielder</td>
-                                <td class="text-center">6</td>
+                                <td class="text-center">@GoalPointsMidfielder</td>
                             </tr>
                             <tr>
                                 <td>For each goal scored by a forward</td>
-                                <td class="text-center">5</td>
+                                <td class="text-center">@GoalPointsAttacker</td>
                             </tr>
                             <tr>
                                 <td>For a clean sheet by a goalkeeper or defender</td>
-                                <td class="text-center">4</td>
+                                <td class="text-center">@CleanSheetDefaultPoints</td>
                             </tr>
                             <tr>
                                 <td>For a clean sheet by a midfielder</td>
-                                <td class="text-center">2</td>
+                                <td class="text-center">@CleanSheetMidfielderPoints</td>
                             </tr>
                             <tr>
                                 <td>For each penalty save</td>
-                                <td class="text-center">5</td>
+                                <td class="text-center">@SavedPenaltyPoints</td>
                             </tr>
                             <tr>
                                 <td>For each penalty miss</td>
-                                <td class="text-center">-4</td>
+                                <td class="text-center">-@MissedPenaltyPoints</td>
                             </tr>
                             <tr>
                                 <td>For every goal if conceded more than one by a goalkeeper or defender</td>
-                                <td class="text-center">-2</td>
+                                <td class="text-center">-@ConcededGoalsDefaultPoints</td>
                             </tr>
                             <tr>
                                 <td>For every goal if conceded more than one by a midfielder</td>
-                                <td class="text-center">-1</td>
+                                <td class="text-center">-@ConcededGoalsMidfielderPoints</td>
                             </tr>
                             <tr>
                                 <td>For each yellow card</td>
-                                <td class="text-center">-2</td>
+                                <td class="text-center">-@YellowCardPoints</td>
                             </tr>
                             <tr>
                                 <td>For each red card</td>
-                                <td class="text-center">-4</td>
+                                <td class="text-center">-@RedCardPoints</td>
                             </tr>
                             <tr>
                                 <td>For each own goal</td>
-                                <td class="text-center">-3</td>
+                                <td class="text-center">-@OwnGoalPoints</td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="table-active font-weight-bold">Bonus points</td>
                             </tr>
                             <tr>
-                                <td>For playing more than 15 minutes and team won</td>
-                                <td class="text-center">1</td>
+                                <td>For playing more than @BonusPointsMinMinutes minutes and team won</td>
+                                <td class="text-center">@TeamWonBonusPoints</td>
                             </tr>
                             <tr>
                                 <td>For scoring more than one goal</td>
-                                <td class="text-center">2</td>
+                                <td class="text-center">@GoalsBonusPoints</td>
                             </tr>
                             <tr>
                                 <td>For saving more than one penalty</td>
-                                <td class="text-center">3</td>
+                                <td class="text-center">@SavedPenaltiesBonusPoints</td>
                             </tr>
                         </tbody>
                     </table>
