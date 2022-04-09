@@ -30,7 +30,7 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * Can access the Gameweek Statistics of all players part of their Fantasy Team
 
 **Admin**
-* Is responsible for importing the data after the end of each week Gameweek
+* Is responsible for importing the data after the end of each week Gameweek and marking it as finished
 * Can import data directly from [API-Football](https://www.api-football.com/)
 * Can import data from Azure Blob Storage and local files
 
@@ -39,10 +39,13 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * The data provider can be modified by changing the registered service for external data
 * All data needed for the start of the Bulgarian First League season 2021/2022 will be seeded (_Teams_, _Players_, _Gameweeks_, _Fixtures_, _Stadiums_)
 * For the purpose of demonstrating the functionallity, it will be simulated that the upcomming Gameweek is number 20 (the first in 2022)
+* In order to test the admin functionality of the project, the the following credentials are provided - Username: Admin, Password: admin123
 
 ## :pencil: Unit tests code coverage ##
 
-## :hammer: Build With ##
+![unitTestCodeCoverage](https://user-images.githubusercontent.com/62556633/162568840-df70387d-cbe0-4140-ac89-18d1b86fa529.png)
+
+## :hammer: Built With ##
 
 * ASP.NET Core 6.0
 * EF Core 6.0
@@ -64,6 +67,8 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 * StyleCop Analyzers
 
 ## :link: Link ##
+
+https://fantasyfl.azurewebsites.net/
 
 ## :floppy_disk: Database Diagram ##
 
