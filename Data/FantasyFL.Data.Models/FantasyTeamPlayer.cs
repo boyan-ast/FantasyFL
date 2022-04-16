@@ -6,8 +6,6 @@
 
     using FantasyFL.Data.Common.Models;
 
-    using static FantasyFL.Common.GlobalConstants;
-
     public class FantasyTeamPlayer : IDeletableEntity
     {
         [Required]
