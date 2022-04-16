@@ -22,7 +22,7 @@ The data related to First Bulgarian League is provided by [API-Football](https:/
 
 **Users**
 * Pick their initial squad of Bulgarian First League players
-* Choose starting lineup for the upcomming Gameweek
+* Choose starting lineup for the upcoming Gameweek
 * Can make one transfer before the start date of each Gameweek
 * Can compete with all registered participants in the game in the global league
 * Can create and join leagues to compete with friends and other users
